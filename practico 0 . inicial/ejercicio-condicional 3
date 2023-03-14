@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+   int cantHoras;
+   float horasExtra, sueldoNormal, sueldoExtra;
+
+   printf("Horas de trabajo: ");
+   scanf("%i", &cantHoras);
+
+   sueldoNormal = cantHoras*300;
+   horasExtra = cantHoras - 40;
+   sueldoExtra = (40*300) + (horasExtra*400);
+
+   if(cantHoras > 40){
+        printf("Tu salario es de: $ %f", sueldoExtra);
+
+   }
+    else {
+        printf("Tu sueldo es de: $ %f", sueldoNormal);
+    }
+}
