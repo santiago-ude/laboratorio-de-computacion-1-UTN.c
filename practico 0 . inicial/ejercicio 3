@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int cantHombres, cantMujeres, alumnos;
+    float porcHombres, porMujeres;
+
+    printf("Cantidad de alumnos: ");
+    scanf("%i", &alumnos);
+
+    printf("cantidad de alumnas: ");
+    scanf("%i", &cantMujeres);
+
+    cantHombres = alumnos - cantMujeres;
+
+    porcHombres = (cantHombres*100)/alumnos;
+
+    porMujeres = (cantMujeres*100)/alumnos;
+
+    printf("Mujeres: %f\n",porMujeres);
+    printf("Hombres: %f",porcHombres);
+
+}
