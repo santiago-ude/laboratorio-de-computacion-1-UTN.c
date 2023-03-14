@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int number1, number2;
+
+    printf("Dame 2 numeros distintos\n ");
+    scanf("%i", &number1);
+    scanf("%i", &number2);
+
+    if(number1 > number2) {
+        printf("%i %i", number2,number1);
+    }
+    else {
+        printf("%i %i", number1,number2);
+    }
+}
