@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+  float precioCompra, precioFinal, descuento;
+
+  printf("Precio de tu compra: $");
+  scanf("%f", &precioCompra);
+
+  descuento = precioCompra*0.15;
+
+  precioFinal = precioCompra - descuento;
+
+  printf("El precio de tu compra con descuento es de: $ %f", precioFinal);
+
+}
