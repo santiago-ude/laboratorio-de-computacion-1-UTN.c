@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    float notaUno, notaDos, notaTres, promedio;
+
+    printf("Dame las notas de tus 3 parciales\n");
+    scanf("%f", &notaUno);
+    scanf("%f", &notaDos);
+    scanf("%f", &notaTres);
+
+    promedio = (notaUno + notaDos + notaTres)/3;
+
+    if(promedio >= 7) {
+        printf("Aprobaste la materia con: %f", promedio);
+    }
+    else {
+            printf("Desaprobaste la materia con: %f", promedio);
+    }
+}
