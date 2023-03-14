@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    float precioCompra, descuento, precioFinal;
+
+    printf("Inserte el precio de tu compra: ");
+    scanf("%f", &precioCompra);
+
+    descuento = precioCompra*0.20;
+
+    precioFinal = precioCompra - descuento;
+
+    if(precioCompra >= 5000) {
+        printf("¡¡¡Tenes descuento!!!, gastaste mas de 5000 asi que tu precio final es de: $ %f", precioFinal);
+    }
+    else {
+        printf("Rata gastaste menos de 5000 asi que tu precio sigue siendo: %f", precioCompra);
+    }
+}
