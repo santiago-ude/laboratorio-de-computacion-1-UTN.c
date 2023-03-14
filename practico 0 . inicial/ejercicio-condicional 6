@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int number1, number2;
+    float resultado;
+
+
+    printf("Dame dos numeros\n");
+    scanf("%i", &number1);
+    scanf("%i", &number2);
+
+
+    if(number1 == number2) {
+            resultado = number1*number2;
+        printf("El resultado es: %f", resultado);
+    }
+    else if (number1 > number2) {
+            resultado = number1 - number2;
+        printf("El resultado es: %f", resultado);
+    }
+    else {
+            resultado = number1 + number2;
+        printf("El resultado es: %f", resultado);
+    }
+}
