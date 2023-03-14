@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int cantCamisas;
+    float descuento20, descuento10, precioCamisa, precioInicial, precioFinal;
+
+    printf("Cantidad de camisas a comprar ");
+    scanf("%i", &cantCamisas);
+
+    printf("Precio camisas ");
+    scanf("%f", &precioCamisa);
+
+    precioInicial = cantCamisas*precioCamisa;
+
+    descuento10 = (10*precioInicial)/100;
+    descuento20 = (20*precioInicial)/100;
+
+    if(cantCamisas >= 3) {
+        precioFinal = precioInicial - descuento20;
+        printf("Por la compra de 3 o mas camisas tu precio es: $ %f", precioFinal);
+    }
+    else {
+        precioFinal = precioInicial - descuento10;
+        printf ("El precio es de: $ %f", precioFinal);
+    }
+}
