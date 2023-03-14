@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    float inversion, ganancia;
+
+    printf("Inserte su inversion: $");
+    scanf("%f", &inversion);
+
+    ganancia = inversion*0.02;
+
+    printf("Tu ganancia es: $ %f", ganancia);
+}
