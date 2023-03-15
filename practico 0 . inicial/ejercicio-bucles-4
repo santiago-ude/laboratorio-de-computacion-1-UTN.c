@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int numberN, i, numberP;
+
+    for(i = 0; i < 15; i++) {
+
+        printf("Dame 15 numeros negativos\n");
+        scanf("%i", &numberN);
+
+        numberP = numberN*(-1);
+        printf("%i\n", numberP);
+    }
+}
