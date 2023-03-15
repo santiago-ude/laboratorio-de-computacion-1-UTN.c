@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+ int nota, notaBaja, i, suma;
+ float notaPromedio, contador;
+
+ notaBaja = 100000;
+
+      printf("Ingrese nota las 40 notas de los alumnos: \n");
+ for (i = 0; i < 40; i++) {
+        contador = contador + 1;
+      scanf("%i", &nota);
+      suma = suma + nota;
+       if(nota < notaBaja) {
+        notaBaja = nota;
+       }
+ }
+
+       notaPromedio = suma/contador;
+
+       printf("La nota mas baja es: %i\n", notaBaja);
+       printf("Y l  nota promedio es: %f", notaPromedio);
+}
