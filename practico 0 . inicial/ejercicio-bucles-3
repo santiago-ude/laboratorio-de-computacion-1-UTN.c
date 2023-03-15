@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   int number, i;
+
+   for(i = 0; i < 10; i++) {
+    printf("Give me a number\n");
+    scanf("%i", &number);
+
+    if(number > 0){
+        printf("%i\n", number);
+    }
+    else {}
+   }
+}
