@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int i,contador, number, cubo, cuarta;
+
+    for(i = 0; i < 10; i++) {
+        contador = contador + 1;
+
+        printf("Dame un numero\n ");
+        scanf("%i", &number);
+
+        cubo = pow(number,3);
+        cuarta = pow(number,4);
+
+        printf("a la cuarta: %i\n",cuarta);
+        printf("al cubo: %i\n", cubo);
+    }
+}
