@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    float contador, suma, nota, promedio, i;
+
+    for(i = 0; i < 7; i++) {
+        printf("Dame tu nota del parcial parcial\n");
+        scanf("%f", &nota);
+
+
+        contador = contador + 1;
+        suma = suma + nota;
+    }
+
+     promedio = suma/contador;
+     printf("El promedio de tus 7 parciales es de: %f", promedio);
+}
