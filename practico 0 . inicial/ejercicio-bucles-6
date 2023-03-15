@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int number, i, contador;
+    float suma;
+
+
+    contador = 0;
+
+    printf("Tabla de que numero queres?");
+    scanf("%i", &number);
+
+
+    for(i = 0; i < 10; i++) {
+        contador = contador + 1;
+        suma = suma + number;
+
+        printf("%i", number);
+        printf(" x %i", contador);
+        printf("= %f\n", suma);
+    }
+}
