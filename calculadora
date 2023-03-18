@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    int operacion, number1, number2;
+    float suma, division, resta, multiplicacion;
+
+
+    printf("Dame los 2 numeros que quieras operar\n");
+    scanf("%i %i", &number1, &number2);
+
+    printf("Que queres hacer\n 1: Sumar\n 2: restar\n 3: dividir\n 4: multiplicar\n");
+    scanf("%i", &operacion);
+
+
+switch (operacion){
+
+case 1:
+    suma = number1 + number2;
+    printf("El resultado de tu suma es: %f", suma);
+    break;
+
+case 2:
+    resta = number1 - number2;
+    printf("El resultado de tu resta es: %f", resta);
+    break;
+
+case 3:
+    division = number1/number2;
+    printf("El resultado de tu division es: %f", division);
+    break;
+
+case 4:
+    multiplicacion = number1 * number2;
+    printf("El resultado de tu multiplicacion es: %f", multiplicacion);
+    break;
+
+default :
+    printf("elegi un numero del 1 al 4 virgo");
+    }
+}
