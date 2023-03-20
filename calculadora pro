@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int operacion, number1, number2, finale;
+    float resultado;
+    char i;
+
+    i = 's';
+
+
+
+   do {
+
+        printf("\nSi queres realizar una operacion ingrese s\n");
+        fflush(stdin);
+        scanf("%c", &i);
+
+    printf("\nQue operacion queres hacer \n 1: suma\n 2:Resta\n 3:Multiplicacion\n 4:division\n");
+    scanf("%i", &operacion);
+
+
+    if (operacion > 4) {
+        printf("Pone un numero del 1 al 4 tontito");
+
+    }
+    else {
+         printf("Dame los 2 numeros que quieras operar\n");
+    scanf("%i %i", &number1, &number2);
+
+
+    switch(operacion) {
+
+case 1:
+
+    resultado = number1 + number2;
+    printf("%.1i + %.1i= %.1f", number1, number2 , resultado);
+    break;
+
+case 2:
+    resultado = number1 - number2;
+    printf("%.1 %.2f", resultado);
+    break;
+
+case 3:
+    resultado = number1 * number2;
+    printf("El resultado de la multiplicacion es: %.2f", resultado);
+    break;
+
+case 4:
+    if(number2 == 0){
+        printf("No se puede dividir por 0 pelotudo");
+    }
+    else {
+    resultado = number1 / number2;
+    printf("El resultado de la division es: %.2f", resultado);
+    }
+    break;
+
+default:
+    printf("Pelotudo pone un numero del 1 al 4 para operar");
+    }
+   }
+   }
+   while(i == 's');
+}
