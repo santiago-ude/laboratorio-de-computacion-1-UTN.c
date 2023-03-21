@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+Pila dada, aux, aux1;
+inicpila(&dada);
+inicpila(&aux);
+inicpila(&aux1);
+
+
+leer(&dada);
+leer(&dada);
+leer(&dada);
+leer(&dada);
+leer(&dada);
+mostrar(&dada);
+
+apilar(&aux, desapilar(&dada));
+apilar(&aux, desapilar(&dada));
+apilar(&aux, desapilar(&dada));
+apilar(&aux, desapilar(&dada));
+
+apilar(&aux1, desapilar(&dada));
+
+while(!pilavacia(&aux)){
+
+    apilar(&dada, desapilar(&aux));
+}
+
+apilar(&dada, desapilar(&aux1));
+
+mostrar(&dada);
+
+
+    return 0;
+}
