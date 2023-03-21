@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+Pila origen, aux, destino;
+
+inicpila(&origen);
+inicpila(&aux);
+inicpila(&destino);
+
+leer(&origen);
+leer(&origen);
+leer(&origen);
+leer(&origen);
+leer(&origen);
+
+mostrar(&origen);
+
+while(!pilavacia(&origen)) {
+apilar(&aux,desapilar(&origen));
+}
+
+mostrar(&aux);
+
+while(!pilavacia(&aux)) {
+    apilar(&destino, desapilar(&aux));
+}
+
+mostrar(&destino);
+
+    return 0;
+}
