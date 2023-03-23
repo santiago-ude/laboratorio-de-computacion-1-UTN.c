@@ -5,21 +5,26 @@
 
 int main()
 {
+    srand(time(NULL));
     Pila mazo, player1, player2;
     inicpila(&mazo);
     inicpila(&player1);
     inicpila(&player2);
 
-    apilar(&mazo, 1);
-    apilar(&mazo, 2);
-    apilar(&mazo, 3);
-    apilar(&mazo, 4);
-    apilar(&mazo, 5);
-    apilar(&mazo, 6);
-    apilar(&mazo, 7);
-    apilar(&mazo, 8);
-    apilar(&mazo, 9);
-    apilar(&mazo, 10);
+    int r = rand() % 12 + 1;
+
+    printf("%i", r);
+
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
+    apilar(&mazo, (rand() % 12 + 1));
 
 
     apilar(&player1, desapilar(&mazo));
