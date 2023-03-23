@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+int main()
+{
+  Pila pilaA, pilaB;
+
+  inicpila(&pilaA);
+  inicpila(&pilaB);
+
+  leer(&pilaA);
+  leer(&pilaA);
+  leer(&pilaA);
+
+
+
+  leer(&pilaB);
+  leer(&pilaB);
+  leer(&pilaB);
+
+
+  while( (!pilavacia(&pilaA)) && (!pilavacia(&pilaB)) ) {
+
+    desapilar(&pilaA);
+    desapilar(&pilaB);
+  }
+
+
+if (pilavacia(&pilaB) && pilavacia(&pilaA)) {
+
+    printf("Las dos pilas tienen la misma cantidad de elementos");
+}
+
+else if (pilavacia (&pilaA)) {
+    printf("La pila  B tiene mas elementos");
+}
+
+else if (pilavacia(&pilaB)) {
+   printf("La pila A tiene mas elementos");
+}
+
+    return 0;
+}
