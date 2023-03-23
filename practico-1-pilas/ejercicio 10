@@ -6,6 +6,7 @@ int main()
 {
   Pila pilaA, pilaB,auxA,auxB;
   int topeA, topeB, valor;
+  float contador;
 
   valor = 1;
 
@@ -67,17 +68,18 @@ else if (pilavacia(&pilaB)) {
 }
 
 
-///VALORES
+///VALORES Y POSICIONES
 
 
 
     while((!pilavacia(&auxA)) && (!pilavacia(&auxB)) ){
+            contador = contador + 1;
     apilar(&pilaA, desapilar(&auxA));
     apilar(&pilaB, desapilar(&auxB));
 
     topeA = tope(&pilaA);
     topeB = tope(&pilaB);
-
+    printf("\nposicion numero %0.f", contador);
      if (topeA == topeB) {
 
         printf ("\nlos dos valores son iguales");
@@ -93,11 +95,6 @@ else if (pilavacia(&pilaB)) {
 
         printf ("\n%i es mayor que %i", topeB, topeA);}
 }
-
-
-///POSICIONES
-
-
 
     return 0;
 }
