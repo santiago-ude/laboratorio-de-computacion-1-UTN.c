@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+int main()
+{
+    Pila mazo, player1, player2;
+    inicpila(&mazo);
+    inicpila(&player1);
+    inicpila(&player2);
+
+    apilar(&mazo, 1);
+    apilar(&mazo, 2);
+    apilar(&mazo, 3);
+    apilar(&mazo, 4);
+    apilar(&mazo, 5);
+    apilar(&mazo, 6);
+    apilar(&mazo, 7);
+    apilar(&mazo, 8);
+    apilar(&mazo, 9);
+    apilar(&mazo, 10);
+
+
+    apilar(&player1, desapilar(&mazo));
+    apilar(&player2, desapilar(&mazo));
+    apilar(&player1, desapilar(&mazo));
+    apilar(&player2, desapilar(&mazo));
+    apilar(&player1, desapilar(&mazo));
+    apilar(&player2, desapilar(&mazo));
+    apilar(&player1, desapilar(&mazo));
+    apilar(&player2, desapilar(&mazo));
+    apilar(&player1, desapilar(&mazo));
+    apilar(&player2, desapilar(&mazo));
+
+    mostrar(&player1);
+    mostrar(&player2);
+    return 0;
+}
