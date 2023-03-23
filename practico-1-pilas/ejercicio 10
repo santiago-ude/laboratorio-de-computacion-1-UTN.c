@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pila.h"
-
+#include "../../pila.h"
 
 int main()
 {
   Pila pilaA, pilaB,auxA,auxB;
-  int topeA, topeB;
+  int topeA, topeB, valor;
 
+  valor = 1;
 
   inicpila(&pilaA);
   inicpila(&pilaB);
@@ -15,16 +15,27 @@ int main()
   inicpila(&auxB);
 
 
-leer(&pilaA);
-leer(&pilaA);
-leer(&pilaA);
+  printf("Pila A\n");
 
-leer(&pilaB);
-leer(&pilaB);
-leer(&pilaB);
-leer(&pilaB);
+  while(valor == 1) {
+  leer(&pilaA);
 
+  printf("\n 1 continuar\n0 salir\n");
+  scanf("%i",&valor);
 
+  }
+
+printf("Pila B\n");
+
+  while(valor == 0) {
+    leer(&pilaB);
+
+    printf("\n 0 continuar\n 1 salir\n");
+    scanf("%i", &valor);
+  }
+
+  mostrar(&pilaA);
+  mostrar(&pilaB);
 
 
 /// CANTIDAD
@@ -81,6 +92,12 @@ else if (pilavacia(&pilaB)) {
     else if (topeB > topeA){
 
         printf ("\n%i es mayor que %i", topeB, topeA);}
-} 
+}
+
+
+///POSICIONES
+
+
+
     return 0;
 }
