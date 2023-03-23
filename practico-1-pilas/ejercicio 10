@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+int main()
+{
+  Pila pilaA, pilaB,auxA,auxB;
+  int topeA, topeB;
+
+
+  inicpila(&pilaA);
+  inicpila(&pilaB);
+  inicpila(&auxA);
+  inicpila(&auxB);
+
+
+leer(&pilaA);
+leer(&pilaA);
+leer(&pilaA);
+
+leer(&pilaB);
+leer(&pilaB);
+leer(&pilaB);
+leer(&pilaB);
+
+
+
+
+/// CANTIDAD
+  while( (!pilavacia(&pilaA)) && (!pilavacia(&pilaB)) ) {
+
+    apilar(&auxA, desapilar(&pilaA));
+    apilar(&auxB, desapilar(&pilaB));
+  }
+
+
+
+
+if (pilavacia(&pilaB) && pilavacia(&pilaA)) {
+
+    printf("Las dos pilas tienen la misma cantidad de elementos");
+}
+
+else if (pilavacia (&pilaA)) {
+    printf("La pila  B tiene mas elementos");
+    while(!pilavacia(&pilaB)) {
+          apilar(&auxB, desapilar(&pilaB));}
+}
+
+else if (pilavacia(&pilaB)) {
+   printf("La pila A tiene mas elementos");
+   while(!pilavacia(&pilaA)) {
+    apilar(&auxA, desapilar(&pilaA));
+   }
+}
+
+
+///VALORES
+
+
+
+    while((!pilavacia(&auxA)) && (!pilavacia(&auxB)) ){
+    apilar(&pilaA, desapilar(&auxA));
+    apilar(&pilaB, desapilar(&auxB));
+
+    topeA = tope(&pilaA);
+    topeB = tope(&pilaB);
+
+     if (topeA == topeB) {
+
+        printf ("\nlos dos valores son iguales");
+
+
+    }
+    else if (topeA > topeB){
+
+        printf ("\n%i es mayor que %i", topeA, topeB);
+
+    }
+    else if (topeB > topeA){
+
+        printf ("\n%i es mayor que %i", topeB, topeA);}
+} 
+    return 0;
+}
