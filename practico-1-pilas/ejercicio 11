@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../../pila.h"
+
+int main()
+{
+   Pila dada, modelo;
+   int valor, topemodelo;
+valor = 1;
+    inicpila(&modelo);
+    inicpila(&dada);
+
+
+
+    apilar(&modelo, 9);
+
+
+    topemodelo = tope(&modelo);
+
+while(valor == 1) {
+     leer(&dada);
+
+    printf("\n 1 continuar\n0 salir\n");
+    scanf("%i",&valor);
+
+    if(topemodelo == tope(&dada)) {
+        desapilar(&dada);
+
+    }
+  }
+
+  mostrar(&dada);
+return 0;
+}
