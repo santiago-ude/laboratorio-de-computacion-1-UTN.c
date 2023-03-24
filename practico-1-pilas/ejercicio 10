@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../pila.h"
+#include "pila.h"
 
 int main()
 {
@@ -21,17 +21,19 @@ int main()
   while(valor == 1) {
   leer(&pilaA);
 
-  printf("\n 1 continuar\n0 salir\n");
-  scanf("%i",&valor);
+
+printf("\n1 continuar\n0 salir\n");
+           scanf("%i",&valor);
+
 
   }
+    valor = 1;
+    printf("Pila B\n");
 
-printf("Pila B\n");
-
-  while(valor == 0) {
+  while(valor == 1) {
     leer(&pilaB);
 
-    printf("\n 0 continuar\n 1 salir\n");
+    printf("\n1 continuar\n 0 salir\n");
     scanf("%i", &valor);
   }
 
@@ -40,6 +42,7 @@ printf("Pila B\n");
 
 
 /// CANTIDAD
+
   while( (!pilavacia(&pilaA)) && (!pilavacia(&pilaB)) ) {
 
     apilar(&auxA, desapilar(&pilaA));
@@ -76,9 +79,24 @@ else if (pilavacia(&pilaB)) {
             contador = contador + 1;
     apilar(&pilaA, desapilar(&auxA));
     apilar(&pilaB, desapilar(&auxB));
+    
+    
+    
+// Aca lo que intento hacer es detectar si la pila esta vacia o no, y en caso de estarlo hacer que el tope sea 0 
 
-    topeA = tope(&pilaA);
-    topeB = tope(&pilaB);
+
+
+       if    ((!pilavacia(&auxA)) && (!pilavacia(&auxB))) {
+
+             topeA = tope(&pilaA);
+             topeB = tope(&pilaB);
+
+    } else if (pilavacia(&auxB)) {
+        topeB = 0;
+    }  else if (pilavacia(&auxA)) {
+          topeA = 0;
+    }
+
     printf("\nposicion numero %0.f", contador);
      if (topeA == topeB) {
 
@@ -88,12 +106,12 @@ else if (pilavacia(&pilaB)) {
     }
     else if (topeA > topeB){
 
-        printf ("\n%i es mayor que %i", topeA, topeB);
+        printf ("\n %i es mayor que %i", topeA, topeB);
 
     }
     else if (topeB > topeA){
 
-        printf ("\n%i es mayor que %i", topeB, topeA);}
+        printf ("\n %i es mayor que %i", topeB, topeA);}
 }
 
     return 0;
