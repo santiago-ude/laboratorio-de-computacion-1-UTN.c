@@ -1,0 +1,19 @@
+while ( (!pilaVacia(&Pila1)) && (!pilaVacia(&Pila2)) ) { 
+      apilar (&Descarte, desapilar(&Pila1));
+      apilar (&Descarte, desapilar(&Pila2));
+} 
+
+
+a: La condicion del ciclo es que Pila1 y Pila2 no esten vacias
+
+
+b: Pila1 = T  && Pila2 = T   == Funciona
+
+
+
+
+
+
+   Pila1 = F && Pila2 = T == No funciona
+   Pila1 = F && Pila2 = T == No funciona
+   Pila1 = F && Pila2 = F == No funciona
