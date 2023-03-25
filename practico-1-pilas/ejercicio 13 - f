@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+
+Pila limite, dada, mayor, menor;
+int valor, topeD, topeL;
+
+
+inicpila(&limite);
+inicpila(&dada);
+inicpila(&mayor);
+inicpila(&menor);
+
+printf("Pila limite \n");
+
+
+valor = 1;
+
+
+while (valor == 1) {
+    leer(&limite);
+
+    printf("1 = seguir 0 = finalizar \n");
+    scanf("%i", &valor);
+
+}
+
+
+
+valor = 1;
+printf("Pila dada \n");
+
+while (valor == 1) {
+    leer(&dada);
+
+    printf("1 = seguir 0 = finalizar \n");
+    scanf("%i",&valor);
+
+}
+
+
+
+while (!pilavacia(&dada)) {
+
+        topeL = tope(&limite);
+        topeD = tope(&dada);
+
+        if (topeD >= topeL) {
+
+
+                apilar(&mayor, desapilar(&dada));
+
+            } else {
+
+            apilar(&menor, desapilar(&dada));
+            }
+
+
+       }
+
+
+mostrar(&limite);
+
+printf("mayores o iguales \n");
+mostrar(&mayor);
+
+printf("Menores \n");
+mostrar(&menor);
+
+    return 0;
+}
