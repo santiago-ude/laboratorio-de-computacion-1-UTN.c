@@ -1,0 +1,7 @@
+Lo que hace ese codigo es lo siguiente:
+
+
+en caso de que pila1 no este vacia, se ejecuta el ciclo.
+En este ciclo se iguala el valor tope da la pila "pila1" y 5.
+En caso de ser verdadero, se desapila el tope de "pila1" y se apila en la pila "aux".
+Posteriormente se desapila la pila "aux" , y se apila en la pila "resultado".
