@@ -6,16 +6,21 @@ int main()
 {
    Pila dada, modelo;
    int valor, topemodelo;
-valor = 1;
+   valor = 1;
     inicpila(&modelo);
     inicpila(&dada);
 
 
+    printf("Dale un valor a la pila Modelo\n");
+    leer(&modelo);
 
-    apilar(&modelo, 9);
 
 
     topemodelo = tope(&modelo);
+
+
+    printf("\nPILA DADA\n");
+
 
 while(valor == 1) {
      leer(&dada);
@@ -25,10 +30,8 @@ while(valor == 1) {
 
     if(topemodelo == tope(&dada)) {
         desapilar(&dada);
-
     }
-  }
-
+}
   mostrar(&dada);
 return 0;
 }
