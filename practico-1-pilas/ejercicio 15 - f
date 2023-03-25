@@ -1,0 +1,8 @@
+La condicion del ciclo es que  :  pila1 no este vacia    
+
+o sea que pila1 tenga elementos dentro
+
+
+El ciclo puede no empezar, ya que pila1 puede estar vacia.
+en caso de que tenga elementos, nunca va a terminar, ya que en ningun momento se le sacan elementos a la pila1,
+por lo tanto la condicion simpre va ser verdadera
