@@ -1,0 +1,63 @@
+a: Este programa no resuleve el problema planteado ya que solo se comparara tope a 5 un saola vez.
+
+b: El error que puedo encontrar es que el codigo dice:
+
+if(!pilaVacia(&Origen))
+
+El primer error es que pilaVacia, no es ninguna funcion, y la forma correcta es   "pilavacia()"
+
+El segundo error es:
+
+if(!pilaVacia(&Origen)) {
+while(tope(&Origen) != 5 ) {
+   apilar(&Distinto, desapilar(&Origen));
+}
+}
+
+
+El codigo se ejeutaria una vez ya que el if y el while estan intercambiados. 
+Por lo tanto una vez que se ejecute el if, ya no se volvera a ejecutar, 
+haciendo que el while se ejecute solo una vez y por lo tanto solo leyendo un elemento tope, y no todos los necesarios
+
+c: 
+
+
+int main() { 
+   Pila Origen, Distinto;
+   inicpila(&Origen);
+   inicpila(&Distinto);
+   leer(&Origen);
+   while (!pilavacia(&Origen)){ 
+      if (tope(&Origen) != 5) {
+         apilar (&Distinto, desapilar(&Origen));
+      } 
+   }
+}
+
+
+d:
+//inicio del programa
+int main() { 
+
+//creacion de pilas
+   Pila Origen, Distinto;
+   
+//  iniciacion de pilas
+   inicpila(&Origen);
+   inicpila(&Distinto);
+
+//leer valor pila Origen
+   leer(&Origen);
+   
+// ciclo que funciona mientras la pila Origen, no este vacia
+   while (!pilavacia(&Origen)){ 
+   
+// condicional que compara el valor tope de Origen y 5
+      if (tope(&Origen) != 5) {
+      
+// se apila tope en la pila Distinto y se desapila de Origen
+         apilar (&Distinto, desapilar(&Origen));
+      } 
+   }
+}
+
