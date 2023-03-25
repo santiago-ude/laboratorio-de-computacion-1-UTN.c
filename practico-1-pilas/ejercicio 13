@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../../pila.h"
+
+int main()
+{
+
+    int valor = 1;
+    float topeLimite;
+  Pila DADA, LIMITE, MAYORES, MENORES;
+  inicpila(&DADA);
+  inicpila(&LIMITE);
+  inicpila(&MAYORES);
+  inicpila(&MENORES);
+
+
+  printf("Insertar un valor a pila LIMITE\n");
+  leer(&LIMITE);
+
+printf("\nPILA DADA\n ");
+  while(valor == 1) {
+
+    leer(&DADA);
+
+    printf("\n 1 para seguir \n 0 para salir\n");
+    scanf("%i", &valor);
+
+  topeLimite = tope(&LIMITE);
+
+  if(topeLimite >= tope(&DADA)) {
+
+
+    apilar(&MENORES, desapilar(&DADA));
+  } else if (topeLimite < tope(&DADA)) {
+  apilar(&MAYORES, desapilar(&DADA));
+  }
+  }
+
+
+mostrar(&DADA);
+mostrar(&LIMITE);
+mostrar(&MENORES);
+mostrar(&MAYORES);
+
+
+return 0;
+}
