@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+
+Pila  dada, aux, par, impar;
+int valor;
+
+
+inicpila(&par);
+inicpila(&dada);
+inicpila(&aux);
+inicpila(&impar);
+
+
+  valor = 1;
+  printf("Pila dada \n");
+
+  while (valor == 1) {
+   leer(&dada);
+
+   printf("1 = seguir 0 = finalizar \n");
+   scanf("%i",&valor);
+
+}
+
+
+
+
+// se ejecuta si dada no esta vacia
+
+while (!pilavacia(&dada)) {
+
+
+// desapila un elemento de dada y lo guarda en aux
+
+    apilar(&aux, desapilar(&dada));
+    
+// si sacando ese elemento, dada queda vacia , es porque solo tenia un elemento , por lo tanto es impar
+    if (pilavacia(&dada)) {
+        printf("Es inpar \n");
+// apilamos el dato en la pila impar
+        apilar (&impar, desapilar(&aux));
+    }
+    
+    
+    
+//si dada sigue teniendo elementos, se ejecuta lo siguiente
+    else {
+    
+// desapilo dada y lo apilo en auxiliar
+        apilar(&aux, desapilar(&dada));
+        
+        
+// si dada esta vacia, quiere decir que es par, porque ya le saco un elemento en el primer if, y sacandole este queda en 0, por lo tanto tenia 2 y es par
+        if (pilavacia(&dada)) {
+
+            printf("es par \n");
+            
+// desapilo dada y apilo el dato en par
+            apilar(&par, desapilar(&aux));
+        }
+    }
+}
+
+
+printf("par");
+mostrar(&par);
+printf("impar");
+mostrar(&impar);
+printf("aux");
+mostrar(&aux);
+
+
+    return 0;
+}
