@@ -1,3 +1,7 @@
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "pila.h"
@@ -73,46 +77,65 @@ else if (pilavacia(&pilaB)) {
 
 ///VALORES Y POSICIONES
 
+       while    ((!pilavacia(&auxA)) && (!pilavacia(&auxB))) {
 
-
-    while((!pilavacia(&auxA)) && (!pilavacia(&auxB)) ){
-            contador = contador + 1;
-    apilar(&pilaA, desapilar(&auxA));
-    apilar(&pilaB, desapilar(&auxB));
-    
-    
-    
-// Aca lo que intento hacer es detectar si la pila esta vacia o no, y en caso de estarlo hacer que el tope sea 0 
+             topeA = tope(&auxA);
+             topeB = tope(&auxB);
 
 
 
-       if    ((!pilavacia(&auxA)) && (!pilavacia(&auxB))) {
+printf("\n\n comparacion \n\n");
 
-             topeA = tope(&pilaA);
-             topeB = tope(&pilaB);
-
-    } else if (pilavacia(&auxB)) {
-        topeB = 0;
-    }  else if (pilavacia(&auxA)) {
-          topeA = 0;
-    }
-
-    printf("\nposicion numero %0.f", contador);
      if (topeA == topeB) {
+           printf ("\nlos dos valores son iguales");
+        
+    }  else if (topeA > topeB){
+           printf ("\n %i es mayor que %i", topeA, topeB);
 
-        printf ("\nlos dos valores son iguales");
+    }  else if (topeB > topeA){
+           printf ("\n %i es mayor que %i", topeB, topeA);}
 
-
-    }
-    else if (topeA > topeB){
-
-        printf ("\n %i es mayor que %i", topeA, topeB);
-
-    }
-    else if (topeB > topeA){
-
-        printf ("\n %i es mayor que %i", topeB, topeA);}
+        apilar(&pilaA, desapilar(&auxA));
+        apilar(&pilaB, desapilar(&auxB));
 }
 
-    return 0;
+while (!pilavacia(&auxA)) {
+
+        topeA = tope(&auxA);
+        topeB =0;
+
+        printf("\n\n comparacion \n\n");
+        
+     if (topeA == topeB) {
+          printf ("\nlos dos valores son iguales");
+
+    }   else if (topeA > topeB){
+         printf ("\n %i es mayor que %i", topeA, topeB);
+
+    }   else if (topeB > topeA){
+         printf ("\n %i es mayor que %i", topeB, topeA);}
+
+
+        apilar(&pilaA, desapilar(&auxA));
+}
+
+while (!pilavacia(&auxB)) {
+
+        topeA = 0;
+        topeB =tope(&auxB);
+
+        printf("\n\n comparacion \n\n");
+     if (topeA == topeB) {
+        printf ("\nlos dos valores son iguales");
+ }    else if (topeA > topeB){
+        printf ("\n %i es mayor que %i", topeA, topeB);
+
+   }  else if (topeB > topeA){
+        printf ("\n %i es mayor que %i", topeB, topeA);}
+
+        apilar(&pilaB, desapilar(&auxB));
+
+}
+
+return 0;
 }
