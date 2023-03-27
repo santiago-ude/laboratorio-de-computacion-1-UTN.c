@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pilaA, pilaB,auxA,auxB;
+    int topeA, topeB, valor, iguales;
+
+
+    valor = 1;
+
+    inicpila(&pilaA);
+    inicpila(&pilaB);
+    inicpila(&auxA);
+    inicpila(&auxB);
+
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pilaA);
+
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+
+
+    }
+    valor = 1;
+    printf("Pila B\n");
+
+    while(valor == 1)
+    {
+        leer(&pilaB);
+
+        printf("\n1 continuar\n 0 salir\n");
+        scanf("%i", &valor);
+    }
+
+    mostrar(&pilaA);
+    mostrar(&pilaB);
+
+
+/// CANTIDAD
+
+    while( ((!pilavacia(&pilaA)) && (!pilavacia(&pilaB)))  && (tope(&pilaA) == tope(&pilaB)) )
+    {
+
+        apilar(&auxA, desapilar(&pilaA));
+        apilar(&auxB, desapilar(&pilaB));
+
+    }
+
+    if (pilavacia(&pilaA)  && pilavacia(&pilaB))  {
+
+        printf("Las pilas son exactamente iguales");
+    } else  {
+        printf("Las pilas son diferentes");
+    }
+
+        return 0;
+    }
