@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../pila.h"
+
+int main()
+{
+    Pila pila, aux, metido;
+    int  valor, topeM, topeP;
+
+
+    valor = 1;
+
+
+    inicpila(&pila);
+    inicpila(&aux);
+    inicpila(&metido);
+
+
+    printf("Pila pila\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+
+
+    printf("Ingresar valor a la pila");
+    leer(&metido);
+
+
+
+            if(tope(&metido) < tope(&pila)) {
+                apilar(&pila, desapilar(&metido));
+            }
+
+            else if(tope(&metido) > tope(&pila)) {
+
+                while(tope(&metido) > tope(&pila)) {
+                    apilar(&aux, desapilar(&pila));
+                }
+                apilar(&pila, desapilar(&metido));
+
+               while(!pilavacia(&aux)) {
+
+                apilar(&pila, desapilar(&aux));
+               }
+
+            }
+
+    mostrar(&pila);
+return 0;
+}
