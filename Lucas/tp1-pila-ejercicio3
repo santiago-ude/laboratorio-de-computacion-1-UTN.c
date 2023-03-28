@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+ Pila dada, distinto,aux;
+ int valor;
+
+ inicpila(&dada);
+ inicpila(&distinto);
+inicpila(&aux);
+
+leer(&dada);
+leer(&dada);
+leer(&dada);
+leer(&dada);
+leer(&dada);
+
+printf("dada");
+mostrar(&dada);
+
+while (!pilavacia(&dada)) {
+    valor = tope(&dada);
+
+if (valor != 8){
+      apilar (&distinto, desapilar(&dada));
+
+  }
+   else {
+    apilar(&aux, desapilar(&dada));
+   }
+
+}
+printf("distinto");
+mostrar(&distinto);
+printf("aux");
+mostrar(&aux);
+
+
+return 0;
+}
