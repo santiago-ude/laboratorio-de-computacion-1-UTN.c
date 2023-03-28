@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../pila.h"
+
+int main()
+{
+    Pila pila;
+
+    int valor = 1;
+    int buscado;
+    inicpila(&pila);
+
+     printf("Ingresar muchos numeros a la pila\n");
+
+
+   /// pedimos numeros para despues buscar entre ellos
+    while(valor == 1)
+    {
+        leer(&pila);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+     printf("Que numero queres buscar ");
+     scanf("%i", &buscado);
+
+///mientras sea distintos se desapilan y se borran hasta llegar al igual...
+
+    while(tope(&pila) != buscado && !pilavacia(&pila)) {
+        desapilar(&pila);
+    }
+    ///si cuando se deja de ejecutar el while es porque encontro el = se da msj que se encontro.
+
+    if(tope(&pila) == buscado) {
+        printf("\n\nEl valor %i fue encontrado en la pila", buscado);
+    }
+    ///si se termino el while xq no se encontro da msj que no fue encontrado.,
+    else {
+    printf("\n\nEl valor %i no fue entontrado en la fila", buscado);
+    }
+
+
+    return 0;
+}
