@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../pila.h"
+
+int main()
+{
+    int valor;
+    Pila pila, ordenada, aux;
+
+   valor = 1;
+
+
+    inicpila(&pila);
+    inicpila(&aux);
+    inicpila(&ordenada);
+
+
+    printf("Pila\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+    mostrar(&pila);
+
+///le agrego el 0 para que tenga un tope con que comparar
+apilar(&ordenada,0);
+
+    while(!pilavacia(&pila)) {
+///si el tope de pila es mayor se agrega de una porque queda ordenado
+        if(tope(&pila) > tope(&ordenada)){
+           apilar(&ordenada, desapilar(&pila));
+           }
+///sino se desapila en aux hasta que el tope de pila sea menor y se apila el valor y
+/// se vuelve a apilar todo lo desapilado anteriormente.
+
+           else{
+
+            while(tope(&pila) < tope(&ordenada)){
+
+                apilar(&aux, desapilar(&ordenada));
+            }
+            apilar(&ordenada, desapilar(&pila));
+
+            while(!pilavacia(&aux)) {
+                apilar(&ordenada, desapilar(&aux));
+            }
+           }
+
+
+    }
+/// como quedo el 0 en la base, invertimos los valores en aux, desapilamos el 0.
+/// y volvemos a poner los valores apilados en ordenada.
+    while(!pilavacia(&ordenada)) {
+        apilar(&aux, desapilar(&ordenada));
+    }
+    desapilar(&aux);
+
+    while(!pilavacia(&aux)) {
+        apilar(&ordenada, desapilar(&aux));
+    }
+
+    mostrar(&ordenada);
+
+    return 0;
+}
