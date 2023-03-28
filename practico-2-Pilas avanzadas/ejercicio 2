@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, aux;
+    int  valor, contador;
+
+    contador = 0;
+    valor = 1;
+
+
+    inicpila(&pila);
+    inicpila(&aux);
+
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+
+  while (!pilavacia (&pila)){
+    contador= contador + 1;
+    desapilar ( &pila);
+
+
+  }
+  printf (" Los elementos de la pila son %i", contador);
+
+    return 0;
+}
