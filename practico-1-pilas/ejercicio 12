@@ -49,16 +49,13 @@ valor = 1;
     }
   }
   apilar(&aux1, desapilar(&modelo));
- 
+
   while (!pilavacia(&dif))
   {
     apilar(&dada,desapilar(&dif));
   }
  }
- while (!pilavacia(&dada))
-  {
-    apilar(&dif, desapilar(&dada));
-  }
+
  printf("modelo");
  mostrar (&modelo);
  printf("dada");
@@ -67,7 +64,6 @@ valor = 1;
  mostrar (&aux1);
  printf("iguales");
  mostrar (&iguales);
- printf("dif");
- mostrar (&dif);
+
  return 0;
 }
