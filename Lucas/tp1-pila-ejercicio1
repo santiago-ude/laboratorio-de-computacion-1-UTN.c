@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+ Pila pilita, aux1,aux2;
+
+ inicpila(&pilita);
+ inicpila(&aux1);
+ inicpila(&aux2);
+
+    leer(&pilita);
+    leer(&pilita);
+    leer(&pilita);
+    leer(&pilita);
+    leer(&pilita);
+
+    apilar(&aux1, desapilar(&pilita));
+    apilar(&aux1, desapilar(&pilita));
+    apilar(&aux1, desapilar(&pilita));
+
+    apilar(&aux2, desapilar(&pilita));
+    apilar(&aux2, desapilar(&pilita));
+
+  printf("aux1");
+  mostrar(&aux1);
+  printf("aux2");
+  mostrar (&aux2);
+}
