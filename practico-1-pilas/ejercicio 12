@@ -1,1 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
 
+int main()
+{
+    int valor = 1;
+  Pila dada, modelo, aux1, iguales, dif;
+  inicpila(&dada);
+  inicpila(&modelo);
+  inicpila(&aux1);
+  inicpila(&iguales);
+  inicpila(&dif);
+
+
+
+  printf("\nPila DADA\n");
+  while(valor == 1){
+    leer(&dada);
+
+    printf("Seguir 1\n salir 0\n");
+    scanf("%i", &valor);
+  }
+valor = 1;
+
+
+    printf("\nPila MODELO\n");
+  while(valor == 1){
+    leer(&modelo);
+
+    printf("Seguir 1\n salir 0\n");
+    scanf("%i", &valor);
+  }
+
+  mostrar(&modelo);
+  mostrar(&dada);
+
+
+ while (!pilavacia (&modelo))
+ {
+  while (!pilavacia(&dada))
+  {
+    if (tope(&modelo) == tope(&dada))
+    {
+      apilar(&iguales, desapilar(&dada));
+    }
+    else{
+      apilar(&dif, desapilar(&dada));
+    }
+  }
+  apilar(&aux1, desapilar(&modelo));
+ 
+  while (!pilavacia(&dif))
+  {
+    apilar(&dada,desapilar(&dif));
+  }
+ }
+ while (!pilavacia(&dada))
+  {
+    apilar(&dif, desapilar(&dada));
+  }
+ printf("modelo");
+ mostrar (&modelo);
+ printf("dada");
+ mostrar (&dada);
+ printf("aux1");
+ mostrar (&aux1);
+ printf("iguales");
+ mostrar (&iguales);
+ printf("dif");
+ mostrar (&dif);
+ return 0;
+}
