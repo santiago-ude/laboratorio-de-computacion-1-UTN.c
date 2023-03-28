@@ -39,24 +39,24 @@ printf("\n1 continuar\n0 salir\n");
 
   mostrar(&modelo);
   mostrar(&dada);
-  
-  
-  
+
+
+
 
     while(!pilavacia(&dada)) {
 
 
     topeM = tope(&modelo);
     topeD = tope(&dada);
-    
-    
-    
+
+
+
     if (topeD == topeM) {
             desapilar(&dada);
 
         } else {
             apilar(&aux, desapilar(&dada));
-            
+
             }
 
 
