@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, aux;
+    int  valor, topeA, promedio, contador, acumulador;
+
+    promedio = 0;
+    acumulador = 0;
+    valor = 1;
+
+
+    inicpila(&pila);
+    inicpila(&aux);
+
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+
+    while(!pilavacia(&pila))
+    {
+        contador++;
+        topeA = tope(&pila);
+        acumulador = acumulador + topeA;
+        apilar(&aux, desapilar(&pila));
+    }
+
+    promedio = acumulador/contador;
+
+
+    mostrar(&aux);
+
+    printf(" \n \n  El promedio de los elementos de la pila es %i  \n", promedio);
+
+    return 0;
+}
