@@ -28,44 +28,28 @@ int main()
     mostrar(&pila);
 
 
-    while(!pilavacia(&numero))
+    if (tope(&numero)  < tope(&pila))
     {
 
+        apilar(&pila, desapilar(&numero));
 
-        topeN = tope(&numero);
-
-        while(!pilavacia(&pila))
+    }
+    else if (tope(&numero) > tope(&pila)) ;
+    {
+        while(tope(&numero) > tope(&pila))
         {
-            topeP = tope(&pila);
+            apilar(&aux, desapilar(&pila));
+        }
 
-            if (topeN  > topeP)
-            {
+        apilar(&pila, desapilar(&numero));
 
-                apilar(&aux, desapilar(&pila));
+        while (!pilavacia(&aux))
+        {
+            apilar(&pila, desapilar(&aux));
+        }
 
-                mostrar(&pila);
-                mostrar(&aux);
-                mostrar(&numero);
+        mostrar(&pila);
+    }
 
-
-            }
-            else if (topeN <= topeP) ;
-            {
-                apilar(&aux, desapilar(&numero));
-                apilar(&aux, desapilar(&pila));
-
-                while (!pilavacia(&aux))
-                {
-                    apilar(&pila, desapilar(&aux));
-                }
-
-                mostrar(&pila);
-
-            return 0;
-            }
-
+    return 0;
 }
-
-}    
-}
-
