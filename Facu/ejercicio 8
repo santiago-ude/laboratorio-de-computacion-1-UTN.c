@@ -1,0 +1,69 @@
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, sacar, aux;
+    int  valor;
+
+
+    valor = 1;
+
+    inicpila(&pila);
+    inicpila(&sacar);
+    inicpila(&aux);
+
+
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+
+    mostrar(&pila);
+
+    printf("Que valor desea sacar? \n");
+
+    leer(&sacar);
+
+
+
+    while (!pilavacia(&pila))
+    {
+
+        if (tope(&sacar) == tope(&pila))
+        {
+
+            desapilar(&pila);
+
+        }
+        else if (tope(&sacar) != (tope(&pila)))
+        {
+
+            apilar(&aux, desapilar(&pila));
+
+        }
+    }
+
+
+
+
+
+    while(!pilavacia(&aux))
+    {
+        apilar(&pila, desapilar(&aux));
+    }
+
+    mostrar(&pila);
+
+    return 0;
+}
