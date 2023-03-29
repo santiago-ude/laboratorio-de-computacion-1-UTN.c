@@ -1,0 +1,61 @@
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, buscado, aux;
+    int  valor;
+
+
+    valor = 1;
+
+    inicpila(&pila);
+    inicpila(&buscado);
+    inicpila(&aux);
+
+
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+
+
+
+    printf("Que valor desea buscar? \n");
+
+    leer(&buscado);
+
+
+
+    while (!pilavacia(&pila))
+    {
+
+        if (tope(&buscado) == tope(&pila))
+        {
+            printf("\n El elemento se encuentra en la pila \n");
+
+            return 0;
+        }
+        else if (tope(&buscado) != (tope(&pila)))
+        {
+
+            desapilar(&pila);
+
+        }
+    }
+
+    printf("\n El elemento no esta en la pila \n");
+
+
+    return 0;
+}
