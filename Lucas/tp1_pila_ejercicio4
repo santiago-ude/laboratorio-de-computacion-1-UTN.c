@@ -1,0 +1,37 @@
+int main()
+{
+ Pila origen, destino,aux;
+
+ inicpila(&origen);
+ inicpila(&destino);
+ inicpila(&aux);
+
+ leer(&origen);
+ leer(&origen);
+ leer(&origen);
+ leer(&origen);
+ leer(&origen);
+
+ printf("origen");
+ mostrar (&origen);
+
+ while (!pilavacia(&origen)){
+ apilar(&aux, desapilar(&origen));
+ }
+
+ printf("aux");
+ mostrar (&aux);
+
+ while (!pilavacia(&aux)){
+ apilar (&destino, desapilar(&aux));
+
+ }
+
+  printf("destino");
+ mostrar(&destino);
+
+
+
+return 0;
+}
+
