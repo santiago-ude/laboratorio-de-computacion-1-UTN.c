@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, numero,aux;
+    int topeP, topeN, valor;
+
+    valor = 1;
+
+    inicpila(&pila);
+    inicpila(&numero);
+    inicpila(&aux);
+
+
+    printf("Ingrese los valores de mayor a menor\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+    printf("Valor a agregar\n");
+    leer(&numero);
+    mostrar(&pila);
+
+
+    while(!pilavacia(&numero))
+    {
+
+
+        topeN = tope(&numero);
+
+        while(!pilavacia(&pila))
+        {
+            topeP = tope(&pila);
+
+            if (topeN  > topeP)
+            {
+
+                apilar(&aux, desapilar(&pila));
+
+                mostrar(&pila);
+                mostrar(&aux);
+                mostrar(&numero);
+
+
+            }
+            else if (topeN <= topeP) ;
+            {
+                apilar(&aux, desapilar(&numero));
+                apilar(&aux, desapilar(&pila));
+
+                while (!pilavacia(&aux))
+                {
+                    apilar(&pila, desapilar(&aux));
+                }
+
+                mostrar(&pila);
+
+            return 0;
+            }
+
+}
+
+}    
+}
+
