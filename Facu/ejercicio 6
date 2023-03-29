@@ -1,0 +1,88 @@
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, ord, aux;
+    int  valor;
+
+
+    valor = 1;
+
+    inicpila(&pila);
+    inicpila(&ord);
+    inicpila(&aux);
+
+
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+    apilar(&ord,0);
+
+    mostrar(&pila);
+
+
+
+
+    while(!pilavacia(&pila))
+    {
+
+
+        if(tope(&pila) > tope(&ord))
+        {
+
+            apilar(&ord, desapilar(&pila));
+
+        }
+        else if (tope(&pila) < tope(&ord))
+        {
+
+            while (tope(&pila) < tope(&ord))
+            {
+
+                apilar(&aux, desapilar(&ord));
+
+            }
+
+            apilar(&ord, desapilar(&pila));
+
+            while (!pilavacia(&aux))
+            {
+                apilar(&ord, desapilar(&aux));
+            }
+
+        }
+
+    }
+
+    while (!pilavacia(&ord))
+    {
+        apilar(&aux, desapilar(&ord));
+    }
+
+    desapilar(&aux);
+
+    while(!pilavacia(&aux))
+    {
+
+        apilar(&ord, desapilar(&aux));
+    }
+
+
+
+    mostrar(&ord);
+
+
+    return 0;
+}
