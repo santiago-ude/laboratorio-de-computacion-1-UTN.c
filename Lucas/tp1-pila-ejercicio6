@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+int main()
+{
+    Pila dada, aux,aux1;
+    int valor;
+
+valor=1;
+
+inicpila (&dada);
+inicpila (&aux);
+inicpila (&aux1);
+
+    printf("\nPila DADA\n");
+  while(valor == 1){
+    leer(&dada);
+
+    printf("Seguir 1\n salir 0\n");
+    scanf("%i", &valor);
+    }
+    mostrar (&dada);
+
+apilar(&aux, desapilar(&dada));
+
+while (!pilavacia(&dada)){
+    apilar(&aux1, desapilar(&dada));
+}
+
+apilar(&dada, desapilar(&aux));
+
+while (!pilavacia(&aux1)){
+    apilar(&dada, desapilar((&aux1)));
+}
+
+printf("DADA")
+mostrar(&dada);
+
+    return 0;
+}
