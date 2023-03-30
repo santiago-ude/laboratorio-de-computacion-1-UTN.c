@@ -1,18 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../pila.h"
+#include "pila.h"
 
 int main()
 {
-    Pila dada, aux;
 
-    int valor = 1;
-    int num;
+    Pila dada, pilaB, aux, aux2;
 
     inicpila(&dada);
+    inicpila(&pilaB);
     inicpila(&aux);
+    inicpila(&aux2);
 
+    int valor = 1;
+    int tope1,tope2;
 
+printf("Pila A\n");
 
     while(valor == 1)
     {
@@ -22,33 +25,38 @@ int main()
         scanf("%i",&valor);
     }
 
-    num = tope(&dada);
-    while(!pilavacia(&dada))
-    {
-        apilar(&aux, desapilar(&dada));
-    }
 
-    if(tope(&aux) == num)
-    {
-        printf("\nEsta pila es capicua\n");
+    while(!pilavacia(&dada)) {
 
-        while(!pilavacia(&aux))
-        {
-            apilar(&dada, desapilar(&aux));
+        tope1 = tope(&dada);
+
+        while(!pilavacia(&dada)){
+            apilar(&aux, desapilar(&dada));
         }
-            mostrar(&dada);
+        mostrar(&aux);
+        mostrar(&dada);
+
+        if(tope(&aux) == tope1) {
+
+                tope2 = tope(&aux);
+                desapilar(&aux);
+
+            while(!pilavacia(&aux)) {
+                    apilar(&dada, desapilar(&aux));
+                }
+                tope1 = tope(&dada);
+                desapilar(&dada);
+            }
+            mostrar(&aux);
+        mostrar(&dada);
+
     }
 
-    else
-    {
-        printf("\nEsta pila no es capicua\n");
+    if (tope1 == tope2) {
+        printf("Es capicua");
 
-        while(!pilavacia(&aux))
-        {
-            apilar(&dada, desapilar(&aux));
-        }
-            mostrar(&dada);
+    } else {
+        printf("no es capicua");
     }
-
-    return 0;
+return 0;
 }
