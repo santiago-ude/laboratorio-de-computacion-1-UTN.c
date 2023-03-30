@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../pila.h"
+
+int main()
+{
+    Pila pila, aux, sacado;
+
+    int valor = 1;
+    int numSacado;
+
+
+    inicpila(&pila);
+    inicpila(&aux);
+    inicpila(&sacado);
+
+    while(valor == 1) {
+        leer(&pila);
+        printf("\n 1 continuar\n 0 salir");
+        scanf("%i", &valor);
+    }
+
+    printf("Que numero queres sacar de los que ingresaste?");
+    scanf("%i", &numSacado);
+
+    printf("\n Pila\n");
+
+    mostrar(&pila);
+
+
+
+    while(!pilavacia(&pila)) {
+
+        if(tope(&pila) == numSacado) {
+            apilar(&sacado, desapilar(&pila));
+        }
+
+        else if(tope(&pila) != numSacado) {
+            apilar(&aux, desapilar(&pila));
+        }
+    }
+    while(!pilavacia(&aux)) {
+            apilar(&pila, desapilar(&aux));
+        }
+
+    printf("\n Borrado\n");
+    mostrar(&sacado);
+
+    printf("\n PILA final\n");
+    mostrar(&pila);
+
+    return 0;
+}
