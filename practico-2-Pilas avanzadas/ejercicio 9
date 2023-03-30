@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../pila.h"
+
+int main()
+{
+    Pila dada, aux;
+
+    int valor = 1;
+    int num;
+
+    inicpila(&dada);
+    inicpila(&aux);
+
+
+
+    while(valor == 1)
+    {
+        leer(&dada);
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+    num = tope(&dada);
+    while(!pilavacia(&dada))
+    {
+        apilar(&aux, desapilar(&dada));
+    }
+
+    if(tope(&aux) == num)
+    {
+        printf("\nEsta pila es capicua\n");
+
+        while(!pilavacia(&aux))
+        {
+            apilar(&dada, desapilar(&aux));
+        }
+            mostrar(&dada);
+    }
+
+    else
+    {
+        printf("\nEsta pila no es capicua\n");
+
+        while(!pilavacia(&aux))
+        {
+            apilar(&dada, desapilar(&aux));
+        }
+            mostrar(&dada);
+    }
+
+    return 0;
+}
