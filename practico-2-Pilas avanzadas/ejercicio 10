@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pila.h"
+#include "../pila.h"
 
 int main()
 {
+
+int topeA, topeB;
+
 Pila pilaA, pilaB, aux;
 
 inicpila(&pilaA);
 inicpila(&pilaB);
 inicpila(&aux);
-
 
 apilar(&pilaA, 1);
 apilar(&pilaA, 2);
@@ -20,38 +22,50 @@ apilar(&pilaB, 3);
 apilar(&pilaB, 5);
 apilar(&pilaB, 7);
 
-mostrar(&pilaB);
-mostrar(&pilaA);
-/// funciona
+ mostrar(&pilaA);
+ mostrar(&pilaB);
 
 
-  while(!pilavacia(&pilaA) && pilavacia(&aux)) {
+ while(!pilavacia(&pilaA)){
 
-        if(tope(&pilaA) == tope(&pilaB)){
+    if (tope(&pilaA) == tope(&pilaB) ) {
 
-        desapilar(&pilaA);
-        }
+        desapilar(&pilaB);
+        apilar(&pilaB, desapilar(&pilaA));
 
-        else{
-
-    while(tope(&pilaA) != tope(&pilaB)){
-
-     apilar(&aux, desapilar(&pilaB));
     }
+
+    else {
+
+       while( (tope(&pilaA) != tope(&pilaB)) && !pilavacia(&pilaB)) {
+
+        apilar(&aux,desapilar(&pilaB));
+
+       }
 
        if(pilavacia(&pilaB)) {
+
+        apilar(&pilaB, desapilar(&pilaA));
+
+       }
+
+        else if(!pilavacia(&pilaA) && (tope(&pilaA) == tope(&pilaB) )) {
+
+            desapilar(&pilaB);
             apilar(&pilaB, desapilar(&pilaA));
 
-    while(!pilavacia(&aux)) {
-        apilar(&pilaB, desapilar(&aux));
+        }
+
+        while(!pilavacia(&aux)) {
+
+            apilar(&pilaB, desapilar(&aux));
+
+        }
     }
-    }
-}
-}
+ }
+
+
+
 mostrar(&pilaB);
-mostrar(&pilaA);
-mostrar(&aux);
-
-
 return 0;
 }
