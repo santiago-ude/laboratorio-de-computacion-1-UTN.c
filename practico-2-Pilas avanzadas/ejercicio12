@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../pila.h"
+
+int main()
+{
+    Pila origen, aux, aux2;
+    int valor = 1;
+
+    inicpila(&origen);
+    inicpila(&aux);
+    inicpila(&aux2);
+
+
+    while(valor == 1) {
+        leer(&origen);
+
+        printf("\n 1 continuar \n 0 salir\n");
+        scanf("%i", &valor);
+    }
+
+
+    apilar(&aux, desapilar(&origen));
+///-----------------------------------------------------------
+
+while(!pilavacia(&origen)) {
+
+    if(tope(&origen) > tope(&aux)) {
+
+        apilar(&aux, desapilar(&origen));
+
+    }
+
+    else if(tope(&origen) < tope(&aux)) {
+
+        while((tope(&origen) < tope(&aux)) && !pilavacia(&aux)) {
+
+            apilar(&aux2, desapilar(&aux));
+
+        }
+
+        apilar(&aux,desapilar(&origen));
+
+        while(!pilavacia(&aux2)){
+
+            apilar(&aux, desapilar(&aux2));
+
+        }
+
+    }
+}
+
+/// pasamos a una tercera pila para luego pasarlo a origen y que no este invertida
+
+while(!pilavacia(&aux)) {
+
+    apilar(&aux2, desapilar(&aux));
+}
+
+
+///devolvemos a origen para darlo de forma ascendente.
+
+while(!pilavacia(&aux2)) {
+
+    apilar(&origen, desapilar(&aux2));
+}
+
+
+printf("\n Pila de forma ascendente\n");
+mostrar(&origen);
+
+
+
+return 0;
+}
