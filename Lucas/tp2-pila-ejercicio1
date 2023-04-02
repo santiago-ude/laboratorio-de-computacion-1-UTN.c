@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+    Pila pila, aux;
+    int valor, resultado, topeA;
+
+     resultado = 0;
+    valor = 1;
+
+    inicpila(&pila);
+    inicpila(&aux);
+
+    printf("Pila A\n");
+
+    while(valor == 1)
+    {
+        leer(&pila);
+
+
+        printf("\n1 continuar\n0 salir\n");
+        scanf("%i",&valor);
+    }
+
+    while(!pilavacia(&pila)){
+        topeA= tope(&pila);
+        resultado=resultado+topeA;
+    apilar(&aux, desapilar(&pila));
+    }
+    mostrar(&aux);
+    printf("El resultado de la suma de elementos de la pila es: %i", resultado);
+
+    return 0;
+}
