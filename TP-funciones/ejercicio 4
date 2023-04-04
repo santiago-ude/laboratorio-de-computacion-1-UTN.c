@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void cargarPiloneta(Pila* piloneta);
+int buscarMenor(Pila* piloneta);
+
+int main()
+{
+
+    int cantidad, i, topeMenor;
+    Pila dada, aux, aux2;
+    inicpila(&dada);
+    inicpila(&aux);
+    inicpila(&aux2);
+
+    printf("Cuantos elementos le queres ingresar\n ");
+    scanf("%i", &cantidad);
+
+    for (i = 0; i < cantidad; i++)
+    {
+        cargarPiloneta(&dada);
+    }
+
+    topeMenor = buscarMenor(&dada);
+
+    printf("El valor menor es %i", topeMenor);
+    mostrar(&dada);
+    return 0;
+}
+
+
+void cargarPiloneta(Pila* piloneta)
+{
+    int elemento;
+
+    printf("Elemento para la piloneta");
+    scanf("%i", &elemento);
+
+    apilar(piloneta, elemento);
+}
+///-------------------------------------------------------------------------------------
+int buscarMenor(Pila* piloneta)
+{
+
+    Pila aux, aux2;
+
+    inicpila(&aux);
+    inicpila(&aux2);
+
+    int topeMenor;
+
+    apilar(&aux, desapilar(piloneta));
+
+    while(!pilavacia(piloneta))
+    {
+
+        if(tope(piloneta) < tope(&aux))
+        {
+            apilar(&aux2, desapilar(&aux));
+            apilar(&aux, desapilar(piloneta));
+
+        }
+
+        else
+        {
+            apilar(&aux2, desapilar(piloneta));
+        }
+    }
+
+
+    while(!pilavacia(&aux2))
+    {
+
+        apilar(piloneta, desapilar(&aux2));
+    }
+    topeMenor = tope(&aux);
+    return topeMenor;
+}
