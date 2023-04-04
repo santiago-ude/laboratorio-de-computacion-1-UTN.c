@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void cargarPila (Pila* dada);
+void invertir (Pila* dada, Pila* aux);
+
+int main()
+{
+    Pila pilona, pilita;
+    inicpila(&pilona);
+    inicpila(&pilita);
+    int cantidad, i;
+
+    printf("Cuantas elementos le queres cargar a la pila PILONA\n");
+    scanf("%i", &cantidad);
+
+    for (i = 0; i < cantidad; i++)
+    {
+
+        cargarPila(&pilona);
+    }
+
+
+    invertir(&pilona, &pilita);
+
+    printf("\NPILONA\n");
+    mostrar(&pilona);
+    printf("\n PILITA \n");
+    mostrar (&pilita);
+
+
+    return 0;
+}
+
+
+void cargarPila(Pila* dada)
+{
+
+    int elemento;
+
+    printf("Ingrese un elemento");
+    scanf("%i", &elemento);
+
+    apilar(dada, elemento);
+}
+
+
+void invertir(Pila* dada, Pila* aux)
+{
+
+    while(!pilavacia(dada))
+    {
+
+        apilar(aux, desapilar(dada));
+    }
+}
