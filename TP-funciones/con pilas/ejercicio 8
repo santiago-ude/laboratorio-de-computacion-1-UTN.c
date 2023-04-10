@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+
+
+void cargarPiloneta (Pila* piloneta);
+int sumaTopeAnterior (Pila* piloneta);
+
+int main()
+{
+    int cantidadDada, i, resultado;
+
+Pila dada;
+inicpila(&dada);
+
+
+printf("Cuantos elementos le vas a agregar a la pila");
+scanf("%i", &cantidadDada);
+
+for ( i = 0; i < cantidadDada; i++) {
+
+    cargarPiloneta(&dada);
+}
+mostrar(&dada);
+
+resultado = sumaTopeAnterior(&dada);
+
+printf("%i", resultado);
+return 0;
+}
+
+
+//      CARGAR PILA
+void cargarPiloneta (Pila* piloneta) {
+
+int elemento;
+
+printf("Dame un elemento para cargar en la pila\n");
+scanf("%i", &elemento);
+
+apilar(piloneta, elemento);
+}
+
+//---------------------------------------
+
+int sumaTopeAnterior (Pila* piloneta) {
+
+Pila variable1;
+inicpila(&variable1);
+
+apilar(&variable1, desapilar(piloneta));
+
+int tope1 = tope(piloneta);
+int tope2 = tope(&variable1);
+
+int resultado = tope1 + tope2;
+return resultado;
+}
