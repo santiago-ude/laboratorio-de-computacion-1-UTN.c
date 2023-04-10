@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+void cargarPiloneta (Pila* piloneta);
+void ordenarPilas (Pila* piloneta, Pila* ordenada);
+
+int main()
+{
+    int cantidadDada, cantidadOrdenada, i;
+
+
+Pila dada, ordenada;
+inicpila(&dada);
+inicpila(&ordenada);
+
+printf("Cuantos elementos le vas a agregar a la pila Ordenada\n LA PILA TIENE QUE ESTAR ORDENADA DE MENOR A MAYOR!!\n");
+scanf("%i", &cantidadOrdenada);
+
+for ( i = 0; i < cantidadOrdenada; i++) {
+
+    cargarPiloneta(&ordenada);
+}
+
+printf("Cuantos elementos le vas a agregar a la pila Dada\n");
+scanf("%i", &cantidadDada);
+
+for ( i = 0; i < cantidadDada; i++) {
+
+    cargarPiloneta(&dada);
+}
+
+mostrar(&ordenada);
+mostrar(&dada);
+
+
+ordenarPilas(&dada, &ordenada);
+
+
+}
+
+
+//      CARGAR PILA
+void cargarPiloneta (Pila* piloneta) {
+
+int elemento;
+
+printf("Dame un elemento para cargar en la pila\n");
+scanf("%i", &elemento);
+
+apilar(piloneta, elemento);
+}
+
+//-----------------------
+
+
+void ordenarPilas (Pila* piloneta, Pila* ordenada) {
+
+Pila aux;
+inicpila(&aux);
+
+while(!pilavacia(piloneta)) {
+
+    if(tope(piloneta) > tope(ordenada)) {
+
+        apilar(ordenada, desapilar(piloneta));
+    }
+
+    else if(tope(piloneta) < tope(ordenada)) {
+
+        while(tope(piloneta) < tope(ordenada) && !pilavacia(ordenada)) {
+
+            apilar(&aux, desapilar(ordenada));
+        }
+        apilar(ordenada, desapilar(piloneta));
+
+    while(!pilavacia(&aux)) {
+
+        apilar(ordenada, desapilar(&aux));
+    }
+    }
+
+    else {
+        desapilar(piloneta);
+    }
+}
+
+mostrar(ordenada);
+}
