@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+
+
+void cargarPiloneta (Pila* piloneta);
+int sumaPila (Pila* piloneta);
+int contadorPila (Pila* piloneta);
+int division (int suma, int cantidad);
+int promedioPila (Pila* piloneta, int suma, int cantidad, int division)
+
+int main()
+{
+    int cantidadDada, i, suma, cantidadElementos, division, promedio;
+
+Pila dada;
+inicpila(&dada);
+
+
+printf("Cuantos elementos le vas a agregar a la pila");
+scanf("%i", &cantidadDada);
+
+for ( i = 0; i < cantidadDada; i++) {
+
+    cargarPiloneta(&dada);
+}
+mostrar(&dada);
+
+suma = sumaPila(&dada);
+cantidadElementos = contadorPila(&dada);
+division = divisionPila(suma, cantidadElementos);
+
+promedio = promedioPila(&dada, suma, cantidadElementos, division);
+printf("Tu promedio es: %i", promedio );
+
+return 0;
+}
+
+
+//      CARGAR PILA
+void cargarPiloneta (Pila* piloneta) {
+
+int elemento;
+
+printf("Dame un elemento para cargar en la pila\n");
+scanf("%i", &elemento);
+
+apilar(piloneta, elemento);
+}
+
+//---------------------------------------
+
+int sumaPila (Pila* piloneta) {
+int resultadoSuma, suma = 0;
+ Pila aux;
+inicpila(&aux);
+
+while(!pilavacia(piloneta)){
+    suma = suma + tope(piloneta);
+    apilar(&aux, desapilar(piloneta));
+}
+
+while(!pilavacia(&aux)) {
+    apilar(piloneta, desapilar(&aux));
+}
+
+resultadoSuma = suma;
+
+return resultadoSuma;
+}
+
+
+
+int contadorPila (Pila* piloneta) {
+Pila aux;
+inicpila(&aux);
+
+int contador = 0;
+int cantidadElementos;
+
+while (!pilavacia(piloneta)){
+    contador = contador + 1;
+    apilar(&aux, desapilar(piloneta));
+}
+
+while(!pilavacia(&aux)){
+
+    apilar(piloneta, desapilar(&aux));
+}
+
+cantidadElementos = contador;
+
+return cantidadElementos;
+}
+
+
+int divisionPila(int suma, int cantidad) {
+
+int resultado = suma/cantidad;
+
+return resultado;
+}
+
+
+int promedioPila (Pila* piloneta, int suma, int cantidad, int division) {
+int resultado;
+int suma = sumapila(piloneta);
+int contador = contadorPila(piloneta);
+int division = divisionPila(suma, cantidad);
+
+
+return division;
+}
