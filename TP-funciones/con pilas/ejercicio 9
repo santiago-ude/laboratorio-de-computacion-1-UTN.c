@@ -3,113 +3,140 @@
 #include "pila.h"
 
 
-
-
 void cargarPiloneta (Pila* piloneta);
 int sumaPila (Pila* piloneta);
 int contadorPila (Pila* piloneta);
-int division (int suma, int cantidad);
-int promedioPila (Pila* piloneta, int suma, int cantidad, int division)
+float divisionPila(Pila* piloneta) ;
+
+void promedioPila(Pila* piloneta);
 
 int main()
 {
+
     int cantidadDada, i, suma, cantidadElementos, division, promedio;
 
-Pila dada;
-inicpila(&dada);
+    Pila dada;
+    inicpila(&dada);
 
 
-printf("Cuantos elementos le vas a agregar a la pila");
-scanf("%i", &cantidadDada);
+    printf("Cuantos elementos le vas a agregar a la pila");
+    scanf("%i", &cantidadDada);
 
-for ( i = 0; i < cantidadDada; i++) {
+    for ( i = 0; i < cantidadDada; i++)
+    {
 
-    cargarPiloneta(&dada);
-}
-mostrar(&dada);
+        cargarPiloneta(&dada);
+    }
+    mostrar(&dada);
 
-suma = sumaPila(&dada);
-cantidadElementos = contadorPila(&dada);
-division = divisionPila(suma, cantidadElementos);
+    promedioPila(&dada);
 
-promedio = promedioPila(&dada, suma, cantidadElementos, division);
-printf("Tu promedio es: %i", promedio );
-
-return 0;
+    return 0;
 }
 
 
 //      CARGAR PILA
-void cargarPiloneta (Pila* piloneta) {
+//-------------------------------------------------------------------
+void cargarPiloneta (Pila* piloneta)
+{
 
-int elemento;
+    int elemento;
 
-printf("Dame un elemento para cargar en la pila\n");
-scanf("%i", &elemento);
+    printf("Dame un elemento para cargar en la pila\n");
+    scanf("%i", &elemento);
 
-apilar(piloneta, elemento);
+    apilar(piloneta, elemento);
 }
 
 //---------------------------------------
 
-int sumaPila (Pila* piloneta) {
-int resultadoSuma, suma = 0;
- Pila aux;
-inicpila(&aux);
+int sumaPila (Pila* piloneta)
+{
+    int resultadoSuma, suma = 0;
+    Pila aux;
+    inicpila(&aux);
 
-while(!pilavacia(piloneta)){
-    suma = suma + tope(piloneta);
-    apilar(&aux, desapilar(piloneta));
-}
+    while(!pilavacia(piloneta))
+    {
+        suma = suma + tope(piloneta);
+        apilar(&aux, desapilar(piloneta));
+    }
 
-while(!pilavacia(&aux)) {
-    apilar(piloneta, desapilar(&aux));
-}
+    while(!pilavacia(&aux))
+    {
+        apilar(piloneta, desapilar(&aux));
+    }
 
-resultadoSuma = suma;
+    resultadoSuma = suma;
 
-return resultadoSuma;
-}
-
-
-
-int contadorPila (Pila* piloneta) {
-Pila aux;
-inicpila(&aux);
-
-int contador = 0;
-int cantidadElementos;
-
-while (!pilavacia(piloneta)){
-    contador = contador + 1;
-    apilar(&aux, desapilar(piloneta));
-}
-
-while(!pilavacia(&aux)){
-
-    apilar(piloneta, desapilar(&aux));
-}
-
-cantidadElementos = contador;
-
-return cantidadElementos;
+    return resultadoSuma;
 }
 
 
-int divisionPila(int suma, int cantidad) {
+///-------------------------------------------------------------
+int contadorPila (Pila* piloneta)
+{
+    Pila aux;
+    inicpila(&aux);
 
-int resultado = suma/cantidad;
+    int contador = 0;
+    int cantidadElementos;
 
-return resultado;
+    while (!pilavacia(piloneta))
+    {
+        contador = contador + 1;
+        apilar(&aux, desapilar(piloneta));
+    }
+
+    while(!pilavacia(&aux))
+    {
+
+        apilar(piloneta, desapilar(&aux));
+    }
+
+    cantidadElementos = contador;
+
+    return cantidadElementos;
 }
 
 
-int promedioPila (Pila* piloneta, int suma, int cantidad, int division) {
-int resultado;
-int suma = sumapila(piloneta);
-int contador = contadorPila(piloneta);
-int division = divisionPila(suma, cantidad);
+
+//--------------------------------------------------
+
+float divisionPila ( Pila* piloneta)
+{
+
+    int suma, contador;
+    float resultado;
+
+    suma = sumaPila(piloneta);
 
 
-return division;
+    contador = contadorPila(piloneta);
+
+    resultado = (float)suma / contador;
+
+
+    return resultado;
+}
+
+
+//-------------------------------------------------------------
+
+void promedioPila ( Pila* piloneta)
+{
+
+    int suma, cantidad ;
+    float promedio;
+
+    suma = sumaPila(piloneta);
+
+    promedio = divisionPila(piloneta);
+
+    cantidad = contadorPila(piloneta);
+
+
+    printf("La cantidada de elementos es: %i \n", cantidad);
+    printf("\n La suma es: %i \n", suma);
+    printf("\n  El promedio  es:  %.2f  ", promedio);
 }
