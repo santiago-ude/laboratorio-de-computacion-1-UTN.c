@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void cargarPila (Pila* dada);
+
+
+int main()
+{
+    Pila pilaA;
+    inicpila(&pilaA);
+    int cantidad;
+
+    printf("Quieres agregar un elemento a la pila PILONA  1 = si , 0 = no \n");
+    scanf("%i", &cantidad);
+
+    while (cantidad == 1)
+    {
+        cargarPila(&pilaA);
+        printf("Quieres agregar un elemento a la pila PILONA  1 = si , 0 = no \n");
+        scanf("%i", &cantidad);
+    }
+
+
+    printf("\n PILONA \n");
+    mostrar(&pilaA);
+
+    return 0;
+}
+
+
+void cargarPila(Pila* dada)
+{
+
+    int elemento;
+
+    printf("Ingrese un elemento");
+    scanf("%i", &elemento);
+
+    apilar(dada, elemento);
+}
