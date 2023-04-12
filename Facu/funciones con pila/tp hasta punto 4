@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void cargarPila (Pila* dada);
+void cambiarPila(Pila* dada, Pila* otra);
+void mismoOrdenDePila (Pila* dada, Pila* otra);
+int encontrarMenor (Pila* dada);
+
+
+int main()
+{
+    Pila pilaA, pilaB;
+    inicpila(&pilaA);
+    inicpila(&pilaB);
+    int cantidad, topeMenor;
+
+    printf("Quieres agregar un elemento a la pila PILONA  1 = si , 0 = no \n");
+    scanf("%i", &cantidad);
+
+    while (cantidad == 1)
+    {
+        cargarPila(&pilaA);
+        printf("Quieres agregar un elemento a la pila PILONA  1 = si , 0 = no \n");
+        scanf("%i", &cantidad);
+    }
+
+
+    printf("\n\n -------------Mostramos la pila cargada---------------------------- \n\n");
+    mostrar(&pilaA);
+
+
+    printf("\n\n -----------Pasamos todos los elementos de una pila a otra---------- \n\n");
+
+    cambiarPila(&pilaA, &pilaB);
+
+
+    printf("\n\n ------------Mismo orden en otra pila--------------------------------\n\n");
+
+    mismoOrdenDePila(&pilaA, &pilaB);
+
+    printf("\n\n ------------------Encontrar el menor de la pila---------------------\n\n");
+
+    topeMenor = encontrarMenor(&pilaA);
+
+    printf("\n\nEl menor elemento es %i \n\n", topeMenor);
+
+    mostrar(&pilaA);
+
+
+    return 0;
+}
+
+
+void cargarPila(Pila* dada)
+{
+
+    int elemento;
+
+    printf("Ingrese un elemento");
+    scanf("%i", &elemento);
+
+    apilar(dada, elemento);
+}
+
+
+void cambiarPila(Pila* dada, Pila* otra)
+{
+
+    while (!pilavacia(dada)){
+
+        apilar(otra, desapilar(dada));
+    }
+
+    printf("\npilaA\n");
+    mostrar(dada);
+    printf("\n pilaB\n");
+    mostrar(otra);
+
+}
+
+
+void mismoOrdenDePila (Pila* dada, Pila* otra)
+{
+
+    Pila aux;
+    inicpila(&aux);
+
+
+    while (!pilavacia(otra)){
+        apilar(&aux, desapilar(otra));
+    }
+
+    while(!pilavacia(&aux)){
+        apilar(dada, desapilar(&aux));
+    }
+
+
+    printf("\n  pila A\n");
+    mostrar(dada);
+    printf("\n pila B \n");
+    mostrar(otra);
+
+}
+
+int encontrarMenor (Pila* dada)
+{
+int topeMenor;
+
+    Pila aux, menor;
+    inicpila(&aux);
+    inicpila(&menor);
+
+   apilar(&menor, tope(dada));
+
+    while(!pilavacia(dada)){
+
+        if (tope(dada) < tope(&menor)) {
+
+                apilar(&aux, desapilar(&menor));
+                apilar(&menor, desapilar(dada));
+        }
+        else {
+            apilar(&aux, desapilar(dada));
+        }
+
+    }
+        while(!pilavacia(&aux)){
+
+            apilar(dada, desapilar(&aux));
+        }
+topeMenor = tope(&menor);
+
+return topeMenor;
+
+
+
+}
