@@ -1,0 +1,74 @@
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+
+    Pila origen,aux, aux2;
+
+    inicpila(&origen);
+    inicpila(&aux);
+    inicpila(&aux2);
+
+
+
+    apilar(&origen, 1);
+    apilar(&origen, 3);
+    apilar(&origen, 5);
+    apilar(&origen, 6);
+    apilar(&origen, 7);
+
+    apilar(&origen, 2);
+    apilar(&origen, 4);
+    apilar(&origen, 90);
+    apilar(&origen, 9);
+    apilar(&origen, 44);
+
+
+    mostrar(&origen);
+
+
+
+
+    //------------------------------------------------------------------------
+
+
+apilar(&aux, desapilar(&origen));
+
+
+while(!pilavacia(&origen)) {
+
+    if (tope(&origen) > tope(&aux)) {
+
+        apilar(&aux, desapilar(&origen));
+    }
+
+    else {
+
+        while (tope(&origen) < tope(&aux)  && !pilavacia(&aux)) {
+
+            apilar(&aux2, desapilar(&aux));
+        }
+
+        apilar(&aux, desapilar(&origen));
+
+        while(!pilavacia(&aux2)) {
+            apilar(&aux, desapilar(&aux2));
+        }
+    }
+}
+
+
+
+
+
+mostrar(&origen);
+mostrar(&aux);
+
+    return 0;
+}
+
+
