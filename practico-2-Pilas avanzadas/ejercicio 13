@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int main()
+{
+
+    int cartas1, cartas2, total1, total2;
+    Pila mazo, p1, p2, aux1, aux2, puntosJug1, puntosJug2;
+
+    inicpila(&mazo);
+    inicpila(&p1);
+    inicpila(&p2);
+    inicpila(&aux1);
+    inicpila(&aux2);
+    inicpila(&puntosJug1);
+    inicpila(&puntosJug2);
+
+//Se crea el mazo de cartas------------------------------------------------------
+
+    apilar(&mazo, 3);
+    apilar(&mazo, 2);
+    apilar(&mazo, 3);
+    apilar(&mazo, 4);
+    apilar(&mazo, 11);
+    apilar(&mazo, 6);
+    apilar(&mazo, 7);
+    apilar(&mazo, 8);
+    apilar(&mazo, 9);
+    apilar(&mazo, 10);
+    apilar(&mazo, 11);
+    apilar(&mazo, 12);
+
+
+    mostrar(&mazo);
+
+    total1 = 0;
+    total2 = 0;
+
+
+// Se reparten las cartas-----------------------------------------------------------
+    while(!pilavacia(&mazo))
+    {
+
+
+        apilar(&p1, desapilar(&mazo));
+        apilar(&p2, desapilar(&mazo));
+        apilar(&p1, desapilar(&mazo));
+        apilar(&p2, desapilar(&mazo));
+
+
+// Se suman las cartas-------------------------------------------------------------------
+
+
+        while(!pilavacia(&p1))
+        {
+            cartas1 = tope(&p1);
+            total1 = total1 + cartas1;
+            apilar(&aux1, desapilar(&p1));
+        }
+
+        printf("%i", total1);
+        mostrar(&aux1);
+
+
+        while(!pilavacia(&p2))
+        {
+            cartas2 = tope(&p2);
+            total2 = total2 + cartas2;
+            apilar(&aux2, desapilar(&p2));
+        }
+
+        printf("%i", total2);
+        mostrar(&aux2);
+
+
+//Se compara el valor de las cartas-----------------------------------------------------
+
+        if(total1 >= total2)
+        {
+            while (!pilavacia(&aux1))
+            {
+                apilar(&puntosJug1, desapilar(&aux2));
+                apilar(&puntosJug1, desapilar(&aux1));
+            }
+
+            printf("\n\n El jugador 1 gana la mano con %i, mientras que el jugador 2 pierde con %i  \n\n", total1, total2);
+
+        }
+        else
+        {
+            while(!pilavacia(&aux1))
+            {
+                apilar(&puntosJug2, desapilar(&aux1));
+                apilar(&puntosJug2, desapilar(&aux2));
+            }
+
+            printf("\n\n El jugador 2 gana la mano con %i, mientras que el jugador 1 pierde con %i  \n\n", total2, total1);
+
+        }
+
+        total1= 0;
+        total2 = 0;
+    }
+
+    printf("\n\n Puntos Jugador 1\n\n");
+    mostrar(&puntosJug1);
+    printf("\n\n Puntos Jugador 2\n\n");
+    mostrar(&puntosJug2);
+
+    return 0;
+}
