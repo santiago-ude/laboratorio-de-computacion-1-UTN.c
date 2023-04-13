@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int sumaMenores (int numero);
+
+int main()
+{
+
+    int numero, resultado;
+
+    printf("\nDame un numero\n");
+    scanf("%i", &numero);
+
+    resultado =  sumaMenores(numero);
+
+    printf("\n\n El resultado es %i", resultado);
+
+    return 0;
+}
+
+int sumaMenores (int numero)
+{
+
+    int resultado;
+    resultado = 0;
+
+    while (numero > 0)
+    {
+
+        numero = numero - 1;
+
+        resultado = resultado + numero;
+
+    }
+
+    return resultado;
+}
