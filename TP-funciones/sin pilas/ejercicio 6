@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    int numero, negativo;
+    int *p = &numero;
+
+    printf("Insterte un numero y te dare el negativo\n");
+    scanf("%i", &numero);
+
+    negativo = numeroNegativo(p);
+
+    printf("%i", negativo);
+
+
+    return 0;
+}
+
+int numeroNegativo ( int *miloj) {
+
+*miloj = *miloj * -1;
+
+
+return *miloj;
+}
