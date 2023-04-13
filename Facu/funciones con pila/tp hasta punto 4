@@ -6,6 +6,9 @@ void cargarPila (Pila* dada);
 void cambiarPila(Pila* dada, Pila* otra);
 void mismoOrdenDePila (Pila* dada, Pila* otra);
 int encontrarMenor (Pila* dada);
+void nuevaPilaOrdenada (Pila* dada, Pila* otra);
+void elementoOrdenado (Pila* dada) ;
+
 
 
 int main()
@@ -46,6 +49,31 @@ int main()
     printf("\n\nEl menor elemento es %i \n\n", topeMenor);
 
     mostrar(&pilaA);
+    printf("\n\n-----------------Ingrese mas elementos a la pila--------------------------\n\n");
+
+    cantidad = 1;
+    while (cantidad == 1)
+    {
+        cargarPila(&pilaA);
+        printf("Quieres agregar un elemento a la pila PILONA  1 = si , 0 = no \n");
+        scanf("%i", &cantidad);
+    }
+    printf("\n\n -------------------------Pila recargada------------------------------\n\n");
+
+    mostrar(&pilaA);
+
+    printf("\n\n----------------------- Nueva Pila ordenada-------------------------------\n\n");
+
+
+    nuevaPilaOrdenada(&pilaA, &pilaB);
+
+    mostrar(&pilaB);
+
+    printf("\n\n--------------------Ingresar un elemento en una pila oredanda--------------\n\n");
+
+    elementoOrdenado (&pilaB);
+
+    mostrar(&pilaB);
 
 
     return 0;
@@ -67,7 +95,8 @@ void cargarPila(Pila* dada)
 void cambiarPila(Pila* dada, Pila* otra)
 {
 
-    while (!pilavacia(dada)){
+    while (!pilavacia(dada))
+    {
 
         apilar(otra, desapilar(dada));
     }
@@ -87,11 +116,13 @@ void mismoOrdenDePila (Pila* dada, Pila* otra)
     inicpila(&aux);
 
 
-    while (!pilavacia(otra)){
+    while (!pilavacia(otra))
+    {
         apilar(&aux, desapilar(otra));
     }
 
-    while(!pilavacia(&aux)){
+    while(!pilavacia(&aux))
+    {
         apilar(dada, desapilar(&aux));
     }
 
@@ -105,34 +136,116 @@ void mismoOrdenDePila (Pila* dada, Pila* otra)
 
 int encontrarMenor (Pila* dada)
 {
-int topeMenor;
+    Pila aux, aux2;
 
-    Pila aux, menor;
     inicpila(&aux);
-    inicpila(&menor);
+    inicpila(&aux2);
 
-   apilar(&menor, tope(dada));
+    int topeMenor;
 
-    while(!pilavacia(dada)){
+    apilar(&aux, desapilar(dada));
 
-        if (tope(dada) < tope(&menor)) {
+    while(!pilavacia(dada))
+    {
 
-                apilar(&aux, desapilar(&menor));
-                apilar(&menor, desapilar(dada));
+        if(tope(dada) < tope(&aux))
+        {
+            apilar(&aux2, desapilar(&aux));
+            apilar(&aux, desapilar(dada));
+
         }
-        else {
+
+        else
+        {
+            apilar(&aux2, desapilar(dada));
+        }
+    }
+
+
+    while(!pilavacia(&aux2))
+    {
+
+        apilar(dada, desapilar(&aux2));
+    }
+    topeMenor = tope(&aux);
+    return topeMenor;
+
+    int elemento;
+
+    printf("Elemento para la piloneta");
+    scanf("%i", &elemento);
+
+    apilar(dada, elemento);
+}
+
+void nuevaPilaOrdenada (Pila* dada, Pila* otra)
+{
+
+
+    Pila aux;
+    inicpila(&aux);
+    apilar(otra, desapilar(dada));
+
+
+    while(!pilavacia(dada))
+    {
+        if (tope(dada) > tope(otra))
+        {
+            apilar(otra, desapilar(dada));
+        }
+        else
+        {
+            while (tope(dada) < tope(otra))
+            {
+                apilar(&aux, desapilar(otra));
+                apilar(otra, desapilar(dada));
+            }
+
+            while (!pilavacia(&aux))
+            {
+                apilar(otra, desapilar(&aux));
+            }
+
+        }
+    }
+}
+
+
+
+void elementoOrdenado (Pila* dada)
+{
+
+    Pila aux;
+
+    inicpila(&aux);
+    int elemento;
+    printf("Ingrese un elemento para agregar a la pila");
+
+    scanf("%i", &elemento);
+
+
+    if(elemento > tope(dada))
+    {
+        apilar(dada, elemento);
+    }
+    else
+    {
+
+        while (elemento < tope(dada)  && pilavacia(dada))
+        {
+
             apilar(&aux, desapilar(dada));
         }
 
-    }
-        while(!pilavacia(&aux)){
+        apilar(dada, elemento);
+
+        while(!pilavacia(&aux))
+        {
 
             apilar(dada, desapilar(&aux));
         }
-topeMenor = tope(&menor);
-
-return topeMenor;
-
+    }
 
 
 }
+
