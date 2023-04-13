@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void sumaNumero (int numero1, int numero2);
+void restaNumero (int numero1, int numero2);
+void divisionNumero (int numero1, int numero2);
+void multiplicacionNumero (int numero1, int numero2);
+
+int main()
+{
+
+    int operacion, num1, num2;
+    printf("que operacion queres hacer \n 1: sumar \n 2: restar \n 3: dividir \n 4: multiplicar \n");
+    scanf ("%i", &operacion);
+
+
+    if (operacion <= 4 && operacion >= 1)
+    {
+
+        printf ("inserta dos numeros \n");
+        scanf("%i %i",  &num1, &num2);
+
+
+        switch (operacion)
+        {
+
+        case 1 :
+            sumaNumero (num1, num2);
+            break;
+        case 2 :
+            restaNumero (num1, num2);
+            break;
+        case 3 :
+            divisionNumero (num1, num2);
+            break;
+        case 4 :
+            multiplicacionNumero (num1, num2);
+            break;
+        }
+
+    }
+    else
+    {
+
+        printf("El numero ingresado no representa ninguna operacion \n\n");
+    }
+
+
+
+
+    return 0;
+}
+
+void sumaNumero (int numero1, int numero2)
+{
+    int resultado;
+    resultado= numero1 + numero2;
+    printf (" \n El resultado de la suma es: %i ", resultado);
+}
+
+
+void restaNumero (int numero1, int numero2)
+{
+
+    int resultado;
+
+    resultado= numero1 - numero2;
+
+    printf (" \n El resultado de la resta es: %i", resultado);
+
+}
+
+
+void divisionNumero (int numero1, int numero2)
+{
+
+    float resultado;
+
+    resultado = (float) numero1 / (float)numero2;
+
+    printf (" \n El resultado de la division es: %.2f", resultado);
+
+}
+
+void multiplicacionNumero (int numero1, int numero2)
+{
+
+    int resultado;
+
+    resultado= numero1 * numero2;
+
+    printf (" \n El resultado de la multiplicacion es : %i", resultado);
+
+
+}
