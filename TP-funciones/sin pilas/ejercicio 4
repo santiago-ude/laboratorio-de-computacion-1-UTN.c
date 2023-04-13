@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void tablaNumero (int numero);
+
+int main()
+{
+
+    int numero;
+
+
+    printf("Dame un numero y te doy la tabla de multiplicacion:\n");
+    scanf("%i", &numero);
+
+    tablaNumero(numero);
+
+    return 0;
+}
+
+void tablaNumero (int numero)
+{
+    int i, contador, resultado, tablaCantidad;
+    contador = 0;
+
+    printf("hasta que numero queres multiplicar el %i ", numero);
+    scanf("%i", &tablaCantidad);
+
+
+    for (i = 0; i < tablaCantidad; i++)
+    {
+
+        contador = contador + 1;
+        resultado = numero * contador;
+
+        printf("%i x %i = %i\n",numero, contador, resultado);
+
+    }
+}
