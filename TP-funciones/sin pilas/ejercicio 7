@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void restaNumero (int *a, int *b);
+
+int main()
+{
+    int variableA, variableB;
+    int *a = &variableA;
+    int *b = &variableB;
+
+    restaNumero( a, b);
+
+    return 0;
+}
+
+void restaNumero (int *a, int *b) {
+
+    int variableA, variableB;
+
+    printf("Inserte numero para variable A\n");
+    scanf("%i", &variableA);
+
+    printf("Inserte numero para variable B\n");
+    scanf("%i", &variableB);
+
+    *a = variableA;
+
+    *b = variableB;
+
+    printf("El valor de la varianteA es: %i\nEl valor de la varianteB: %i", *a, *b);
+}
