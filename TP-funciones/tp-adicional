@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void productosComprados(int *producto, int *precio);
+
+int main()
+{
+    int productos, precio;
+
+    int *pro, *pre;
+
+    pre = &precio;
+    pro = &productos;
+
+    productosComprados(&pro, &pre);
+
+    printf("cantidad productos: %i\nprecio: $%i", pro, pre );
+
+    return 0;
+}
+
+void productosComprados(int *producto, int *precio) {
+
+    int pro, pre;
+
+    printf("Ingrese cuantos productos compro");
+    scanf("%i", &pro);
+
+    *producto = pro;
+
+    printf("Cual es el precio unitario del producto");
+    scanf("%i", &pre);
+
+    *precio = pre;
+}
