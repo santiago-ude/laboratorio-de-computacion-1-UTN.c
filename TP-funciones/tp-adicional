@@ -41,12 +41,12 @@ void productosComprados(int *producto, int *precio)
 
     int pro, pre;
 
-    printf("Ingrese cuantos productos compro");
+    printf("Ingrese cuantos productos compro: ");
     scanf("%i", &pro);
 
     *producto = pro;
 
-    printf("Cual es el precio unitario del producto");
+    printf("Cual es el precio unitario del producto: ");
     scanf("%i", &pre);
 
     *precio = pre;
@@ -67,30 +67,28 @@ int montoFinal (int producto, int precio)
 //----------------DESCUENTO-----------------------------------------
 int descuento (int producto, int pFinal)
 {
-
-
     int descuento, precioDescuento;
 
-    if (pFinal >= 1000 &&  pFinal < 2000 || producto >=10 && producto < 25)
-    {
-
-        descuento = (15 * pFinal) / 100;
-
+    if((pFinal > 1000 && pFinal <=2000) && (producto > 10 || producto >=25) ) {
+        descuento = (pFinal * 15)/100;
         precioDescuento = pFinal - descuento;
     }
-
-    else if(pFinal >= 2000 && producto >= 25)
-    {
-
-        descuento = (20 * pFinal) / 100;
-
+    else if((pFinal > 1000 || pFinal >= 2000) && (producto > 10 && producto < 25))
+{
+        descuento = (pFinal * 15)/100;
         precioDescuento = pFinal - descuento;
 
+}
+    else if (pFinal > 2000 && producto >= 25) {
+
+        descuento = (pFinal * 20)/100;
+        precioDescuento = pFinal - descuento;
     }
     else {
-
+        descuento = 0;
         precioDescuento = pFinal;
     }
+
 
     return precioDescuento;
 }
