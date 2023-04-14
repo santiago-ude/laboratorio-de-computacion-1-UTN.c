@@ -4,10 +4,11 @@
 void productosComprados(int *producto, int *precio);
 int montoFinal (int producto, int precio);
 int descuento (int producto, int pFinal);
+void facturaCompra (int productos, int precio, int pFinal, int descuento, int pDescuento);
 
 int main()
 {
-    int productos, precio, pFinal, pDescuento;
+    int productos, precio, pFinal, pDescuento, descuentoFactura;
 
     int *pro, *pre;
 
@@ -25,11 +26,16 @@ int main()
 
     printf(" \nEl precio con descuento incluido es de $%i ", pDescuento);
 
+    descuentoFactura = pFinal - pDescuento;
+
+    facturaCompra ( productos,  precio,  pFinal,  descuentoFactura,  pDescuento);
 
 
     return 0;
 }
 
+
+//-------------PRODUCTOS Y PRECIO UNITARIO------------------------
 void productosComprados(int *producto, int *precio)
 {
 
@@ -46,7 +52,7 @@ void productosComprados(int *producto, int *precio)
     *precio = pre;
 }
 
-
+//-----------------PRECIO FINAL---------------------------------
 int montoFinal (int producto, int precio)
 {
 
@@ -58,17 +64,17 @@ int montoFinal (int producto, int precio)
 
 }
 
-
+//----------------DESCUENTO-----------------------------------------
 int descuento (int producto, int pFinal)
 {
 
 
     int descuento, precioDescuento;
 
-    if (pFinal >= 1000 &&  pFinal < 2000 && producto >=10)
+    if (pFinal >= 1000 &&  pFinal < 2000 || producto >=10 && producto < 25)
     {
 
-        descuento= (15 * pFinal) / 100;
+        descuento = (15 * pFinal) / 100;
 
         precioDescuento = pFinal - descuento;
     }
@@ -81,6 +87,22 @@ int descuento (int producto, int pFinal)
         precioDescuento = pFinal - descuento;
 
     }
+    else {
+
+        precioDescuento = pFinal;
+    }
 
     return precioDescuento;
+}
+
+//--------------FACTURA------------------------------------
+
+void facturaCompra (int productos, int precio, int pFinal, int descuento, int pDescuento) {
+
+printf("\n\n\n   Empresa: PROUPRO");
+printf("\n   Cantidad de productos............. %i u", productos);
+printf("\n   Precio Unitario................... $%i", precio);
+printf("\n   Total Parcial..................... $%i", pFinal);
+printf("\n   Descuento aplicado................ -$%i", descuento);
+printf("\n   Precio a pagar.................... $%i", pDescuento);
 }
