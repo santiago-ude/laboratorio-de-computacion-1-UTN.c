@@ -2,24 +2,36 @@
 #include <stdlib.h>
 
 void productosComprados(int *producto, int *precio);
+int montoFinal (int producto, int precio);
+int descuento (int producto, int pFinal);
 
 int main()
 {
-    int productos, precio;
+    int productos, precio, pFinal, pDescuento;
 
     int *pro, *pre;
 
     pre = &precio;
     pro = &productos;
 
-    productosComprados(&pro, &pre);
+    productosComprados(pro, pre);
 
-    printf("cantidad productos: %i\nprecio: $%i", pro, pre );
+    printf("cantidad productos: %i\nprecio: $%i ", productos, precio );
+
+    pFinal = montoFinal(productos, precio);
+    printf("\n El precio final de la compra es: $ %i", pFinal);
+
+    pDescuento = descuento(productos, pFinal);
+
+    printf(" \nEl precio con descuento incluido es de $%i ", pDescuento);
+
+
 
     return 0;
 }
 
-void productosComprados(int *producto, int *precio) {
+void productosComprados(int *producto, int *precio)
+{
 
     int pro, pre;
 
@@ -32,4 +44,43 @@ void productosComprados(int *producto, int *precio) {
     scanf("%i", &pre);
 
     *precio = pre;
+}
+
+
+int montoFinal (int producto, int precio)
+{
+
+    int resultado;
+
+    resultado = producto * precio;
+
+    return resultado;
+
+}
+
+
+int descuento (int producto, int pFinal)
+{
+
+
+    int descuento, precioDescuento;
+
+    if (pFinal >= 1000 &&  pFinal < 2000 && producto >=10)
+    {
+
+        descuento= (15 * pFinal) / 100;
+
+        precioDescuento = pFinal - descuento;
+    }
+
+    else if(pFinal >= 2000 && producto >= 25)
+    {
+
+        descuento = (20 * pFinal) / 100;
+
+        precioDescuento = pFinal - descuento;
+
+    }
+
+    return precioDescuento;
 }
