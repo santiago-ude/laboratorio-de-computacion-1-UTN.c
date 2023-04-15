@@ -1,0 +1,144 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void productosComprados(int *producto, int *precio);
+int montoFinal (int producto, int precio);
+int descuento (int producto, int pFinal);
+void facturaCompra (int productos, int precio, int pFinal, int descuento, int pDescuento);
+void realizarVenta ();
+void ventasDia ();
+
+int main()
+{
+
+
+   ventasDia();
+
+    return 0;
+}
+
+
+//-------------PRODUCTOS Y PRECIO UNITARIO------------------------
+void productosComprados(int *producto, int *precio)
+{
+
+    int pro, pre;
+
+    printf("Ingrese cuantos productos compro: ");
+    scanf("%i", &pro);
+
+    *producto = pro;
+
+    printf("Cual es el precio unitario del producto: ");
+    scanf("%i", &pre);
+
+    *precio = pre;
+}
+
+//-----------------PRECIO FINAL---------------------------------
+int montoFinal (int producto, int precio)
+{
+
+    int resultado;
+
+    resultado = producto * precio;
+
+    return resultado;
+
+}
+
+//----------------DESCUENTO-----------------------------------------
+int descuento (int producto, int pFinal)
+{
+    int descuento, precioDescuento;
+
+    if((pFinal > 1000 && pFinal <=2000) && (producto > 10 || producto >=25) ) {
+        descuento = (pFinal * 15)/100;
+        precioDescuento = pFinal - descuento;
+    }
+    else if((pFinal > 1000 || pFinal >= 2000) && (producto > 10 && producto < 25))
+{
+        descuento = (pFinal * 15)/100;
+        precioDescuento = pFinal - descuento;
+
+}
+    else if (pFinal > 2000 && producto >= 25) {
+
+        descuento = (pFinal * 20)/100;
+        precioDescuento = pFinal - descuento;
+    }
+    else {
+        descuento = 0;
+        precioDescuento = pFinal;
+    }
+
+
+    return precioDescuento;
+}
+
+//--------------FACTURA------------------------------------
+
+void facturaCompra (int productos, int precio, int pFinal, int descuento, int pDescuento) {
+
+printf("\n\n\n   Empresa: PROUPRO");
+printf("\n   Cantidad de productos............. %i u", productos);
+printf("\n   Precio Unitario................... $%i", precio);
+printf("\n   Total Parcial..................... $%i", pFinal);
+printf("\n   Descuento aplicado................ -$%i", descuento);
+printf("\n   Precio a pagar.................... $%i", pDescuento);
+}
+
+//----------------Realizar venta-----------------------------
+
+void realizarVenta () {
+
+    int productos, precio, pFinal, pDescuento, descuentoFactura;
+
+    int *pro, *pre;
+
+    pre = &precio;
+    pro = &productos;
+
+    productosComprados(pro, pre);
+
+    printf("cantidad productos: %i\nprecio: $%i ", productos, precio );
+
+    pFinal = montoFinal(productos, precio);
+    printf("\n El precio final de la compra es: $ %i", pFinal);
+
+    pDescuento = descuento(productos, pFinal);
+
+    printf(" \nEl precio con descuento incluido es de $%i ", pDescuento);
+
+    descuentoFactura = pFinal - pDescuento;
+
+    facturaCompra ( productos,  precio,  pFinal,  descuentoFactura,  pDescuento);
+}
+
+//-----------------ventasDia---------------------------------------
+
+
+void ventasDia (){
+
+    int veces = 0;
+    int valor = 1;
+    int *pro, *desc;
+
+    printf("\n\n  Desea realizar una venta? \n  1 = Si\n  0 = No \n\n");
+    scanf("%i", &valor);
+
+    while (valor == 1) {
+
+        realizarVenta(*pro,*desc);
+        veces++;
+
+
+
+    printf("\n\n  Desea realizar una venta?\n  1 = Si\n  0 = No \n\n");
+    scanf("%i", &valor);
+    }
+
+printf("%i", desc);
+
+
+}
