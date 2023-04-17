@@ -35,7 +35,7 @@ int main()
 
 
     printf("\nCantidad productos vendidos en el dia: %i", productosDia);
-    printf("\nCantidad de dinero recaudado en el dia %i", montoDia);
+    printf("\nCantidad de dinero recaudado en el dia %i\n", montoDia);
 
 
     return 0;
