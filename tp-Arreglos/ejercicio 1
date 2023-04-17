@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cargarArray (int array[], int dimension);
+
+int main()
+{
+    int dimension = 10;
+    int array [dimension];
+    int validos = cargarArray(array, dimension);
+    int i;
+
+   printf("\nLa cantidad de elementos validos del arreglo son: %i", validos);
+
+
+
+    return 0;
+}
+
+int cargarArray (int array[], int dimension){
+    int valor = 1;
+    int i;
+
+    while(valor == 1) {
+
+    printf("Inserte elemento al arreglo:\n");
+    scanf("%i", &array[i]);
+     i++;
+    printf("\n seguir cargando: 1\nDejar de cargar: 0\n");
+    scanf("%i", &valor);
+
+    }
+    return i;
+}
