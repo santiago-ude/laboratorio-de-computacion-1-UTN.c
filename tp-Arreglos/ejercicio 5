@@ -29,7 +29,7 @@ int cargarArray (float array[], int dimension) {
    int i = 0;
 
 
-    while (valor == 1) {
+    while (valor == 1 && (i < dimension)) {
 
         printf("Ingrese un valor");
         scanf("%f", &array[i]);
@@ -55,6 +55,7 @@ float sumarArray (float array[], int validos){
 
     return resultado;
 }
+
 
 
 
