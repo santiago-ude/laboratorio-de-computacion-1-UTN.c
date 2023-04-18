@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void insertarElemento(char array[],int validos, char dato);
+
+int main() {
+
+int i;
+char nuevoChar;
+char array[] = {'a','b','c','e','f','i','l'};
+int validos = 7;
+
+printf("Agregar un caracter al array: ");
+scanf("%c", &nuevoChar);
+
+insertarElemento(array, validos, nuevoChar);
+
+for( i = 0; i < validos; i++){
+
+    printf("%c", array[i]);
+
+}
+
+
+
+
+
+
+
+
+
+   return 0;
+}
+
+void insertarElemento(char array[],int validos, char dato) {
+
+    int i;
+
+   if(array[validos] < dato) {
+
+    array[validos] = dato;
+   }
+   else{
+
+    while (array[validos] > dato) {
+
+
+        array[validos+1] = array[validos];
+        validos--;
+
+    }
+   }
+}
+
+
