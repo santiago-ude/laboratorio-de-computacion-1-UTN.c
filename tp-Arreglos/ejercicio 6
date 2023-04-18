@@ -2,37 +2,81 @@
 #include <stdlib.h>
 
 void buscarCaracter (char array[], int dimension);
+int cargarArray(char array[], int dimension);
+int main()
+{
 
-int main() {
+    int dimension = 10;
+    int validos;
 
-int dimension = 10;
-
-char array[10] = "hola amigo";
-
-
-buscarCaracter(array, dimension);
+    char array[dimension] ;
+    validos = cargarArray(array, dimension);
 
 
-return 0;
+
+    buscarCaracter(array, dimension);
+
+
+    return 0;
 }
 
-void buscarCaracter (char array[], int dimension) {
+int cargarArray(char array[], int dimension)
+{
 
-int i = 0;
-char elemento, valor;
+    int valor = 1;
+    int i =0;
 
-printf("Que valor queres buscar en el array? ");
-scanf("%c", &valor);
+    while (valor == 1)
+    {
+        printf("Cargar el array con un caracter: ");
+        fflush(stdin);
+        scanf("%c", &array[i]);
+        i++;
 
+        printf("1 seguir\n0: cortar");
+        scanf("%i", &valor);
 
-while (i < dimension){
-
-    elemento = array[i];
-
-    if (valor == elemento) {
-        printf("%c se encuentra dentro del arreglo", valor);
-        i = dimension;
     }
-    i++;
+
+
+    return i;
 }
+
+
+
+
+
+void buscarCaracter (char array[], int dimension)
+{
+
+    int i = 0;
+    char elemento, valor;
+
+    printf("Que valor queres buscar en el array? ");
+    fflush(stdin);
+    scanf("%c", &valor);
+
+
+    while (i < dimension)
+    {
+
+        elemento = array[i];
+
+        if (valor == elemento)
+        {
+            printf("%c se encuentra dentro del arreglo", valor);
+            i = dimension;
+        }
+
+        else if (valor != elemento)
+        {
+            printf("El caracter %c, no se encuentra dentro del arreglo", valor);
+            return 0;
+        }
+        i++;
+    }
 }
+
+
+
+
