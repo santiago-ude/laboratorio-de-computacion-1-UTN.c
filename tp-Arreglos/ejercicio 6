@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cargarArray (char array[]);
+
+int main()
+{
+    int dimension = 10;
+    int i, validos;
+    char array[dimension];
+
+    validos = cargarArray(array);
+
+    for (i = 0; i < validos; i++) {
+
+        printf("%c", array[i]);
+    }
+
+
+    return 0;
+}
+
+int cargarArray (char array[]) {
+
+int i = 00;
+int valor;
+
+printf("Deseas cargar el array?\n1:SI\n2:NO\n");
+scanf("%i", &valor);
+
+while(valor == 1){
+
+    printf("Inserte unicamente un caracter al array\n");
+    scanf("%c", &array[i]);
+    i++;
+
+    printf("Deseas seguir cargando el array?\n1:SI\n0:NO\n");
+    scanf("%i", &valor);
+
+}
+return i;
+}
