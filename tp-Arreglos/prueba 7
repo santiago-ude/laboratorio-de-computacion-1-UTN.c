@@ -1,55 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void insertarElemento(char array[],int validos, char dato);
+void integrarElemento(char array[], char dato, int validos);
 
 int main() {
 
-int i;
-char nuevoChar;
-char array[] = {'a','b','c','e','f','i','l'};
-int validos = 7;
+int i,validos;
 
-printf("Agregar un caracter al array: ");
-scanf("%c", &nuevoChar);
+char array[10] = {'a','b','c','g','h','k', 'o'};
+char dato;
 
-insertarElemento(array, validos, nuevoChar);
+validos = 7;
 
-for( i = 0; i < validos; i++){
+printf("Ingresar caracter para agregar al array: ");
+scanf("%c", &dato);
+
+
+integrarElemento(array, dato, validos);
+
+
+for(i = 0; i <= (validos + 1); i++) {
 
     printf("%c", array[i]);
-
 }
 
 
-
-
-
-
-
-
-
-   return 0;
+return 0;
 }
 
-void insertarElemento(char array[],int validos, char dato) {
+void integrarElemento(char array[], char dato, int validos) {
+int i = 0;
 
-    int i;
-
-   if(array[validos] < dato) {
+if (dato > array[(validos -1)]){
 
     array[validos] = dato;
-   }
-   else{
-
-    while (array[validos] > dato) {
-
-
-        array[validos+1] = array[validos];
-        validos--;
-
-    }
-   }
 }
+else if(dato < array[(validos - 1)]) {
 
+    while(dato < array[(validos - 1)]){
 
+    array[validos] = array[validos - 1];
+    validos--;
+}
+array[validos] = dato;
+
+}
+}
