@@ -1,42 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int cargarArray (char array[]);
+void buscarCaracter (char array[], int dimension);
 
-int main()
-{
-    int dimension = 10;
-    int i, validos;
-    char array[dimension];
+int main() {
 
-    validos = cargarArray(array);
+int dimension = 10;
 
-    for (i = 0; i < validos; i++) {
+char array[10] = {'H', 'o','l','a',' ','A','m','i','g','o'};
 
-        printf("%c", array[i]);
+
+buscarCaracter(array, dimension);
+
+
+return 0;
+}
+
+void buscarCaracter (char array[], int dimension) {
+
+int i = 0;
+char elemento, valor;
+
+printf("Que valor queres buscar en el array? ");
+scanf("%c", &valor);
+
+
+while (i < dimension){
+
+    elemento = array[i];
+
+    if (valor == elemento) {
+        printf("%c se encuentra dentro del arreglo", valor);
     }
-
-
-    return 0;
-}
-
-int cargarArray (char array[]) {
-
-int i = 00;
-int valor;
-
-printf("Deseas cargar el array?\n1:SI\n2:NO\n");
-scanf("%i", &valor);
-
-while(valor == 1){
-
-    printf("Inserte unicamente un caracter al array\n");
-    scanf("%c", &array[i]);
     i++;
-
-    printf("Deseas seguir cargando el array?\n1:SI\n0:NO\n");
-    scanf("%i", &valor);
-
 }
-return i;
 }
