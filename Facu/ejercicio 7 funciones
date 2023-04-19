@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void meterElemento (char array[], char letra, int cantidad);
+void mostrar (char array[], int cantidad);
+
+int main()
+{
+    char array[9] = {'a','d','g','i','l','n','r','w'};
+    char letra;
+    int cantidad =  8;
+    int i;
+
+    printf("Dame una letra para ingresar al array ");
+    fflush(stdin);
+    scanf("%c", &letra);
+
+    for (i = 0; i < cantidad; i++) {
+            if (letra == array[i]) {
+                printf("\n La letra ingresa ya esta en el array \n");
+                mostrar(array,cantidad);
+                return 0;
+
+            }
+    }
+
+    meterElemento (array,letra,cantidad);
+    mostrar(array,cantidad);
+
+
+    return 0;
+}
+
+//-----------------------------------------------------------------
+
+
+
+void meterElemento (char array[], char letra, int pos)
+{
+
+    if (letra > array[(pos - 1)])
+    {
+        array[pos] = letra;
+    }
+    else
+    {
+        while (letra < array[(pos - 1)])
+        {
+            array[pos] = array[(pos - 1)];
+            pos--;
+        }
+        array[pos] = letra;
+    }
+
+}
+
+void mostrar (char array[], int cantidad) {
+
+    int i;
+
+        for (i = 0; i < cantidad; i++) {
+
+        printf("%c \n", array[i]);
+    }
+}
