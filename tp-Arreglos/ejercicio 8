@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int buscarMayor (char array[], int cantidad);
+
+int main()
+{
+    char array[9] = {'a','d','g','i','z','n','r','w'};
+    char letra;
+    int cantidad =  8;
+    char mayor;
+
+
+    mayor =buscarMayor(array,cantidad);
+  printf("la letra mas facking grande es: %c", mayor);
+    return 0;
+}
+
+//-----------------------------------------------------------------
+
+
+
+int buscarMayor (char array[], int cantidad)
+{
+int i;
+char mayor = array[0];
+
+for(i = 0; i < cantidad; i++){
+    if(array[i] > mayor) {
+        mayor = array[i];
+    }
+}
+
+   return mayor;
+}
