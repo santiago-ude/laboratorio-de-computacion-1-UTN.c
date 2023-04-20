@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void ordenarInsercion (int array[], int validos);
+int cargarArray (int array[], int dimension);
+void mostrar (int array[], int validos);
+
+
+int main()
+{
+    int dimension =  100;
+    int array[dimension];
+
+
+    int validos = cargarArray(array, dimension);
+    mostrar(array, validos);
+
+   ordenarInsercion(array, validos);
+
+
+    return 0;
+}
+
+//-----------------------------------------------------------------
+
+int cargarArray (int array[], int dimension)
+{
+
+    int validos = 0;
+    int valor = 1;
+    int i = 0;
+
+    while( valor == 1 && dimension <= 100)
+    {
+        printf("Insertar un numero al array: ");
+        scanf(" %i", &array[i]);
+
+        i++;
+
+        printf("1: SEGUIR\n0:CORTAR\n");
+        scanf("%i", &valor);
+    }
+    printf("Array original\n");
+
+    return i;
+}
+
+//--------------------INCERCION---------------------------------
+
+void ordenarInsercion (int array[], int validos) {
+int u = validos++;
+int i;
+int elemento;
+
+    printf("Inserte un numero al array: ");
+    scanf("%i", &elemento);
+
+    if(elemento > array[u-1]) {
+        array[u] = elemento;
+    }
+    else {
+
+        while (elemento < array[u-1]) {
+
+            array[u] = array[u-1];
+            u--;
+        }
+         array[u] = elemento;
+    }
+
+
+    mostrar(array, validos);
+}
+//----------------------MOSTRAR----------------------------------------
+
+void mostrar (int array[], int validos) {
+
+    int i;
+
+        for (i = 0; i < validos; i++) {
+
+        printf("%i \n", array[i]);
+    }
+}
+
+
