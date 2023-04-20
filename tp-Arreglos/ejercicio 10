@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int cargarArray (int array[], int dimension);
+void capicua (int array[], int validos);
+void mostrar (int array[], int cantidad);
+
+int main()
+{
+    int dimension =  100;
+    int array[dimension];
+
+    int validos = cargarArray(array, dimension);
+
+    printf("Array inverso \n");
+
+    capicua(array,validos);
+
+    return 0;
+}
+
+//-----------------------------------------------------------------
+
+int cargarArray (int array[], int dimension)
+{
+
+    int validos = 0;
+    int valor = 1;
+    int i = 0;
+
+    while( valor == 1 && dimension <= 100)
+    {
+        validos = validos + 1;
+        printf("Insertar un numero al array: ");
+        scanf(" %i", &array[i]);
+
+        i++;
+
+        printf("1: SEGUIR\n0:CORTAR\n");
+        scanf(" %i", &valor);
+    }
+    printf("Array original\n");
+        mostrar(array, validos);
+
+    return validos;
+}
+
+void capicua (int array[], int validos)
+{
+
+    int u =  validos;
+    int i = 0;
+    int aux;
+    for (i = 0; i < u; i++) {
+
+        aux = array[u-1];
+        array[u-1] = array[i];
+        array[i] = aux;
+        u--;
+    }
+
+    mostrar(array,validos);
+
+}
+
+void mostrar (int array[], int cantidad) {
+
+    int i;
+
+        for (i = 0; i < cantidad; i++) {
+
+        printf("%i \n", array[i]);
+    }
+    printf("\n");
+}
