@@ -4,24 +4,30 @@
 void ordenarInsercion (int array[], int validos);
 int cargarArray (int array[], int dimension);
 void mostrar (int array[], int validos);
+int encontrarMenor (int array[], int i, int validos);
+void ordenarSeleccion(int array[], int validos);
 
 
 int main()
 {
     int dimension =  100;
     int array[dimension];
+    
 
 
     int validos = cargarArray(array, dimension);
     mostrar(array, validos);
 
-   ordenarInsercion(array, validos);
+    ordenarInsercion(array, validos);
+
+    // ordenarSeleccion(array, validos);
+
 
 
     return 0;
 }
 
-//-----------------------------------------------------------------
+//-----------------------CARGAR ARRAY------------------------------------------
 
 int cargarArray (int array[], int dimension)
 {
@@ -47,40 +53,76 @@ int cargarArray (int array[], int dimension)
 
 //--------------------INCERCION---------------------------------
 
-void ordenarInsercion (int array[], int validos) {
-int u = validos++;
-int i;
-int elemento;
+void ordenarInsercion (int array[], int validos){
+    int i, pos, aux;
 
-    printf("Inserte un numero al array: ");
-    scanf("%i", &elemento);
-
-    if(elemento > array[u-1]) {
-        array[u] = elemento;
-    }
-    else {
-
-        while (elemento < array[u-1]) {
-
-            array[u] = array[u-1];
-            u--;
-        }
-         array[u] = elemento;
+    for (i = 0; i < validos; i++){
+        pos = i;
+        aux = array[i];
+        while (pos > 0 && aux < array[pos - 1] ){
+            array[pos] = array[pos - 1];
+            pos--;
+        } array[pos] = aux;
     }
 
-
+    printf("\n Array ordenado por incercion");
     mostrar(array, validos);
 }
 //----------------------MOSTRAR----------------------------------------
 
-void mostrar (int array[], int validos) {
+void mostrar (int array[], int validos)
+{
 
     int i;
 
-        for (i = 0; i < validos; i++) {
+    for (i = 0; i < validos; i++)
+    {
 
         printf("%i \n", array[i]);
     }
 }
+
+
+//--------------------------Seleccion--------------------------------
+
+
+void ordenarSeleccion(int array[], int validos)
+{
+    int posmenor, aux, i = 0;
+
+    while (i< (validos - 1)){
+        posmenor = encontrarMenor(array, i, validos);
+
+        aux = array[posmenor];
+        array[posmenor] = array[i];
+        array[i] = aux;
+        i++;
+    }
+    printf("\n Array ordenado por seleccion \n");
+    mostrar(array, validos);
+
+}
+//-----------------------------Encontrar menor---------------------
+
+int encontrarMenor (int array[], int i, int validos)
+{
+    int posMenor = i;
+    int menor = array[i];
+
+    while (i < validos) {
+        if (menor > array[i]) {
+            menor = array[i];
+            posMenor = i;
+        }
+        i++;
+    }
+    return posMenor;
+}
+
+
+
+
+
+
 
 
