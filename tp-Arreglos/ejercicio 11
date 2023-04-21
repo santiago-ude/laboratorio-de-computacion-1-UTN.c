@@ -6,13 +6,14 @@ int cargarArray (int array[], int dimension);
 void mostrar (int array[], int validos);
 int encontrarMenor (int array[], int i, int validos);
 void ordenarSeleccion(int array[], int validos);
+void insertar(int array[], int u, int elemento);
 
 
 int main()
 {
     int dimension =  100;
     int array[dimension];
-    
+
 
 
     int validos = cargarArray(array, dimension);
@@ -51,23 +52,36 @@ int cargarArray (int array[], int dimension)
     return i;
 }
 
-//--------------------INCERCION---------------------------------
+//--------------------INSERCION---------------------------------
+void insertar(int array[], int u, int elemento)
+{
+int i = u;
 
-void ordenarInsercion (int array[], int validos){
-    int i, pos, aux;
+while (i >= 0 && elemento < array[i]){
 
-    for (i = 0; i < validos; i++){
-        pos = i;
-        aux = array[i];
-        while (pos > 0 && aux < array[pos - 1] ){
-            array[pos] = array[pos - 1];
-            pos--;
-        } array[pos] = aux;
-    }
-
-    printf("\n Array ordenado por incercion");
-    mostrar(array, validos);
+    array[i+1] = array[i];
+    i--;
 }
+array[i + 1] = elemento;
+}
+//-----------------------------------------------------------------------
+
+void ordenarInsercion(int array[], int validos)
+{
+
+    int u = 0;
+
+
+    while  (u < (validos - 1) ) {
+
+        insertar(array, u, array[u + 1]);
+        u++;
+        }
+        printf("\nArray ordenado\n");
+        mostrar(array, validos);
+}
+
+
 //----------------------MOSTRAR----------------------------------------
 
 void mostrar (int array[], int validos)
@@ -88,13 +102,24 @@ void mostrar (int array[], int validos)
 
 void ordenarSeleccion(int array[], int validos)
 {
+
+//Declaramos las variables
     int posmenor, aux, i = 0;
 
-    while (i< (validos - 1)){
+// Creamos un bucle para ordenar el array
+    while (i< (validos - 1))
+    {
+
+// Llamo a la funcion encontrarMenor
         posmenor = encontrarMenor(array, i, validos);
 
+//guardo en aux el elemento guardado en la posicion posmenor
+
         aux = array[posmenor];
+// guardo el valor actual en la posicion menor
         array[posmenor] = array[i];
+
+// guardo en la poscion actual, el valor de la posicion menor
         array[i] = aux;
         i++;
     }
@@ -106,20 +131,35 @@ void ordenarSeleccion(int array[], int validos)
 
 int encontrarMenor (int array[], int i, int validos)
 {
+
+// Guardamos la posicion y el elemento que recibimos de la funcion
+
     int posMenor = i;
     int menor = array[i];
 
-    while (i < validos) {
-        if (menor > array[i]) {
-            menor = array[i];
-            posMenor = i;
+// igualas la variable u a i para no mezclarse (para que sea mas claro)
+    int u = i;
+
+//hacemos un bucle para conseguir el menor elemento
+    while (u < validos)
+    {
+
+// hacemos un condicional que se ejecute, si menor es mayor al elemento del array en la pósicoin u
+
+        if (menor > array[u])
+        {
+// guardamos en menor, el elemento de la posicion u;
+            menor = array[u];
+// guardamos la posicion del menor elemento
+            posMenor = u;
         }
-        i++;
+// sumamos u
+        u++;
     }
+
+// retornamos la posicion con el menor elemento
     return posMenor;
 }
-
-
 
 
 
