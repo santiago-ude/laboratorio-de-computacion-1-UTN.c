@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+int sumaValores (int array[], int validos);
+
+int main()
+{
+
+int array[5] = {1,5,6,7,8};
+int validos = 5;
+
+sumaValores(array, validos);
+
+
+    return 0;
+}
+
+
+
+int sumaValores (int array[], int validos) {
+
+
+    int resultado = 0;
+    int i = 0;
+
+
+    for (i; i < validos; i++) {
+
+
+        resultado = array[i] + array[i + 1];
+        array[i + 1] = resultado;
+
+    }
+int u;
+for(u = 0;u < validos; u++) {
+
+    printf("%i \n", array[u]);
+
+
+
+}
