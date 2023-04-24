@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void juntarArreglos (int arrayA[], int validosA, int arrayB[], int validosB, int arrayC[]);
+
+
+int main()
+{
+
+    int arrayA[10] = {'a','c','d','f','h','k','m','z'};
+    int validosA = 8;
+    int arrayB[10] = {'b','d','e','g','j','m','o','y'};
+    int validosB = 8;
+    int arrayC[25];
+
+
+
+
+    juntarArreglos(arrayA,validosA,arrayB,validosB,arrayC);
+
+
+
+
+
+    return 0;
+}
+
+void juntarArreglos (int arrayA[], int validosA, int arrayB[], int validosB, int arrayC[])
+{
+
+    int i = 0;
+    int u = 0;
+    int validosC;
+
+
+    while (i < validosA && i < validosB)
+    {
+
+    
+        
+        if (arrayA[i] < arrayB[i])
+        {
+
+            arrayC[u] = arrayA[i];
+            arrayC[u + 1] = arrayB[i];
+            u = u + 2;
+
+
+        }
+        else if (arrayB[i] < arrayA[i])
+        {
+
+            arrayC[u] = arrayB[i];
+            arrayC[u + 1] = arrayA[i];
+            u = u + 2;
+
+
+        }
+        else if (arrayB[i] == arrayA[i])
+        {
+
+            arrayC[u] = arrayA[i];
+            u++;
+        }
+
+
+        i++;
+
+
+    }
+    
+    int x;
+
+    for (x = 0; x < u; x++)
+    {
+
+        printf("%c", arrayC[x]);
+
+
+    }
+}
