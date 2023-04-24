@@ -2,17 +2,17 @@
 #include <stdlib.h>
 
 
-void juntarArreglos (int arrayA[], int validosA, int arrayB[], int validosB, int arrayC[]);
+void juntarArreglos (char arrayA[], int validosA, char arrayB[], int validosB, char arrayC[]);
 
 
 int main()
 {
 
-    int arrayA[10] = {'a','c','d','f','h','k','m','z'};
+    char arrayA[10] = {'a','c','d','f','h','k','m','z'};
     int validosA = 8;
-    int arrayB[10] = {'b','d','e','g','j','m','o','y'};
+    char arrayB[10] = {'b','d','e','g','j','m','o','y'};
     int validosB = 8;
-    int arrayC[25];
+    char arrayC[25];
 
 
 
@@ -26,7 +26,7 @@ int main()
     return 0;
 }
 
-void juntarArreglos (int arrayA[], int validosA, int arrayB[], int validosB, int arrayC[])
+void juntarArreglos (char arrayA[], int validosA, char arrayB[], int validosB, char arrayC[])
 {
 
     int i = 0;
@@ -37,8 +37,9 @@ void juntarArreglos (int arrayA[], int validosA, int arrayB[], int validosB, int
     while (i < validosA && i < validosB)
     {
 
-    
-        
+
+
+
         if (arrayA[i] < arrayB[i])
         {
 
@@ -69,7 +70,7 @@ void juntarArreglos (int arrayA[], int validosA, int arrayB[], int validosB, int
 
 
     }
-    
+
     int x;
 
     for (x = 0; x < u; x++)
