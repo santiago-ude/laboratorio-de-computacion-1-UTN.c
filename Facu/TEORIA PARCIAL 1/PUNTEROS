@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+// El operador & devuelve la dirección de memoria de la variable que le siga
+
+//El operador * devuelve el valor de lo que almacen al dirección de memoria posterior
+
+
+
+void cambiarValor(int* varA, int* varB);
+
+
+int main()
+{
+//------Se creanlas variables-----------
+    int varA = 10;
+    int varB = 20;
+
+    printf("%i \n", varA);
+    printf("%i \n", varB);
+
+
+// -----------Se llama a la funcion-----------------
+//----Se pasa por parametro la direccion de memoria de las variables
+// con el operador & -------
+
+    cambiarValor(&varA, &varB);
+
+//----Se imprime en pantalla las variables-------
+
+    printf("%i \n", varA);
+    printf("%i", varB);
+    return 0;
+}
+
+
+
+
+
+//-------Se crea la funcion---------
+
+//Se reciben como parametro las direcciones de memoria de las variables
+void cambiarValor(int* varA, int* varB)
+{
+
+    //-----Se declara una variable auxiliar------------
+    int aux;
+
+    //---la variable aux, toma el valor que se encuentra
+    // En la dirección de memoria que contiene varA
+    aux = *varA;
+
+//------- El valor que contenga la dirección de memoria de varA, va a ser
+//Igual que el valor el valor de la direccion de memoria de varB------
+    *varA = *varB;
+
+    // ----la direccion de memoria que contiene varB, va  atomar el valor
+    //Almacenado en la variable local aux-----
+
+    *varB = aux;
+
+}
