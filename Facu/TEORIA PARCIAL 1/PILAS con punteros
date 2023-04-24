@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+//----------Para mandar una pila por referencia
+//Es necesario aclarar que es tipo "Pila" y puntero " * "
+//Junto con el nombre de la pila "pilita"---------
+void invertirPila (Pila* pilita);
+
+int main()
+{
+    Pila pilita;
+
+    inicpila(&pilita);
+
+    apilar(&pilita,1);
+    apilar(&pilita,2);
+    apilar(&pilita,3);
+    apilar(&pilita,4);
+    apilar(&pilita,5);
+
+    mostrar(&pilita);
+
+// ---------Llamamos a la funcion enviando la direccion de memoria de pilita-----
+    invertirPila(&pilita);
+
+
+    mostrar(&pilita);
+
+
+    return 0;
+}
+
+
+void invertirPila (Pila* pilita)
+{
+
+//-----------Adentro de la funcion no es necesario trabajar con &
+// En las funciones llamada spor referencia----------
+
+
+    Pila aux,aux1;
+    inicpila(&aux);
+    inicpila(&aux1);
+
+    while(!pilavacia(pilita))
+    {
+
+        apilar(&aux, desapilar(pilita));
+    }
+
+    while(!pilavacia(&aux))
+    {
+
+        apilar(&aux1, desapilar(&aux));
+    }
+
+    while(!pilavacia(&aux1))
+    {
+
+        apilar(pilita, desapilar(&aux1));
+    }
+
+
+}
+
+
+
+
+
+void fundamentosPila ()
+{
+
+// -----------Declaramos la pila-------------
+    Pila pilota;
+
+// ------------Inicializamos la pila------------
+    inicpila(&pilota);
+
+//------------Leemos un dato por consola-----------
+    leer(&pilota);
+
+//-----------Apilamos un dato por codigo--------
+    apilar(&pilota,5);
+
+//------Agarramos el tope de la pila--------------
+
+
+    int topeP = tope(&pilota);
+
+    printf("%i", topeP);
+
+//--------Eliminamos un elemento de la pila---------
+
+    desapilar(&pilota);
+
+//------------Decimos si esta vacia o no--------------
+
+    pilavacia(&pilota);
+
+
+//----------Mostramos un La pila entera----------
+    mostrar(&pilota);
+
+
+}
