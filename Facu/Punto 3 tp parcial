@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+
+void pasarMenores(Pila* pila);
+int encontrarMenor (Pila* pila);
+
+//----------------Main---------------------------------------------
+
+int main()
+{
+    Pila pila;
+    inicpila(&pila);
+
+    apilar(&pila, 7);
+    apilar(&pila, 2);
+    apilar(&pila, 1);
+    apilar(&pila, 4);
+    apilar(&pila, 5);
+    apilar(&pila, 6);
+    apilar(&pila, 7);
+
+
+
+//int menor = encontrarMenor(&pila);
+
+//printf("%i", menor);
+
+mostrar(&pila);
+
+pasarMenores(&pila);
+
+
+    return 0;
+}
+
+
+
+//----------------PasarMenoresElementos-----------------------
+
+
+void pasarMenores(Pila * pila) {
+
+int validos = 5;
+int nuevoArray[validos];
+int i = 0;
+int menor;
+
+while (i < validos) {
+
+    menor = encontrarMenor(&pila);
+
+    nuevoArray[i] = menor;
+
+    i++;
+}
+int u;
+for (u = 0; u < validos;u++){
+
+    printf("%i  \n", nuevoArray[u]);
+}
+
+}
+
+
+
+
+//------------------Encontrar menores-----------------------------
+
+int encontrarMenor(Pila * pila) {
+    Pila aux;
+    inicpila(&aux);
+
+    Pila menor;
+    inicpila(&menor);
+
+
+apilar (&menor, desapilar(&pila));
+
+printf("%i \n", tope(&menor));
+
+while (!pilavacia(&pila)) {
+
+        if (tope(&menor) > tope(&pila)) {
+
+            apilar(&aux, desapilar(&menor));
+            apilar(&menor, desapilar(&pila));
+
+        } else {
+            apilar(&aux, desapilar(&pila));
+        }
+
+}
+
+
+while(!pilavacia(&aux)){
+
+    apilar(&pila, desapilar(&aux));
+
+}
+
+    mostrar(&pila);
+return tope(&menor);
+
+
+}
