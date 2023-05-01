@@ -1,0 +1,207 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+//DECLARACIONES DE LAS FUNCIONES------------------------
+int cargarElementos(int array[], int dimension, Pila* pilona);
+void mostrarArray (int array[], int validos);
+void buscarElemento (int array[], int validos);
+int buscarMenorPila(Pila piloneta);
+void IntercambiarArreglo(Pila pilona);
+void pasarArreglo(Pila piloneta);
+
+
+
+int main()
+{
+    int dimension = 100;
+    int array[dimension];
+    int validos;
+
+    Pila pilona;
+    inicpila(&pilona);
+//----------DECLARACIONES-----------------
+
+    validos = cargarElementos(array, dimension, &pilona);
+
+        //muestra como quedo cargada la pila------
+        printf("\nPILA CON IMPARES MULTIPLOS DE 3\n");
+        mostrar(&pilona);
+
+        //muestra como quedo cargado el array-----
+        printf("\n\nARREGLO CON IMPARES\n\n");
+        mostrarArray(array, validos);
+
+        //busca el elemento que le indiques, en el array----
+        buscarElemento(array, validos);
+
+        IntercambiarArreglo(pilona);
+
+        pasarArreglo(pilona);
+
+
+
+    return 0;
+}
+
+
+int cargarElementos(int array[], int dimension, Pila* pilona){
+
+
+    int elemento;
+    int valor = 1;
+    int i;
+
+    while(valor == 1 && i < dimension){
+
+        printf("Insertar elemento: ");
+        scanf("%i",&elemento);
+
+
+        if((elemento %2) == 1 && (elemento %3) == 0) {
+
+            apilar(pilona, elemento);
+
+        }
+
+        else if ((elemento %2) == 1) {
+
+            array[i] = elemento;
+            i++;
+
+        }
+
+        else if((elemento %2) == 0){
+
+
+            printf("Inserte solo un numero impar");
+
+        }
+
+
+        printf("\n1 SEGUIR\n");
+        scanf("%i", &valor);
+    }
+
+    return i;
+}
+
+
+
+void mostrarArray (int array[], int validos) {
+
+    int i;
+
+    for(i = 0; i < validos; i++){
+
+        printf("%i ", array[i]);
+    }
+
+
+
+}
+
+
+void buscarElemento (int array[], int validos) {
+
+    int i = 0;
+    int elemento;
+    int u;
+
+    printf("\nQue numero queres buscar: ");
+    scanf("%i", &elemento);
+
+
+    while(i < validos){
+
+        if(elemento == array[i]){
+
+            printf("\nTu numero se encuentra en el array");
+            i = validos;
+        }
+        else {
+            i++;
+        }
+    }
+}
+
+int buscarMenorPila(Pila piloneta) {
+
+    Pila aux;
+    inicpila(&aux);
+    int menor = 0;
+
+
+    apilar(&aux, desapilar(&piloneta));
+    menor = tope(&aux);
+
+    while(!pilavacia(&piloneta)) {
+
+    if(menor > tope(&piloneta)){
+
+        menor = tope(&piloneta);
+        apilar(&aux, desapilar(&piloneta));
+        }
+
+        else {
+
+            apilar(&aux, desapilar(&piloneta));
+        }
+    }
+
+    while(!pilavacia(&aux) && tope(&aux) != menor){
+
+        apilar(&piloneta, desapilar(&aux));
+    }
+    desapilar(&aux);
+
+    while(!pilavacia(&aux)){
+        apilar(&piloneta,desapilar(&aux));
+    }
+
+    return menor;
+    }
+
+
+void IntercambiarArreglo(Pila pilona){
+
+    int i;
+    int arrayA[5];
+
+    for(i = 0; i <=5; i++){
+
+        arrayA[i] = buscarMenorPila(pilona);
+
+    }
+    printf("\n5 ELEMENTOS MENORES DE LA PILA\n");
+    mostrarArray(arrayA, 5);
+}
+
+void pasarArreglo(Pila piloneta) {
+
+    int arrayB[100];
+    int i = 0;
+
+    Pila aux;
+    inicpila(&aux);
+
+    while(!pilavacia(&piloneta)){
+        tope = tope(&piloneta);
+        arrayB[i] = tope;
+        
+        apilar(&aux, desapilar(&piloneta));
+        
+        apilar(&aux, desapilar(&piloneta));
+        i++;
+    }
+
+    while(!pilavacia(&aux)){
+
+        apilar(&piloneta, desapilar(&aux));
+    }
+
+    mostrar(&piloneta);
+    mostrarArray(arrayB, i);
+
+
+}
