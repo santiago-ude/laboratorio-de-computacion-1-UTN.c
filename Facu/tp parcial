@@ -2,157 +2,208 @@
 #include <stdlib.h>
 #include "pila.h"
 
-
-int cargarTodo (int array[], int dimension, Pila* pila);
-void encontrarElemento(int array[], int  validos);
-void pasarMenores(Pila* pila);
-int encontrarMenor (Pila* pila);
+int sumarPila (Pila pilita);
+int buscarMenor (Pila pilita);
+void cambiarMenores ( Pila  pilita);
+void pasarElementos(Pila pilita);
+int cargarTodo(int array[], int dimension, Pila* pilita);
+void encontrarElemento(int array[], int validos);
+void mostrarArray(int array[], int validos);
 
 //----------------Main---------------------------------------------
 
 int main()
 {
-    int dimension = 100;
+    int dimension =  100;
     int array[dimension];
-
-    Pila pila;
-    inicpila(&pila);
-
-
-    int validos = cargarTodo(array, dimension, &pila);
-    printf("%i", validos);
-
-    mostrar(&pila);
+    Pila pilita;
+    inicpila(&pilita);
 
     int i;
-    for (i = 0; i< validos; i++)
-    {
-        printf("%i \n", array[i]);
-    }
+
+
+    pasarElementos(pilita);
+
+    int validos = cargarTodo(array, dimension, &pilita);
+
+printf("\nArray Original\n");
+    mostrarArray(array,validos);
 
     encontrarElemento(array, validos);
 
+    cambiarMenores (pilita);
 
-    pasarMenores(&pila);
+    pasarElementos(pilita);
 
     return 0;
 }
 
-//-------------------CargarTodo-----------------------------
+//----------CargarTodo-------------------
 
-int cargarTodo (int array[], int dimension, Pila* pila)
+int cargarTodo(int array[], int dimension, Pila* pilita)
 {
-
-    int dato;
     int valor = 1;
-    int valido = 0;
+    int dato;
+    int validos = 0;
 
     while (valor == 1)
     {
-
-        printf("Ingrese un valor impar");
+        printf("Ingrese un dato impar");
         scanf("%i", &dato);
+
 
         if (dato % 2 == 1 && dato % 3 == 0)
         {
 
-            apilar(pila, dato);
+            apilar(pilita,dato);
         }
-        else if (dato % 2 == 1 && valido < dimension)
+        else if (dato %2 == 1 && validos < dimension)
         {
-            array[valido] = dato;
-            valido++;
+
+            array[validos] = dato;
+
+            validos++;
 
         }
         else
         {
-            printf("\n El numero ingresado es par \n");
+            printf("El numero ingresado es par \n");
         }
 
-        printf("Desea seaguir? oprima 1  \n");
+        printf("DEsea continuar? presione 1 \n");
         scanf("%i", &valor);
-    }
-    return valido;
-}
 
 
-//-------------------Buscar Elemento------------------------
-
-
-void encontrarElemento(int array[],  int validos){
-
-int dato;
-int i = 0;
-
-printf("Que numero desea buscar?");
-scanf("%i", &dato);
-
-while (validos > i) {
-
-
-    if (dato == array[validos - 1]) {
-
-        printf("El elemento %i se encuentra en el array", dato);
-        return 0;
-    }
-    else {
-            validos--;
     }
 
-}
-
-printf("El elemento %i no se encuentra en el array", dato);
-
-
+return validos;
 }
 
 
+//-----------EncontrarElemento---------------
 
+void encontrarElemento(int array[], int validos)
+{
 
-//----------------PasarMenoresElementos-----------------------
+    int dato;
+    int i = 0;
 
+    printf(" \n Que dato quiere buscar en el array \n");
+    scanf("%i", &dato);
 
-void pasarMenores(Pila * pila){
+    while (validos  > i)
+    {
 
-int dimension = 5;
-int nuevoArray[dimension];
-int i = 0;
-int validos;
+        if (dato == array[i])
+        {
 
+            printf("\n El elemento %i se encuentra en el array \n ", dato);
+            return 0;
+        }
+        else
+        {
+            i++;
+        }
 
-while (i < dimension - 1) {
+    }
 
-    int menor = encontrarMenor(pila);
+    printf("\n El elemento %i no se encuentra en el array \n ", dato);
 
-    nuevoArray[i] = menor;
-    validos++;
 
 }
-int u;
 
-for (u = 0; u < validos; u++) {
 
-    printf("%i", nuevoArray[u]);
+//------------Buscar Menor-------------------
+int buscarMenor (Pila pilita)
+{
+
+    Pila aux;
+    Pila menor;
+
+    inicpila(&aux);
+    inicpila(&menor);
+
+    apilar(&menor, desapilar (&pilita));
+
+    while (!pilavacia(&pilita))
+    {
+
+        if (tope(&menor) > tope(&pilita))
+        {
+
+            apilar(&aux, desapilar(&menor));
+            apilar(&menor, desapilar(&pilita));
+        }
+        else
+        {
+            apilar(&aux, desapilar(&pilita));
+        }
+
+    }
+    while(!pilavacia(&aux))
+    {
+
+        apilar(&pilita, desapilar(&aux));
+    }
+
+    mostrar(&pilita);
+    return tope(&menor);
 }
+
+
+//-----------Buscar_cinco_Menores--------------
+
+
+void cambiarMenores ( Pila  pilita)
+{
+
+    int i = 0;
+    
+    int nuevoArray[5];
+
+
+    while (i < 5)
+    {
+
+        int dato = buscarMenor(pilita);
+
+        nuevoArray[i] = dato;
+        i++;
+    }
+
+    int u = 0;
+    for (u; u < i; u++)
+    {
+
+        printf("%i \n", nuevoArray[u]);
+    }
+
+
 }
 
+//--------------PasarElementos--------------------------
 
 
-//------------------Encontrar menores-----------------------------
-int encontrarMenor (Pila *pila) {
-int aux;
-int menor = tope(pila);
+void pasarElementos(Pila pilita)
+{
 
-while (!pilavacia(pila)) {
+    int dimension = 100;
+    int nuevoArray[dimension];
+    int i=0;
 
-    if (menor > tope(pila)){
+    while (!pilavacia(&pilita))
+    {
 
-         aux = tope(pila);
+        nuevoArray[i] = tope(&pilita);
+        desapilar(&pilita);
+        desapilar(&pilita);
+        i++;
+    }
 
-         apilar(pila, menor);
+   mostrarArray(nuevoArray,i);
 
-         menor = aux;
 
+}
     }
 
     desapilar(pila);
