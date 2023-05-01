@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+int cargarTodo (int array[], int dimension, Pila* pila);
+void encontrarElemento(int array[], int  validos);
+void pasarMenores(Pila* pila);
+int encontrarMenor (Pila* pila);
+
+//----------------Main---------------------------------------------
+
+int main()
+{
+    int dimension = 100;
+    int array[dimension];
+
+    Pila pila;
+    inicpila(&pila);
+
+
+    int validos = cargarTodo(array, dimension, &pila);
+    printf("%i", validos);
+
+    mostrar(&pila);
+
+    int i;
+    for (i = 0; i< validos; i++)
+    {
+        printf("%i \n", array[i]);
+    }
+
+    encontrarElemento(array, validos);
+
+
+    pasarMenores(&pila);
+
+    return 0;
+}
+
+//-------------------CargarTodo-----------------------------
+
+int cargarTodo (int array[], int dimension, Pila* pila)
+{
+
+    int dato;
+    int valor = 1;
+    int valido = 0;
+
+    while (valor == 1)
+    {
+
+        printf("Ingrese un valor impar");
+        scanf("%i", &dato);
+
+        if (dato % 2 == 1 && dato % 3 == 0)
+        {
+
+            apilar(pila, dato);
+        }
+        else if (dato % 2 == 1 && valido < dimension)
+        {
+            array[valido] = dato;
+            valido++;
+
+        }
+        else
+        {
+            printf("\n El numero ingresado es par \n");
+        }
+
+        printf("Desea seaguir? oprima 1  \n");
+        scanf("%i", &valor);
+    }
+    return valido;
+}
+
+
+//-------------------Buscar Elemento------------------------
+
+
+void encontrarElemento(int array[],  int validos){
+
+int dato;
+int i = 0;
+
+printf("Que numero desea buscar?");
+scanf("%i", &dato);
+
+while (validos > i) {
+
+
+    if (dato == array[validos - 1]) {
+
+        printf("El elemento %i se encuentra en el array", dato);
+        return 0;
+    }
+    else {
+            validos--;
+    }
+
+}
+
+printf("El elemento %i no se encuentra en el array", dato);
+
+
+}
+
+
+
+
+//----------------PasarMenoresElementos-----------------------
+
+
+void pasarMenores(Pila * pila){
+
+int dimension = 5;
+int nuevoArray[dimension];
+int i = 0;
+int validos;
+
+
+while (i < dimension - 1) {
+
+    int menor = encontrarMenor(pila);
+
+    nuevoArray[i] = menor;
+    validos++;
+
+}
+int u;
+
+for (u = 0; u < validos; u++) {
+
+    printf("%i", nuevoArray[u]);
+}
+}
+
+
+
+//------------------Encontrar menores-----------------------------
+int encontrarMenor (Pila *pila) {
+int aux;
+int menor = tope(pila);
+
+while (!pilavacia(pila)) {
+
+    if (menor > tope(pila)){
+
+         aux = tope(pila);
+
+         apilar(pila, menor);
+
+         menor = aux;
+
+    }
+
+    desapilar(pila);
+}
+
+
+
+
+return menor;
+}
