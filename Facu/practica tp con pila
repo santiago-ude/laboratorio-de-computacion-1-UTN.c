@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void mostrarArray(int array[], int validos);
+void sumarCompras (Pila pilita, int sumas[]);
+
+int main()
+{
+    Pila pilita;
+    inicpila(&pilita);
+
+    apilar(&pilita, 863);
+    apilar(&pilita, 15);
+    apilar(&pilita, 7);
+    apilar(&pilita, 1516);
+    apilar(&pilita, 6);
+    apilar(&pilita, 28);
+    apilar(&pilita, 415);
+
+    int validosSuma = 4;
+    int sumas[validosSuma];
+
+    sumarCompras(pilita, sumas);
+
+    mostrarArray(sumas,validosSuma);
+
+    return 0;
+}
+
+void sumarCompras (Pila pilita, int sumas[])
+{
+
+
+    int i = 0;
+
+    int pos0 = 0;
+    int pos1= 0;
+    int pos2 = 0;
+    int pos3 = 0;
+
+    for (i ; i < 7 ; i++)
+    {
+
+        if (tope(&pilita) > 0 && tope(&pilita) <= 9)
+        {
+
+            pos0 = pos0 + tope(&pilita);
+        }
+        else if (tope(&pilita) >= 10 && tope(&pilita) <= 99)
+        {
+
+            pos1 = pos1 + tope(&pilita);
+        }
+        else if (tope(&pilita) >= 100 && tope(&pilita) <= 999)
+        {
+
+            pos2 = pos2 + tope(&pilita);
+        }
+        else if (tope(&pilita) >= 1000)
+        {
+
+            pos3 = pos3 + tope(&pilita);
+        }
+
+            desapilar(&pilita);
+    }
+
+    sumas[0] = pos0;
+    sumas[1] = pos1;
+    sumas[2] = pos2;
+    sumas[3] = pos3;
+
+}
+
+void mostrarArray(int array[], int validos)
+{
+
+    int i = 0;
+
+    for (i; i < validos; i++)
+    {
+
+        printf("%i \n", array[i]);
+    }
+}
