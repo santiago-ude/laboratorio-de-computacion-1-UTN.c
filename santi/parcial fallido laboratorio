@@ -1,0 +1,145 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+int cargarKilometros(Pila* recorrido);
+int buscarMayor(Pila recorrido);
+void mostraPila(Pila recorrido);
+void sumaKilometros(Pila recorrido, int cantidadDias);
+void mostrarArray(int array[], int validos);
+
+int main(){
+
+//DECLARACION PUNTO 1
+Pila recorrido;
+inicpila(&recorrido);
+
+//FUNCIONES PUNTO 1
+int cantDias = cargarKilometros(&recorrido);
+
+//PUNTO 2
+int mayor = buscarMayor(recorrido);
+printf("La mayor distancia recorrida es de %i kilometros", mayor);
+
+//PUNTO 3
+mostraPila(recorrido);
+
+//PUNTO 4 a
+sumaKilometros(recorrido, cantDias);
+
+//PUNTO 4 b
+//...
+
+//PUNTO 5
+//...
+
+
+
+return 0;
+}
+
+int cargarKilometros(Pila* recorrido){
+
+    int kilometros;
+    int valorDia = 1;
+    int valor = 1;
+    int contador = 1;
+
+    while(valorDia == 1){
+
+        valor = 1;
+        while(valor == 1) {
+
+
+            printf("Inserta la cantidad de kilometros recorridos: ");
+            scanf("%i", &kilometros);
+
+            apilar(recorrido, kilometros);
+
+            printf("\n1:SEGUIR CARGANDO KILOMETROS\n0:DEJAR DE CARGAR KILOMETROS\n");
+            scanf("%i", &valor);
+
+        }
+
+        apilar(recorrido, -1);
+        contador = contador + 1;
+        printf("Desea cargar kilometros del dia %i\n1:CARGAR\n0:NO CARGAR\n", contador);
+        scanf("%i", &valorDia);
+    }
+    return contador;
+}
+
+
+int buscarMayor(Pila recorrido){
+
+    int mayor = 0;
+    int contador = 0;
+    while(!pilavacia(&recorrido)){
+
+         if (mayor < tope(&recorrido)){
+
+            mayor = tope(&recorrido);
+
+            }
+
+            desapilar(&recorrido);
+        }
+
+
+return mayor;
+}
+
+
+void mostraPila(Pila recorrido){
+
+    printf("\nDias y kilometros\n");
+    while(!pilavacia(&recorrido)){
+
+        if(tope(&recorrido) != -1){
+
+            printf("%i ", tope(&recorrido));
+            desapilar(&recorrido);
+        }
+
+        else {
+                printf("\n");
+                desapilar(&recorrido);
+        }
+    }
+    printf("\n\n\n");
+}
+
+void mostrarArray(int array[], int validos){
+
+    int i;
+    for(i = 0; i < validos; i++){
+
+        printf("%i ", array[i]);
+    }
+
+}
+
+void sumaKilometros(Pila recorrido, int cantidadDias){
+
+    int arrayDia[100];
+    int suma = 0;
+    int i;
+
+    for(i = 0; i < cantidadDias; i++){
+
+    desapilar(&recorrido);
+
+    while(!pilavacia(&recorrido) && tope(&recorrido) != -1 ){
+
+        suma = suma + tope(&recorrido);
+        desapilar(&recorrido);
+    }
+
+    arrayDia[i] = suma;
+    suma = 0;
+
+}
+    printf("\nSuma de kilometros por dia\n");
+    mostrarArray(arrayDia, cantidadDias-1);
+
+}
