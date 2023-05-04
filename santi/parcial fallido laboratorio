@@ -7,33 +7,68 @@ int buscarMayor(Pila recorrido);
 void mostraPila(Pila recorrido);
 void sumaKilometros(Pila recorrido, int cantidadDias);
 void mostrarArray(int array[], int validos);
+int descansosDia(Pila recorrido, int arrayDescanso[]);
 
 int main(){
+
+
+
+
+
+
+
+
 
 //DECLARACION PUNTO 1
 Pila recorrido;
 inicpila(&recorrido);
+int cantDias;
+int mayor;
+int operador;
+int arrayDescanso[100];
 
-//FUNCIONES PUNTO 1
-int cantDias = cargarKilometros(&recorrido);
+//-------------------------------------------------------------------------------------------------
+printf("Que punto queres ver:\nPunto 1: 1\nPunto 2: 2\nPunto 3: 3\nPunto 4a: 4\nPunto 4b: 44\nPunto 5: 5\n");
+scanf("%i", &operador);
 
-//PUNTO 2
-int mayor = buscarMayor(recorrido);
-printf("La mayor distancia recorrida es de %i kilometros", mayor);
+switch(operador){
 
-//PUNTO 3
-mostraPila(recorrido);
+case 1:
+    cargarKilometros(&recorrido);
+     break;
 
-//PUNTO 4 a
-sumaKilometros(recorrido, cantDias);
+case 2:
+    cargarKilometros(&recorrido);
+    mayor = buscarMayor(recorrido);
+    printf("\nLa mayor distancia recorrida es de %i kilometros\n", mayor);
+    break;
 
-//PUNTO 4 b
-//...
+case 3:
+    cargarKilometros(&recorrido);
+    mostraPila(recorrido);
+    break;
 
-//PUNTO 5
-//...
+case 4:
+    cantDias = cargarKilometros(&recorrido);
+    sumaKilometros(recorrido, cantDias);
+    break;
 
+case 44:
 
+    descansosDia(recorrido, arrayDescanso);
+    break;
+
+case 5:
+
+    cantDias = cargarKilometros(&recorrido);
+    sumaKilometros(recorrido, cantDias);
+    printf("\n\n");
+    descansosDia(recorrido, arrayDescanso);
+    break;
+
+default:
+    printf("Pone un numero que coincida con las consignas burro/a.");
+}
 
 return 0;
 }
@@ -141,5 +176,41 @@ void sumaKilometros(Pila recorrido, int cantidadDias){
 }
     printf("\nSuma de kilometros por dia\n");
     mostrarArray(arrayDia, cantidadDias-1);
-
 }
+
+int descansosDia(Pila recorrido, int arrayDescanso[]){
+
+    int kilometros;
+    int valorDia = 1;
+    int valor = 1;
+    int contador = 0;
+    int contador2;
+    int i = 0;
+
+    while(valorDia == 1){
+        contador2 = 0;
+        valor = 1;
+        while(valor == 1) {
+
+
+            printf("Inserta la cantidad de kilometros recorridos: ");
+            scanf("%i", &kilometros);
+
+            apilar(&recorrido, kilometros);
+
+            printf("\n1:SEGUIR CARGANDO KILOMETROS\n0:DEJAR DE CARGAR KILOMETROS\n");
+            scanf("%i", &valor);
+            contador2 = contador2 + 1;
+        }
+        arrayDescanso[i] = contador2;
+        i++;
+        contador = contador + 1;
+        apilar(&recorrido, -1);
+        printf("Desea cargar kilometros del dia %i\n1:CARGAR\n0:NO CARGAR\n", contador);
+        scanf("%i", &valorDia);
+    }
+
+    mostrarArray(arrayDescanso, contador);
+    return contador;
+}
+
