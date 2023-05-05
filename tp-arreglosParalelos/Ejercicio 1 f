@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cargarLegajos ( char nombres[20][30] ,int edades[], int legajos[], int dimension);
+void mostrarArray(char nombres[20][30] , int edades[], int legajos[], int validos);
+
+int main()
+{
+    int dimension = 100;
+
+    char nombres[dimension][30];
+    int edades[dimension];
+    int legajos[dimension];
+
+
+    int validos = cargarLegajos(nombres, edades, legajos, dimension);
+
+    mostrarArray(nombres, edades, legajos, validos);
+    return 0;
+}
+
+
+
+int cargarLegajos (char nombres[20][30]  ,int edades[], int legajos[] , int dimension) {
+
+    int i;
+
+    int valor = 1;
+        while (valor == 1 & i < dimension)  {
+
+
+        fflush(stdin);
+        printf("Ingrese el nombre ");
+        scanf("%s", &nombres[i]);
+
+        printf("ingrese la edad ");
+        scanf("%i", &edades[i]);
+
+
+
+        printf("Ingrese el legajo ");
+        scanf("%i", &legajos[i]);
+
+        i++;
+
+        printf("Si desea seguir presione 1");
+        scanf("%i", &valor);
+
+
+    }
+return i;
+}
+
+
+void mostrarArray(char nombres[20][30]  , int edades[], int legajos[], int validos) {
+
+
+
+    int u;
+    for (u = 0; u < validos; u++) {
+
+        printf("\n");
+       printf("Nombre: %s \n", nombres[u]);
+       printf("Edad:   %i \n", edades[u]);
+       printf("Legajo: %i \n", legajos[u]);
+       printf("\n");
+    }
+
+}
