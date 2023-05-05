@@ -3,6 +3,7 @@
 
 int cargarLegajos ( char nombres[20][30] ,int edades[], int legajos[], int dimension);
 void mostrarArray(char nombres[20][30] , int edades[], int legajos[], int validos);
+int buscarLegajo(int legajos[], int validos);
 
 int main()
 {
@@ -16,6 +17,13 @@ int main()
     int validos = cargarLegajos(nombres, edades, legajos, dimension);
 
     mostrarArray(nombres, edades, legajos, validos);
+
+    int posicion = buscarLegajo(legajos, validos);
+
+
+
+
+
     return 0;
 }
 
@@ -65,5 +73,32 @@ void mostrarArray(char nombres[20][30]  , int edades[], int legajos[], int valid
        printf("Legajo: %i \n", legajos[u]);
        printf("\n");
     }
+
+}
+
+int buscarLegajo(int legajos[], int validos) {
+
+int abc = 0;
+int legajo;
+
+printf("Que legajo desea buscar?");
+scanf("%i", &legajo);
+
+
+for (abc; abc < validos; abc++) {
+
+
+    if (legajos[abc] == legajo) {
+
+            printf("El legajo %i, se encuentra en la posicion %i", legajo, abc);
+
+    return abc;
+    }
+
+
+}
+
+printf("El legajo no se encontro");
+
 
 }
