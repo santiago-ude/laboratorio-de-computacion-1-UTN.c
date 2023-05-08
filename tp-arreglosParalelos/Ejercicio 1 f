@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-int cargarLegajos ( char nombres[20][30] ,int edades[], int legajos[], int dimension);
-void mostrarArray(char nombres[20][30] , int edades[], int legajos[], int validos);
+int cargarLegajos ( char nombres[20][30],int edades[], int legajos[], int dimension);
+void mostrarArray(char nombres[20][30], int edades[], int legajos[], int validos);
 int buscarLegajo(int legajos[], int validos);
+void nombreLegajo (char nombres[20][30], int edades[], int legajos[], int validos);
+void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int validos);
+int buscarMenor(char nombres[20][30], int validos, int u);
 
 int main()
 {
@@ -18,8 +22,9 @@ int main()
 
     mostrarArray(nombres, edades, legajos, validos);
 
-    int posicion = buscarLegajo(legajos, validos);
+    nombreLegajo(nombres, edades, legajos, validos);
 
+    ordenarLegajos(nombres, edades, legajos, validos);
 
 
 
@@ -29,76 +34,167 @@ int main()
 
 
 
-int cargarLegajos (char nombres[20][30]  ,int edades[], int legajos[] , int dimension) {
+int cargarLegajos (char nombres[20][30],int edades[], int legajos[], int dimension)
+{
 
     int i;
 
     int valor = 1;
-        while (valor == 1 & i < dimension)  {
+    while (valor == 1 & i < dimension)
+    {
 
 
         fflush(stdin);
-        printf("Ingrese el nombre ");
+        printf("Ingrese el nombre: ");
         scanf("%s", &nombres[i]);
 
-        printf("ingrese la edad ");
+        printf("ingrese la edad: ");
         scanf("%i", &edades[i]);
 
 
 
-        printf("Ingrese el legajo ");
+        printf("Ingrese el legajo: ");
         scanf("%i", &legajos[i]);
 
         i++;
 
-        printf("Si desea seguir presione 1");
+        printf(" \n Si desea seguir presione 1  \n");
         scanf("%i", &valor);
 
 
     }
-return i;
+    return i;
 }
 
 
-void mostrarArray(char nombres[20][30]  , int edades[], int legajos[], int validos) {
+void mostrarArray(char nombres[20][30], int edades[], int legajos[], int validos)
+{
 
 
 
     int u;
-    for (u = 0; u < validos; u++) {
+    for (u = 0; u < validos; u++)
+    {
 
         printf("\n");
-       printf("Nombre: %s \n", nombres[u]);
-       printf("Edad:   %i \n", edades[u]);
-       printf("Legajo: %i \n", legajos[u]);
-       printf("\n");
+        printf("Nombre: %s \n", nombres[u]);
+        printf("Edad:   %i \n", edades[u]);
+        printf("Legajo: %i \n", legajos[u]);
+        printf("\n");
     }
 
 }
 
-int buscarLegajo(int legajos[], int validos) {
+int buscarLegajo(int legajos[], int validos)
+{
 
-int abc = 0;
-int legajo;
+    int abc = 0;
+    int legajo;
 
-printf("Que legajo desea buscar?");
-scanf("%i", &legajo);
-
-
-for (abc; abc < validos; abc++) {
+    printf("Que legajo desea buscar?");
+    scanf("%i", &legajo);
 
 
-    if (legajos[abc] == legajo) {
+    for (abc; abc < validos; abc++)
+    {
 
-            printf("El legajo %i, se encuentra en la posicion %i", legajo, abc);
+
+        if (legajos[abc] == legajo)
+        {
+
+            printf("El legajo %i, se encuentra en la posicion %i \n", legajo, abc);
+
+            return abc;
+        }
+
+
+    }
+
+    printf("El legajo no se encontro");
 
     return abc;
+}
+
+void nombreLegajo (char nombres[20][30], int edades[], int legajos[], int validos)
+{
+
+
+    int posicion = buscarLegajo(legajos, validos);
+
+
+
+    printf(" \nEl legajo corresponde a %s \n", nombres[posicion] );
+
+
+}
+
+
+void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int validos)
+{
+
+    char nombre1[30];
+    int edad1;
+    int legajo1;
+
+    int u = 0;
+
+    while (u < validos)
+    {
+
+
+        int posMenor = buscarMenor(nombres, validos, u);
+        printf(" \n \n %i \n", posMenor);
+
+        strcpy(nombre1[u], nombres[u]);
+        edad1 = edades[u];
+        legajo1 = legajos[u];
+
+        strcpy(nombres[u],nombres[posMenor]);
+        edades[u] = edades[posMenor];
+        legajos[u] = legajos[posMenor];
+
+        strcpy(nombres[posMenor], nombre1);
+        edades[posMenor] = edad1;
+        legajos[posMenor] = legajo1;
+
+        u++;
+
     }
 
+    mostrarArray(nombres, edades, legajos, validos);
 
 }
 
-printf("El legajo no se encontro");
 
 
+int buscarMenor(char nombres[20][30], int validos, int u)
+{
+
+
+    int i = u;
+    char menor[30];
+    strcpy(menor,nombres[i]);
+    int posMenor = i;
+
+
+    while ( i < validos -1)
+    {
+
+
+        if (strcmp( menor,nombres[i])>0)
+        {
+
+            strcpy(menor, nombres[i]);
+            posMenor = i;
+
+        }
+
+        i++;
+
+    }
+
+    return posMenor;
 }
+
+
+
