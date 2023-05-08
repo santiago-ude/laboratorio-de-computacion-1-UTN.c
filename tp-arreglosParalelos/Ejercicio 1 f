@@ -198,3 +198,4 @@ int buscarMenor(char nombres[20][30], int validos, int u)
 
 
 
+
