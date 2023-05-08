@@ -40,7 +40,7 @@ int cargarLegajos (char nombres[20][30],int edades[], int legajos[], int dimensi
     int i;
 
     int valor = 1;
-    while (valor == 1 & i < dimension)
+    while ((valor == 1) && (i < dimension))
     {
 
 
@@ -132,18 +132,18 @@ void nombreLegajo (char nombres[20][30], int edades[], int legajos[], int valido
 void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int validos)
 {
 
-    char nombre1[30];
+    char nombre1[20][30];
     int edad1;
     int legajo1;
 
     int u = 0;
 
-    while (u < validos)
+    while (u < validos -1)
     {
 
 
         int posMenor = buscarMenor(nombres, validos, u);
-        printf(" \n \n %i \n", posMenor);
+
 
         strcpy(nombre1[u], nombres[u]);
         edad1 = edades[u];
@@ -153,7 +153,7 @@ void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int valid
         edades[u] = edades[posMenor];
         legajos[u] = legajos[posMenor];
 
-        strcpy(nombres[posMenor], nombre1);
+        strcpy(nombres[posMenor], nombre1[u]);
         edades[posMenor] = edad1;
         legajos[posMenor] = legajo1;
 
@@ -167,35 +167,27 @@ void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int valid
 
 
 
-int buscarMenor(char nombres[20][30], int validos, int u)
+int buscarMenor(char nombres[20][30], int validos, int i)
 {
 
 
-    int i = u;
-    char menor[30];
-    strcpy(menor,nombres[i]);
+    char menor[20][30];
+    strcpy(menor[i],nombres[i]);
     int posMenor = i;
 
 
     while ( i < validos -1)
     {
 
-
-        if (strcmp( menor,nombres[i])>0)
+        if (strcmp( menor[i],nombres[i])>0)
         {
-
-            strcpy(menor, nombres[i]);
+            strcpy(menor[i], nombres[i]);
             posMenor = i;
-
         }
-
         i++;
-
     }
 
     return posMenor;
 }
-
-
 
 
