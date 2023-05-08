@@ -21,10 +21,8 @@ int main()
 
    // int posicion = buscarLegajo(legajos, validos);
 
-buscarNombreLegajo(nombres, edades, legajos, validos);
 
-
-
+    buscarNombreLegajo(nombres, edades, legajos, validos);
     return 0;
 }
 
@@ -52,7 +50,7 @@ int cargarLegajos (char nombres[20][30]  ,int edades[], int legajos[] , int dime
 
         i++;
 
-        printf("Si desea seguir presione 1");
+        printf("Si desea seguir presione 1: ");
         scanf("%i", &valor);
 
 
@@ -82,7 +80,7 @@ int buscarLegajo(int legajos[], int validos) {
 int abc = 0;
 int legajo;
 
-printf("Que legajo desea buscar?");
+printf("Que legajo desea buscar? ");
 scanf("%i", &legajo);
 
 
@@ -107,8 +105,8 @@ void buscarNombreLegajo(char nombres[20][30], int edades[], int legajos[], int v
     int posicionLegajo;
     posicionLegajo = buscarLegajo(legajos, validos);
 
-    printf("\n%s\n", nombres[posicionLegajo]);
-    printf("%i\n", edades[posicionLegajo]);
-    printf("%i", legajos[posicionLegajo]);
+    printf("\nNombre: %s\n", nombres[posicionLegajo]);
+    printf("Edad: %i\n", edades[posicionLegajo]);
+    printf("N Legajo: %i\n", legajos[posicionLegajo]);
 
 }
