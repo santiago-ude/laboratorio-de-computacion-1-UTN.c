@@ -160,6 +160,7 @@ int cargarStrings(char palabras[maxPalabras][maxLetras]){
 
     while((valor == 1) && (i < maxPalabras)){
 
+        fflush(stdin);
         printf("\nCargar el string\n ");
         scanf("%s", &palabras[i]);
 
