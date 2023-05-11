@@ -1,230 +1,242 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-int cargarLegajos ( char nombres[20][30],int edades[], int legajos[], int dimension);
-void mostrarArray(char nombres[20][30], int edades[], int legajos[], int validos);
-int buscarLegajo(int legajos[], int validos);
-int nombreLegajo (char nombres[20][30], int edades[], int legajos[], int validos);
-void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int validos);
-int buscarMenor(char nombres[20][30], int validos, int u);
-void mostrarAlumnos(char nombres[20][30], int edades[], int legajos[], int validos);
-void mostrarSolo(char nombres[20][30], int edades[], int legajos[], int posicion);
+#include "pila.h"
+#define maxFilas 5
+#define maxColumnas 3
 
 
+#define maxLetras 30
+#define maxPalabras 21
+
+void cargarMatriz(int matriz[maxFilas][maxColumnas]);
+void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
+void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
+int sumarMatriz ( int matriz[maxFilas][maxColumnas]);
+void promedioMatriz (int matriz[maxFilas][maxColumnas]);
+void buscarDato(int matriz[maxFilas][maxColumnas], int dato);
+int cargarStrings(char palabras[maxPalabras][maxLetras]);
+void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresadas);
+void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresadas, char palabraBuscada[maxLetras]);
 
 int main()
 {
+    int matriz[maxFilas][maxColumnas];
 
-    int opcion;
-    int valor = 1;
-    int dimension = 100;
-
-    char nombres[dimension][30];
-    int edades[dimension];
-    int legajos[dimension];
+    //cargarMatriz(matriz);
 
 
-    printf(" Primero carge el array con el nombre, la edad y el numero de legajo \n");
+    cargarAleatorio(matriz);
+    mostrarMatriz(matriz);
+    //sumarMatriz(matriz);
+    promedioMatriz(matriz);
 
-    int validos = cargarLegajos(nombres, edades, legajos, dimension);
+    int dato;
+    // printf(" Que dato desea buscar ");
+    //scanf("%i", &dato);
 
-    while (valor == 1)
-    {
+    //buscarDato(matriz, dato);
 
-        opcion = 0;
+    char palabras[maxPalabras][maxLetras];
 
-        printf(" 1: Mostrar el array \n");
-        printf(" 2: Buscar un legajo \n");
-        printf(" 3: Ordenar legajos \n");
-        printf(" 4: Buscar tres alumnos \n");
+    int palabrasIngresadas = cargarStrings(palabras);
 
-        scanf("%i", &opcion);
+    mostrarArreglo(palabras, palabrasIngresadas);
 
-        switch(opcion)
-        {
 
-        case 1:
-            mostrarArray(nombres, edades, legajos, validos);
-            break;
 
-        case 2:
-            nombreLegajo(nombres, edades, legajos, validos);
-            break;
 
-        case 3:
-            ordenarLegajos(nombres, edades, legajos, validos);
-            break;
+    //---------------------------------------------------
 
-        case 4:
-            mostrarAlumnos(nombres, edades, legajos, validos);
+    char palabraBuscada[maxLetras];
 
-        }
+    printf("Que palabra desea buscar: ");
+    fflush(stdin);
+    gets(palabraBuscada);
 
-        printf("Desea realizar otra accion");
-        scanf("%i", &valor);
 
-    }
+    buscarPalabra(palabras, palabrasIngresadas, palabraBuscada);
+
     return 0;
 }
 
-
-
-int cargarLegajos (char nombres[20][30],int edades[], int legajos[], int dimension)
+void cargarMatriz(int matriz[maxFilas][maxColumnas])
 {
 
-    int i = 0;
+    int i, j;
+
+    for (i = 0; i < maxFilas; i++ )
+    {
+
+        for(j = 0; j < maxColumnas; j++)
+        {
+
+            printf("Inserte valor a la matriz: ");
+            scanf("%i", &matriz[i][j]);
+
+        }
+    }
+}
+
+
+void mostrarMatriz (int matriz[maxFilas][maxColumnas])
+{
+
+    int i;
+    int j;
+
+    for (i = 0; i < maxFilas; i++ )
+    {
+
+        for(j = 0; j < maxColumnas; j++)
+        {
+
+            printf("%i  ", matriz[i][j]);
+
+        }
+        printf("\n");
+    }
+}
+
+void cargarAleatorio(int matriz[maxFilas][maxColumnas])
+{
+
+    int i, j, dato;
+
+    for (i = 0; i < maxFilas; i++ )
+    {
+
+        for(j = 0; j < maxColumnas; j++)
+        {
+
+            dato = rand() % 100 + 1;
+
+
+            matriz[i][j] = dato;
+
+        }
+    }
+}
+
+
+int sumarMatriz ( int matriz[maxFilas][maxColumnas])
+{
+
+    int i, j, resultado = 0;
+
+    for (i = 0; i < maxFilas; i++ )
+    {
+
+        for(j = 0; j < maxColumnas; j++)
+        {
+
+            resultado = resultado + matriz[i][j];
+
+        }
+    }
+
+
+    printf("\n EL resultado de la suma de la mtriz es: %i", resultado);
+
+    return resultado;
+}
+
+
+void promedioMatriz (int matriz[maxFilas][maxColumnas])
+{
+
+    int resultado = sumarMatriz(matriz);
+
+    int elementos = maxColumnas * maxFilas;
+
+    float promedio;
+    promedio = (float)resultado / (float)elementos;
+
+
+    printf("\n El promedio de tu matriz es: %.2f", promedio);
+
+}
+
+
+void buscarDato(int matriz[maxFilas][maxColumnas], int dato)
+{
+
+
+    int i, j;
+
+    for (i = 0; i < maxFilas; i++ )
+    {
+
+        for(j = 0; j < maxColumnas; j++)
+        {
+
+            if (dato == matriz[i][j])
+            {
+
+                printf(" El dato %i, se encuentra en la matriz  ", dato);
+            }
+        }
+    }
+}
+
+
+int cargarStrings(char palabras[maxPalabras][maxLetras])
+{
+
 
     int valor = 1;
-    while ((valor == 1) && (i < dimension))
+    int i = 0;
+
+    while((valor == 1) && (i < maxPalabras))
     {
 
         fflush(stdin);
-        printf("Ingrese el nombre: ");
-        gets(nombres[i]);
-
-        printf("ingrese la edad: ");
-        scanf("%i", &edades[i]);
-
-
-
-        printf("Ingrese el legajo: ");
-        scanf("%i", &legajos[i]);
+        printf("\nCargar el string\n ");
+        scanf("%s", &palabras[i]);
 
         i++;
-
-        printf(" \n Si desea seguir presione 1  \n");
+        printf("\n1:SEGUIR\n0:CORTAR\n");
         scanf("%i", &valor);
-
     }
+
     return i;
 }
 
-
-void mostrarArray(char nombres[20][30], int edades[], int legajos[], int validos)
+void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresadas)
 {
 
-    int u = 0;
-    for (u; u < validos; u++)
+    int i;
+
+    for (i = 0; i < palabrasIngresadas; i++)
     {
-        printf("\n");
-        printf("Nombre: %s \n", nombres[u]);
-        printf("Edad:   %i \n", edades[u]);
-        printf("Legajo: %i \n", legajos[u]);
-        printf("\n");
+
+        printf("%s\n", palabras[i]);
     }
 }
 
-int buscarLegajo(int legajos[], int validos)
+
+
+void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresadas, char palabraBuscada[maxLetras])
 {
 
-    int abc = 0;
-    int legajo;
 
-    printf("\n Que legajo desea buscar? ");
-    scanf("%i", &legajo);
-
-
-    for (abc; abc < validos; abc++)
-    {
-
-        if (legajos[abc] == legajo)
-        {
-            printf("\n \nEl legajo %i, se encuentra en la posicion %i \n", legajo, abc);
-
-            return abc;
-        }
-    }
-
-    printf("El legajo no se encontro");
-
-    return abc;
-}
-
-int nombreLegajo (char nombres[20][30], int edades[], int legajos[], int validos)
-{
-
-    int posicion = buscarLegajo(legajos, validos);
-
-    printf(" \nEl legajo corresponde a %s \n", nombres[posicion] );
-
-    return posicion;
-}
-
-
-void ordenarLegajos(char nombres[20][30], int edades[], int legajos[], int validos)
-{
-
-    char nombre1[20][30];
-    int edad1;
-    int legajo1;
-
-    int u = 0;
-
-    while (u < validos -1)
-    {
-
-        int posMenor = buscarMenor(nombres, validos, u);
-
-        strcpy(nombre1[u], nombres[u]);
-        edad1 = edades[u];
-        legajo1 = legajos[u];
-
-        strcpy(nombres[u],nombres[posMenor]);
-        edades[u] = edades[posMenor];
-        legajos[u] = legajos[posMenor];
-
-        strcpy(nombres[posMenor], nombre1[u]);
-        edades[posMenor] = edad1;
-        legajos[posMenor] = legajo1;
-
-        u++;
-
-    }
-
-    mostrarArray(nombres, edades, legajos, validos);
-    
-}
-
-
-int buscarMenor(char nombres[20][30], int validos, int i)
-{
-    char palabraMenor[30];
-    strcpy(palabraMenor,nombres[i]);
-    int posMenor = i;
-
-    while ( i < validos)
-    {
-        if (strcmp( palabraMenor,nombres[i])>0)
-        {
-            strcpy(palabraMenor, nombres[i]);
-            posMenor = i;
-        }
-        i++;
-    }
-    return posMenor;
-}
-
-
-
-void mostrarAlumnos(char nombres[20][30], int edades[], int legajos[], int validos)
-{
     int i = 0;
 
-    while (i < 3)
+
+    while (i < palabrasIngresadas)
     {
-        int posicion =  buscarLegajo(legajos, validos);
 
-        printf("\n\n");
-        printf("Nombre: %s \n", nombres[posicion]);
-        printf("Edad:   %i \n", edades[posicion]);
-        printf("Legajo: %i \n", legajos[posicion]);
-        printf("\n\n");
+        if (strcmp(palabras[i], palabraBuscada )== 0)
+        {
 
+
+            printf("La palabra %s esta en la posicion %i \n", palabraBuscada, i);
+            return 0;
+        }
         i++;
     }
 
-}
+    printf("\n -1 Wachin \n");
 
+}
 
 
