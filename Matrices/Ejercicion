@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+#define maxFilas 5
+#define maxColumnas 3
+
+void cargarMatriz(int matriz[maxFilas][maxColumnas]);
+void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
+
+int main()
+{
+    int matriz[maxFilas][maxColumnas];
+
+    cargarMatriz(matriz);
+    mostrarMatriz(matriz);
+
+    return 0;
+}
+
+void cargarMatriz(int matriz[maxFilas][maxColumnas]){
+
+int i, j;
+
+    for (i = 0; i < maxFilas; i++ ){
+
+        for(j = 0; j < maxColumnas; j++){
+
+            printf("Inserte valor a la matriz: ");
+            scanf("%i", &matriz[i][j]);
+
+        }
+    }
+}
+
+
+void mostrarMatriz (int matriz[maxFilas][maxColumnas]){
+
+    int i;
+    int j;
+
+for (i = 0; i < maxFilas; i++ ){
+
+        for(j = 0; j < maxColumnas; j++){
+
+            printf("%i  ", matriz[i][j]);
+
+        }
+        printf("\n");
+    }
+}
