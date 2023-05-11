@@ -7,6 +7,7 @@
 void cargarMatriz(int matriz[maxFilas][maxColumnas]);
 void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
 void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
+void sumarMatriz ( int matriz[maxFilas][maxColumnas]);
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
 
     cargarAleatorio(matriz);
     mostrarMatriz(matriz);
+    sumarMatriz(matriz);
 
     return 0;
 }
@@ -68,4 +70,23 @@ int i, j, dato;
 
         }
     }
+}
+
+
+void sumarMatriz ( int matriz[maxFilas][maxColumnas]) {
+
+int i, j, resultado = 0;
+
+    for (i = 0; i < maxFilas; i++ ){
+
+        for(j = 0; j < maxColumnas; j++){
+
+            resultado = resultado + matriz[i][j];
+
+        }
+    }
+
+
+printf("\n EL resultado de la suma de la mtriz es: %i", resultado);
+
 }
