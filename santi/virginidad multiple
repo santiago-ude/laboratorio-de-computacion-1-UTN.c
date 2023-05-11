@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+
+int cargarArreglos(char nombre[20][30], int edad[], int documento[], int dimension);
+void mostrarArreglos(char nombre[20][30], int edad[], int documento[], int validos);
+
+int main()
+{
+
+    int dimension = 20;
+    char nombre[dimension][30];
+    int edad[dimension];
+    int documento[dimension];
+
+
+    int validos = cargarArreglos(nombre, edad, documento, dimension);
+
+    printf("\n\nLos validos son: %i\n\n", validos);
+
+    mostrarArreglos(nombre, edad, documento, validos);
+
+
+    return 0;
+}
+
+int cargarArreglos(char nombre[20][30], int edad[], int documento[], int dimension){
+
+    int valor = 1;
+    int i = 0;
+
+
+ while((i < dimension) && (valor == 1)){
+
+        fflush(stdin);
+        printf("\nCargar el nombre: ");
+        scanf("%s", &nombre[i]);
+
+        printf("\nInsertar la edad: ");
+        scanf("%i", &edad[i]);
+
+        printf("\nIngresar su N de documento: ");
+        scanf("%i", &documento[i]);
+
+
+
+        i++;
+        printf("\n1:SEGUIR CARGANDO\n0:CORTAR\n");
+        scanf("%i", &valor);
+    }
+
+    return i;
+}
+
+
+void mostrarArreglos(char nombre[20][30], int edad[], int documento[], int validos){
+
+    int i = 0;
+    while(i < validos){
+
+        printf("\nNombre: %s\n", nombre[i]);
+        printf("Edad: %i\n", edad[i]);
+        printf("N de documento: %i\n\n", documento[i]);
+       i++;
+    }
