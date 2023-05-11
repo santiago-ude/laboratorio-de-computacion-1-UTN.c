@@ -4,12 +4,18 @@
 #define maxFilas 5
 #define maxColumnas 3
 
+
+#define maxLetras 30
+#define maxPalabras 21
+
 void cargarMatriz(int matriz[maxFilas][maxColumnas]);
 void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
 void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
 int sumarMatriz ( int matriz[maxFilas][maxColumnas]);
 void promedioMatriz (int matriz[maxFilas][maxColumnas]);
 void buscarDato(int matriz[maxFilas][maxColumnas], int dato);
+int cargarStrings(char palabras[maxPalabras][maxLetras]);
+void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresadas);
 
 int main()
 {
@@ -24,10 +30,18 @@ int main()
     promedioMatriz(matriz);
 
    int dato;
-   printf(" Que dato desea buscar ");
-   scanf("%i", &dato);
+  // printf(" Que dato desea buscar ");
+   //scanf("%i", &dato);
 
-   buscarDato(matriz, dato);
+   //buscarDato(matriz, dato);
+
+   char palabras[maxPalabras][maxLetras];
+
+   int palabrasIngresadas = cargarStrings(palabras);
+
+    mostrarArreglo(palabras, palabrasIngresadas);
+
+
 
 
 
@@ -134,5 +148,35 @@ int i, j;
             printf(" El dato %i, se encuentra en la matriz  ", dato);
            }
         }
+    }
+}
+
+
+int cargarStrings(char palabras[maxPalabras][maxLetras]){
+
+
+    int valor = 1;
+    int i = 0;
+
+    while((valor == 1) && (i < maxPalabras)){
+
+        printf("\nCargar el string\n ");
+        scanf("%s", &palabras[i]);
+
+        i++;
+        printf("\n1:SEGUIR\n0:CORTAR\n");
+        scanf("%i", &valor);
+    }
+
+    return i;
+}
+
+void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresadas){
+
+        int i;
+
+    for (i = 0; i < palabrasIngresadas; i++){
+
+        printf("%s\n", palabras[i]);
     }
 }
