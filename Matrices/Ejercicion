@@ -7,7 +7,9 @@
 void cargarMatriz(int matriz[maxFilas][maxColumnas]);
 void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
 void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
-void sumarMatriz ( int matriz[maxFilas][maxColumnas]);
+int sumarMatriz ( int matriz[maxFilas][maxColumnas]);
+void promedioMatriz (int matriz[maxFilas][maxColumnas]);
+void buscarDato(int matriz[maxFilas][maxColumnas], int dato);
 
 int main()
 {
@@ -18,7 +20,17 @@ int main()
 
     cargarAleatorio(matriz);
     mostrarMatriz(matriz);
-    sumarMatriz(matriz);
+    //sumarMatriz(matriz);
+    promedioMatriz(matriz);
+
+   int dato;
+   printf(" Que dato desea buscar ");
+   scanf("%i", &dato);
+
+   buscarDato(matriz, dato);
+
+
+
 
     return 0;
 }
@@ -73,7 +85,7 @@ int i, j, dato;
 }
 
 
-void sumarMatriz ( int matriz[maxFilas][maxColumnas]) {
+int sumarMatriz ( int matriz[maxFilas][maxColumnas]) {
 
 int i, j, resultado = 0;
 
@@ -89,4 +101,38 @@ int i, j, resultado = 0;
 
 printf("\n EL resultado de la suma de la mtriz es: %i", resultado);
 
+    return resultado;
+}
+
+
+void promedioMatriz (int matriz[maxFilas][maxColumnas]){
+
+    int resultado = sumarMatriz(matriz);
+
+    int elementos = maxColumnas * maxFilas;
+
+    float promedio;
+    promedio = (float)resultado / (float)elementos;
+
+
+   printf("\n El promedio de tu matriz es: %.2f", promedio);
+
+}
+
+
+void buscarDato(int matriz[maxFilas][maxColumnas], int dato) {
+
+
+int i, j;
+
+    for (i = 0; i < maxFilas; i++ ){
+
+        for(j = 0; j < maxColumnas; j++){
+
+           if (dato == matriz[i][j]){
+
+            printf(" El dato %i, se encuentra en la matriz  ", dato);
+           }
+        }
+    }
 }
