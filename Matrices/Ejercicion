@@ -6,12 +6,16 @@
 
 void cargarMatriz(int matriz[maxFilas][maxColumnas]);
 void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
+void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
 
 int main()
 {
     int matriz[maxFilas][maxColumnas];
 
-    cargarMatriz(matriz);
+    //cargarMatriz(matriz);
+
+
+    cargarAleatorio(matriz);
     mostrarMatriz(matriz);
 
     return 0;
@@ -46,5 +50,22 @@ for (i = 0; i < maxFilas; i++ ){
 
         }
         printf("\n");
+    }
+}
+
+void cargarAleatorio(int matriz[maxFilas][maxColumnas]){
+
+int i, j, dato;
+
+    for (i = 0; i < maxFilas; i++ ){
+
+        for(j = 0; j < maxColumnas; j++){
+
+            dato = rand() % 100 + 1;
+
+
+            matriz[i][j] = dato;
+
+        }
     }
 }
