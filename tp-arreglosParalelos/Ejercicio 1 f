@@ -17,20 +17,22 @@ void buscarDato(int matriz[maxFilas][maxColumnas], int dato);
 int cargarStrings(char palabras[maxPalabras][maxLetras]);
 void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresadas);
 void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresadas, char palabraBuscada[maxLetras]);
+int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas);
+void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngresadas);
 
 int main()
 {
-    int matriz[maxFilas][maxColumnas];
+    //int matriz[maxFilas][maxColumnas];
 
     //cargarMatriz(matriz);
 
 
-    cargarAleatorio(matriz);
-    mostrarMatriz(matriz);
+   // cargarAleatorio(matriz);
+   // mostrarMatriz(matriz);
     //sumarMatriz(matriz);
-    promedioMatriz(matriz);
+    //promedioMatriz(matriz);
 
-    int dato;
+    //int dato;
     // printf(" Que dato desea buscar ");
     //scanf("%i", &dato);
 
@@ -40,6 +42,7 @@ int main()
 
     int palabrasIngresadas = cargarStrings(palabras);
 
+    ordenarSeleccion(palabras, palabrasIngresadas);
     mostrarArreglo(palabras, palabrasIngresadas);
 
 
@@ -213,8 +216,6 @@ void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresada
     }
 }
 
-
-
 void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresadas, char palabraBuscada[maxLetras])
 {
 
@@ -239,4 +240,42 @@ void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresada
 
 }
 
+
+int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas){
+
+    char menor[maxLetras];
+    strcpy(menor, palabras[i]);
+    int posicion = i;
+    int u = i + 1;
+
+
+    while(u < palabrasIngresadas){
+
+        if(strcmp(menor, palabras[u]) > 0){
+
+            strcpy(menor, palabras[u]);
+            posicion = u;
+        }
+        u++;
+    }
+    return posicion;
+}
+
+
+void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngresadas){
+
+int posmenor;
+int i = 0;
+char aux[maxLetras];
+
+while (i < palabrasIngresadas - 1){
+
+    posmenor = elementoMenor(palabras, i, palabrasIngresadas);
+
+    strcpy(aux, palabras[posmenor]);
+    strcpy(palabras[posmenor], palabras[i]);
+    strcpy(palabras[i], aux);
+    i++;
+}
+}
 
