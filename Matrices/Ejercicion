@@ -4,12 +4,24 @@
 #define maxFilas 5
 #define maxColumnas 3
 
-
 #define maxLetras 30
 #define maxPalabras 21
 
+#define maxFilasA 2
+#define maxColumnasA 2
+
+#define maxFilasB 2
+#define maxColumnasB 5
+
+
+
+
 void cargarMatriz(int matriz[maxFilas][maxColumnas]);
+void cargarMatrizA(int matriz[maxFilasA][maxColumnasA]);
+void cargarMatrizB(int matriz[maxFilasB][maxColumnasB]);
 void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
+void mostrarMatrizA (int matriz[maxFilasA][maxColumnasA]);
+void mostrarMatrizB (int matriz[maxFilasB][maxColumnasB]);
 void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
 int sumarMatriz ( int matriz[maxFilas][maxColumnas]);
 void promedioMatriz (int matriz[maxFilas][maxColumnas]);
@@ -17,44 +29,124 @@ void buscarDato(int matriz[maxFilas][maxColumnas], int dato);
 int cargarStrings(char palabras[maxPalabras][maxLetras]);
 void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresadas);
 void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresadas, char palabraBuscada[maxLetras]);
+void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngresadas);
+int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas);
+int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA]);
+void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]);
+void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]);
 
 int main()
 {
+    int operador;
+    int valor = 1;
+
+    //DECLARACION MATRIZ GENERAL
     int matriz[maxFilas][maxColumnas];
 
-    //cargarMatriz(matriz);
-
-
-    cargarAleatorio(matriz);
-    mostrarMatriz(matriz);
-    //sumarMatriz(matriz);
-    promedioMatriz(matriz);
-
     int dato;
-    // printf(" Que dato desea buscar ");
-    //scanf("%i", &dato);
-
-    //buscarDato(matriz, dato);
-
     char palabras[maxPalabras][maxLetras];
+    int palabrasIngresadas;
+    char palabraBuscada[maxLetras];
 
-    int palabrasIngresadas = cargarStrings(palabras);
+    int matrizA[maxFilasA][maxColumnasA];
 
-    mostrarArreglo(palabras, palabrasIngresadas);
+
+
+
+    while(valor == 1) {
+
+            printf("Que punto queres hacer? \nPunto 1 = 1\nPunto 2 = 2\nPunto 3 = 3\nPunto 4 = 4\nPunto 5 = 5\nPunto 6 = 6\nPunto 7 = 7\nPunto 8 = 8\nPunto 9 = 9\nPunto 10 = 10\nPunto 11 = 11\nPunto 12 = 12\nPunto 13 = 13\nPunto 14 = 14\nPunto 15 = 15\nPunto 16 = 16\n");
+    scanf("%i", &operador);
+
+
+    switch(operador){
+
+    case 1:
+
+        cargarMatriz(matriz);
+        mostrarMatriz(matriz);
+        break;
+
+    case 2:
+
+
+        mostrarMatriz(matriz);
+        break;
+
+    case 3:
+        cargarAleatorio(matriz);
+        mostrarMatriz(matriz);
+        break;
+
+    case 4:
+        cargarMatriz(matriz);
+        sumarMatriz(matriz);
+        break;
+
+    case 5:
+        cargarMatriz(matriz);
+        promedioMatriz(matriz);
+        break;
+
+    case 6:
+
+        printf(" Que dato desea buscar ");
+        scanf("%i", &dato);
+        buscarDato(matriz, dato);
+        break;
+
+    case 7:
+        palabrasIngresadas = cargarStrings(palabras);
+        mostrarArreglo(palabras, palabrasIngresadas);
+        break;
+
+    case 9:
+        printf("Que palabra desea buscar: ");
+        fflush(stdin);
+        gets(palabraBuscada);
+        buscarPalabra(palabras, palabrasIngresadas, palabraBuscada);
+        break;
+
+    case 11:
+
+        ordenarSeleccion(palabras, palabrasIngresadas);
+        mostrarArreglo(palabras, palabrasIngresadas);
+        break;
+
+    case 12:
+
+        cargarMatrizA(matrizA);
+        encontrarDeterminante(matrizA);
+        break;
+
+    case 13:
+        cargarMatrizA(matrizA);
+        inversaMatriz(matrizA);
+        break;
+
+    case 14:
+        cargarMatrizA(matrizA);
+        multiplicarMatriz(matrizA);
+        break;
+
+        }
+
+        printf("Desea hacer otro punto?");
+        scanf("%i", &valor);
+
+
+
+}
+
+
 
 
 
 
     //---------------------------------------------------
 
-    char palabraBuscada[maxLetras];
-
-    printf("Que palabra desea buscar: ");
-    fflush(stdin);
-    gets(palabraBuscada);
 
 
-    buscarPalabra(palabras, palabrasIngresadas, palabraBuscada);
 
     return 0;
 }
@@ -77,6 +169,41 @@ void cargarMatriz(int matriz[maxFilas][maxColumnas])
     }
 }
 
+void cargarMatrizA(int matriz[maxFilasA][maxColumnasA])
+{
+
+    int i, j;
+
+    for (i = 0; i < maxFilasA; i++ )
+    {
+
+        for(j = 0; j < maxColumnasA; j++)
+        {
+
+            printf("Inserte valor a la matriz: ");
+            scanf("%i", &matriz[i][j]);
+
+        }
+    }
+}
+
+void cargarMatrizB(int matriz[maxFilasB][maxColumnasB])
+{
+
+    int i, j;
+
+    for (i = 0; i < maxFilasB; i++ )
+    {
+
+        for(j = 0; j < maxColumnas; j++)
+        {
+
+            printf("Inserte valor a la matriz: ");
+            scanf("%i", &matriz[i][j]);
+
+        }
+    }
+}
 
 void mostrarMatriz (int matriz[maxFilas][maxColumnas])
 {
@@ -96,6 +223,46 @@ void mostrarMatriz (int matriz[maxFilas][maxColumnas])
         printf("\n");
     }
 }
+
+void mostrarMatrizA (int matriz[maxFilasA][maxColumnasA])
+{
+
+    int i;
+    int j;
+
+    for (i = 0; i < maxFilasA; i++ )
+    {
+
+        for(j = 0; j < maxColumnasA; j++)
+        {
+
+            printf("%i  ", matriz[i][j]);
+
+        }
+        printf("\n");
+    }
+}
+
+void mostrarMatrizB (int matriz[maxFilasB][maxColumnasB])
+{
+
+    int i;
+    int j;
+
+    for (i = 0; i < maxFilasB; i++ )
+    {
+
+        for(j = 0; j < maxColumnasB; j++)
+        {
+
+            printf("%i  ", matriz[i][j]);
+
+        }
+        printf("\n");
+    }
+}
+
+
 
 void cargarAleatorio(int matriz[maxFilas][maxColumnas])
 {
@@ -214,7 +381,6 @@ void mostrarArreglo(char palabras[maxPalabras][maxLetras], int palabrasIngresada
 }
 
 
-
 void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresadas, char palabraBuscada[maxLetras])
 {
 
@@ -236,3 +402,121 @@ void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresada
 
 
 }
+
+int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas){
+
+    char menor[maxLetras];
+    strcpy(menor, palabras[i]);
+    int posicion = i;
+    int u = i + 1;
+
+
+    while(u < palabrasIngresadas){
+
+        if(strcmp(menor, palabras[u]) > 0){
+
+            strcpy(menor, palabras[u]);
+            posicion = u;
+        }
+        u++;
+    }
+    return posicion;
+}
+
+
+void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngresadas){
+
+int posmenor;
+int i = 0;
+char aux[maxLetras];
+
+while (i < palabrasIngresadas - 1){
+
+    posmenor = elementoMenor(palabras, i, palabrasIngresadas);
+
+    strcpy(aux, palabras[posmenor]);
+    strcpy(palabras[posmenor], palabras[i]);
+    strcpy(palabras[i], aux);
+    i++;
+}
+}
+
+int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA]){
+
+    int i = 0;
+    int j = 0;
+    int resultado;
+    resultado = ( matrizA[i][j]* matrizA[i+1][j+1])-( matrizA[i][j+1]* matrizA[i+1][j]);
+
+
+    printf("El determinante de la matriz A es: %i  \n", resultado);
+
+    return resultado;
+}
+
+
+void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]) {
+
+    int resultado = encontrarDeterminante(matrizA);
+
+    if (resultado == 0) {
+
+        printf("La matriz no tiene inversa \n");
+    }
+    else {
+        printf("La matriz tiene inversa  \n");
+    }
+
+
+
+
+
+}
+
+
+
+
+void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]){
+
+    int iA= 0;
+    int jA = 0;
+    int iB = 0;
+    int jB = 0;
+    int iR = 0;
+    int jR = 0;
+
+    int matrizB[maxFilasB][maxColumnasB];
+
+    int matrizR[maxFilasB][maxColumnasB];
+    int resultado;
+
+    cargarMatriz(matrizB);
+
+    if(maxColumnasA != maxFilasB){
+        printf("No se puede multplicar ya que la cantidad columnas de la matriz A son distinas a la cantidad de filas de la matriz B");
+        return 0;
+    }
+
+
+
+
+          while(jA < maxColumnasA && iA < maxFilasA){
+
+            while(jB < maxColumnasB && iB < maxFilasB){
+
+                resultado = (((matrizA[iA][jA])*(matrizB[iB][jB])) + ((matrizA[iA][jA+1]*matrizB[iB+1][jB])));
+                matrizR[iR][jR] = resultado;
+
+                jB++;
+                jR++;
+          }
+          iR++;
+          iA++;
+
+            }
+
+            printf("\nLa matriz R es la siguiente:\n");
+            mostrarMatrizB(matrizR);
+
+}
+
