@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pila.h"
 #define maxFilas 5
 #define maxColumnas 3
 
@@ -33,7 +32,7 @@ void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngres
 int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas);
 int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA]);
 void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]);
-void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]);
+void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA],int matrizB[maxFilasB][maxColumnasB]);
 
 int main()
 {
@@ -49,6 +48,7 @@ int main()
     char palabraBuscada[maxLetras];
 
     int matrizA[maxFilasA][maxColumnasA];
+    int matrizB[maxFilasB][maxColumnasB];
 
 
 
@@ -125,8 +125,11 @@ int main()
         break;
 
     case 14:
+        printf("MATRIZ A (2X2)\n");
         cargarMatrizA(matrizA);
-        multiplicarMatriz(matrizA);
+        printf("\nMATRIZ B (2X5)\n");
+        cargarMatrizB(matrizB);
+        multiplicarMatriz(matrizA, matrizB);
         break;
 
         }
@@ -195,7 +198,7 @@ void cargarMatrizB(int matriz[maxFilasB][maxColumnasB])
     for (i = 0; i < maxFilasB; i++ )
     {
 
-        for(j = 0; j < maxColumnas; j++)
+        for(j = 0; j < maxColumnasB; j++)
         {
 
             printf("Inserte valor a la matriz: ");
@@ -476,7 +479,7 @@ void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]) {
 
 
 
-void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]){
+void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA], int matrizB[maxFilasB][maxColumnasB]){
 
     int iA= 0;
     int jA = 0;
@@ -485,12 +488,12 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]){
     int iR = 0;
     int jR = 0;
 
-    int matrizB[maxFilasB][maxColumnasB];
+
 
     int matrizR[maxFilasB][maxColumnasB];
     int resultado;
 
-    cargarMatriz(matrizB);
+
 
     if(maxColumnasA != maxFilasB){
         printf("No se puede multplicar ya que la cantidad columnas de la matriz A son distinas a la cantidad de filas de la matriz B");
@@ -500,7 +503,9 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]){
 
 
 
-          while(jA < maxColumnasA && iA < maxFilasA){
+          while(jA < maxColumnasA && iA < maxFilasA) {
+            jB = 0;
+            jR = 0;
 
             while(jB < maxColumnasB && iB < maxFilasB){
 
@@ -521,4 +526,36 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA]){
 }
 
 
+
+
+void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA]) {
+    
+    
+    
+int determinate = encontrarDeterminante(matrizA);
+
+
+if (determinate == 0) {
+    
+    printf("El determiante es 0 por lo tanto no tiene inversa");
+    return 0;
+}
+
+int matrizC[maxFilasA][maxColumnasA];
+
+
+
+
+}
+
+
+void matrizCofactores( int matrizC[maxFilasA][maxColumnasA]) {
+
+
+matrizC[]
+
+
+
+
+}
 
