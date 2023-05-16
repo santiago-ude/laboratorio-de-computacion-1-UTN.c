@@ -37,6 +37,9 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA],int matrizB[maxFilas
 void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA]);
 void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFilasA][maxColumnasA]);
 void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[maxFilasA][maxColumnasA]) ;
+void elecciones();
+void mostrarArregloNum(float array[], int validos);
+void sumaPorcentajeVotos(int eleccione[5][5]);
 
 int main()
 {
@@ -609,4 +612,126 @@ void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[max
     matrizAdj[1][0] = matrizC[0][1];
     matrizAdj[1][1] = matrizC[1][1];
 
+}
+
+void elecciones(){
+
+
+int elecciones [5][5];
+
+char encabezado[5][20];
+
+
+elecciones[0][0] = 1;
+elecciones[0][1] = 194;
+elecciones[0][2] = 48;
+elecciones[0][3] = 206;
+elecciones[0][4] = 45;
+elecciones[1][0] = 2;
+elecciones[1][1] = 180;
+elecciones[1][2] = 20;
+elecciones[1][3] = 320;
+elecciones[1][4] = 16;
+elecciones[2][0] = 3;
+elecciones[2][1] = 221;
+elecciones[2][2] = 90;
+elecciones[2][3] = 140;
+elecciones[2][4] = 20;
+elecciones[3][0] = 4;
+elecciones[3][1] = 432;
+elecciones[3][2] = 51;
+elecciones[3][3] = 821;
+elecciones[3][4] = 14;
+elecciones[4][0] = 5;
+elecciones[4][1] = 820;
+elecciones[4][2] = 61;
+elecciones[4][3] = 946;
+elecciones[4][4] = 18;
+
+
+
+strcpy(encabezado[0], "Distrito   ");
+strcpy(encabezado[1], "Candidato A  ");
+strcpy(encabezado[2], "Candidato B ");
+strcpy(encabezado[3], "Candidato C  ");
+strcpy(encabezado[4], "Candidato D");
+
+
+    int i;
+    int j;
+    int z;
+
+    for (z = 0; z < 5; z++)
+    {
+
+        printf("|%s ", encabezado[z]);
+    }
+    printf("\n");
+
+    for (i = 0; i < 5; i++ )
+    {
+
+        for(j = 0; j < 5; j++)
+        {
+
+            printf("|%i           ", elecciones[i][j]);
+
+        }
+
+        printf("\n");
+
+    }
+
+    sumaPorcentajeVotos(elecciones);
+}
+
+
+void sumaPorcentajeVotos(int elecciones[5][5]){
+
+    int i;
+    int j;
+    int suma = 0;
+    float votos[4];
+    float porcentaje[4];
+    int totalVotos;
+    int h = 0;
+    int k;
+    for(i = 0; i < 5; i++){
+
+
+        for(j = 1; j < 5;j++){
+
+            suma = suma + elecciones[j];
+        }
+        votos[i] = suma;
+        suma = 0;
+    }
+
+    while (h < 4){
+
+        totalVotos = totalVotos + votos[h];
+        h++;
+    }
+
+    for(k = 0; k < 4; k++){
+
+        porcentaje[k] = ((votos[0]*100)/totalVotos);
+    }
+
+        printf("Suma de votos por candidato respectivamente: \n");
+        mostrarArregloNum(votos, 4);
+
+        printf("Porcentajes de votos conseguidos por candidato respectivamente: \n");
+        mostrarArregloNum(porcentaje, 4);
+
+}
+
+void mostrarArregloNum(float array[], int validos){
+
+    int i;
+
+    for(i = 0; i < validos; i++){
+
+        printf("%.2f",array[i]);
+    }
 }
