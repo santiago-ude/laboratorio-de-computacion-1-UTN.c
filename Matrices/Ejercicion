@@ -20,6 +20,7 @@ void cargarMatrizA(int matriz[maxFilasA][maxColumnasA]);
 void cargarMatrizB(int matriz[maxFilasB][maxColumnasB]);
 void mostrarMatriz (int matriz[maxFilas][maxColumnas]);
 void mostrarMatrizA (int matriz[maxFilasA][maxColumnasA]);
+void mostrarMatrizAFloat(float matriz[maxFilasA][maxColumnasA]);
 void mostrarMatrizB (int matriz[maxFilasB][maxColumnasB]);
 void cargarAleatorio(int matriz[maxFilas][maxColumnas]);
 int sumarMatriz ( int matriz[maxFilas][maxColumnas]);
@@ -33,6 +34,9 @@ int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngr
 int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA]);
 void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]);
 void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA],int matrizB[maxFilasB][maxColumnasB]);
+void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA]);
+void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFilasA][maxColumnasA]);
+void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[maxFilasA][maxColumnasA]) ;
 
 int main()
 {
@@ -131,6 +135,10 @@ int main()
         cargarMatrizB(matrizB);
         multiplicarMatriz(matrizA, matrizB);
         break;
+
+    case 15:
+        cargarMatrizA(matrizA);
+        calcualrMatrizInversa(matrizA);
 
         }
 
@@ -245,6 +253,30 @@ void mostrarMatrizA (int matriz[maxFilasA][maxColumnasA])
         printf("\n");
     }
 }
+
+
+void mostrarMatrizAFloat(float matriz[maxFilasA][maxColumnasA]){
+
+
+    int i;
+    int j;
+
+    for (i = 0; i < maxFilasA; i++ )
+    {
+
+        for(j = 0; j < maxColumnasA; j++)
+        {
+
+            printf("%.2f  ", matriz[i][j]);
+
+        }
+        printf("\n");
+    }
+}
+
+
+
+
 
 void mostrarMatrizB (int matriz[maxFilasB][maxColumnasB])
 {
@@ -529,33 +561,52 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA], int matrizB[maxFila
 
 
 void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA]) {
-    
-    
-    
-int determinate = encontrarDeterminante(matrizA);
+
+    float matrizC[maxFilasA][maxColumnasA];
+    float matrizI[maxFilasA][maxColumnasA];
+    int determinate = encontrarDeterminante(matrizA);
+    int matrizAdj[maxFilasA][maxColumnasA];
 
 
 if (determinate == 0) {
-    
+
     printf("El determiante es 0 por lo tanto no tiene inversa");
     return 0;
 }
 
-int matrizC[maxFilasA][maxColumnasA];
+    matrizCofactores(matrizA, matrizC);
+    matrizTraspuesta(matrizC, matrizAdj);
+
+
+    matrizI[0][0] = (((float)matrizAdj[0][0])/determinate);
+    matrizI[0][1] = (((float)matrizAdj[0][1])/determinate);
+    matrizI[1][0] = (((float)matrizAdj[1][0])/determinate);
+    matrizI[1][1] = (((float)matrizAdj[1][1])/determinate);
 
 
 
 
-}
-
-
-void matrizCofactores( int matrizC[maxFilasA][maxColumnasA]) {
-
-
-matrizC[]
-
-
-
+mostrarMatrizAFloat(matrizI);
 
 }
 
+
+void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFilasA][maxColumnasA]) {
+
+
+    matrizC[0][0] = matrizA[1][1];
+    matrizC[0][1] = -(matrizA[1][0]);
+    matrizC[1][0] = -(matrizA[0][1]);
+    matrizC[1][1] = matrizA[0][0];
+
+}
+
+void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[maxFilasA][maxColumnasA]) {
+
+
+    matrizAdj[0][0] = matrizC[0][0];
+    matrizAdj[0][1] = matrizC[1][0];
+    matrizAdj[1][0] = matrizC[0][1];
+    matrizAdj[1][1] = matrizC[1][1];
+
+}
