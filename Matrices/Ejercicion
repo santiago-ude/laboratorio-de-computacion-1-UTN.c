@@ -12,6 +12,9 @@
 #define maxFilasB 2
 #define maxColumnasB 5
 
+#define maxFilasSimetrica 3
+#define maxColumnasSimetrica 3
+
 
 
 
@@ -39,7 +42,15 @@ void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFil
 void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[maxFilasA][maxColumnasA]) ;
 void elecciones();
 void mostrarArregloNum(float array[], int validos);
-void sumaPorcentajeVotos(int eleccione[5][5]);
+int sumaElecciones(int elecciones[5][5], int votos[4]);
+void mostrarArregloNumInt(int array[], int validos);
+int sumarVotos( int votos[4]);
+void calcularPorcentaje(int votos[4], int votosTotales, float porcentaje[4]);
+int candidatoElecto(int votos[4]);
+int ganadorElecciones(float porcentaje[4]);
+void masVotados(float porcentaje[4], char encabezado[5][20]);
+int segundoGanador(float porcentaje[4]);
+
 
 int main()
 {
@@ -56,101 +67,113 @@ int main()
 
     int matrizA[maxFilasA][maxColumnasA];
     int matrizB[maxFilasB][maxColumnasB];
+    
+    int matrizS[maxFilasSimetrica][maxColumnasSimetrica];
 
 
 
 
-    while(valor == 1) {
+    while(valor == 1)
+    {
 
-            printf("Que punto queres hacer? \nPunto 1 = 1\nPunto 2 = 2\nPunto 3 = 3\nPunto 4 = 4\nPunto 5 = 5\nPunto 6 = 6\nPunto 7 = 7\nPunto 8 = 8\nPunto 9 = 9\nPunto 10 = 10\nPunto 11 = 11\nPunto 12 = 12\nPunto 13 = 13\nPunto 14 = 14\nPunto 15 = 15\nPunto 16 = 16\n");
-    scanf("%i", &operador);
-
-
-    switch(operador){
-
-    case 1:
-
-        cargarMatriz(matriz);
-        mostrarMatriz(matriz);
-        break;
-
-    case 2:
+        printf("Que punto queres hacer? \nPunto 1 = 1\nPunto 2 = 2\nPunto 3 = 3\nPunto 4 = 4\nPunto 5 = 5\nPunto 6 = 6\nPunto 7 = 7\nPunto 8 = 8\nPunto 9 = 9\nPunto 10 = 10\nPunto 11 = 11\nPunto 12 = 12\nPunto 13 = 13\nPunto 14 = 14\nPunto 15 = 15\nPunto 16 = 16\n");
+        scanf("%i", &operador);
 
 
-        mostrarMatriz(matriz);
-        break;
+        switch(operador)
+        {
 
-    case 3:
-        cargarAleatorio(matriz);
-        mostrarMatriz(matriz);
-        break;
+        case 1:
 
-    case 4:
-        cargarMatriz(matriz);
-        sumarMatriz(matriz);
-        break;
+            cargarMatriz(matriz);
+            mostrarMatriz(matriz);
+            break;
 
-    case 5:
-        cargarMatriz(matriz);
-        promedioMatriz(matriz);
-        break;
+        case 2:
 
-    case 6:
 
-        printf(" Que dato desea buscar ");
-        scanf("%i", &dato);
-        buscarDato(matriz, dato);
-        break;
+            mostrarMatriz(matriz);
+            break;
 
-    case 7:
-        palabrasIngresadas = cargarStrings(palabras);
-        mostrarArreglo(palabras, palabrasIngresadas);
-        break;
+        case 3:
+            cargarAleatorio(matriz);
+            mostrarMatriz(matriz);
+            break;
 
-    case 9:
-        printf("Que palabra desea buscar: ");
-        fflush(stdin);
-        gets(palabraBuscada);
-        buscarPalabra(palabras, palabrasIngresadas, palabraBuscada);
-        break;
+        case 4:
+            cargarMatriz(matriz);
+            sumarMatriz(matriz);
+            break;
 
-    case 11:
+        case 5:
+            cargarMatriz(matriz);
+            promedioMatriz(matriz);
+            break;
 
-        ordenarSeleccion(palabras, palabrasIngresadas);
-        mostrarArreglo(palabras, palabrasIngresadas);
-        break;
+        case 6:
 
-    case 12:
+            printf(" Que dato desea buscar ");
+            scanf("%i", &dato);
+            buscarDato(matriz, dato);
+            break;
 
-        cargarMatrizA(matrizA);
-        encontrarDeterminante(matrizA);
-        break;
+        case 7:
+            palabrasIngresadas = cargarStrings(palabras);
+            mostrarArreglo(palabras, palabrasIngresadas);
+            break;
 
-    case 13:
-        cargarMatrizA(matrizA);
-        inversaMatriz(matrizA);
-        break;
+        case 9:
+            printf("Que palabra desea buscar: ");
+            fflush(stdin);
+            gets(palabraBuscada);
+            buscarPalabra(palabras, palabrasIngresadas, palabraBuscada);
+            break;
 
-    case 14:
-        printf("MATRIZ A (2X2)\n");
-        cargarMatrizA(matrizA);
-        printf("\nMATRIZ B (2X5)\n");
-        cargarMatrizB(matrizB);
-        multiplicarMatriz(matrizA, matrizB);
-        break;
+        case 11:
 
-    case 15:
-        cargarMatrizA(matrizA);
-        calcualrMatrizInversa(matrizA);
+            ordenarSeleccion(palabras, palabrasIngresadas);
+            mostrarArreglo(palabras, palabrasIngresadas);
+            break;
 
+        case 12:
+
+            cargarMatrizA(matrizA);
+            encontrarDeterminante(matrizA);
+            break;
+
+        case 13:
+            cargarMatrizA(matrizA);
+            inversaMatriz(matrizA);
+            break;
+
+        case 14:
+            printf("MATRIZ A (2X2)\n");
+            cargarMatrizA(matrizA);
+            printf("\nMATRIZ B (2X5)\n");
+            cargarMatrizB(matrizB);
+            multiplicarMatriz(matrizA, matrizB);
+            break;
+
+        case 15:
+            cargarMatrizA(matrizA);
+            calcualrMatrizInversa(matrizA);
+            break;
+
+        case 16:
+            elecciones();
+            break;
         }
+        
+        case 17:
+            cargarMatrizS(matrizS);
+            
 
-        printf("Desea hacer otro punto?");
+        printf("\nDesea hacer otro punto?\n1:SI\n");
         scanf("%i", &valor);
 
 
 
-}
+    }
 
 
 
@@ -178,6 +201,24 @@ void cargarMatriz(int matriz[maxFilas][maxColumnas])
 
             printf("Inserte valor a la matriz: ");
             scanf("%i", &matriz[i][j]);
+
+        }
+    }
+}
+
+void cargarMatrizS(int matrizS[maxFilasSimetrica][maxColumnasSimetrica])
+{
+
+    int i, j;
+
+    for (i = 0; i < maxFilasSimetrica; i++ )
+    {
+
+        for(j = 0; j < maxColumnasSimetrica; j++)
+        {
+
+            printf("Inserte valor a la matriz: ");
+            scanf("%i", &matrizS[i][j]);
 
         }
     }
@@ -258,7 +299,8 @@ void mostrarMatrizA (int matriz[maxFilasA][maxColumnasA])
 }
 
 
-void mostrarMatrizAFloat(float matriz[maxFilasA][maxColumnasA]){
+void mostrarMatrizAFloat(float matriz[maxFilasA][maxColumnasA])
+{
 
 
     int i;
@@ -441,7 +483,8 @@ void buscarPalabra (char palabras[maxPalabras][maxLetras], int palabrasIngresada
 
 }
 
-int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas){
+int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngresadas)
+{
 
     char menor[maxLetras];
     strcpy(menor, palabras[i]);
@@ -449,9 +492,11 @@ int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngr
     int u = i + 1;
 
 
-    while(u < palabrasIngresadas){
+    while(u < palabrasIngresadas)
+    {
 
-        if(strcmp(menor, palabras[u]) > 0){
+        if(strcmp(menor, palabras[u]) > 0)
+        {
 
             strcpy(menor, palabras[u]);
             posicion = u;
@@ -462,24 +507,27 @@ int elementoMenor(char palabras[maxPalabras][maxLetras], int i, int palabrasIngr
 }
 
 
-void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngresadas){
+void ordenarSeleccion (char palabras[maxPalabras][maxLetras], int palabrasIngresadas)
+{
 
-int posmenor;
-int i = 0;
-char aux[maxLetras];
+    int posmenor;
+    int i = 0;
+    char aux[maxLetras];
 
-while (i < palabrasIngresadas - 1){
+    while (i < palabrasIngresadas - 1)
+    {
 
-    posmenor = elementoMenor(palabras, i, palabrasIngresadas);
+        posmenor = elementoMenor(palabras, i, palabrasIngresadas);
 
-    strcpy(aux, palabras[posmenor]);
-    strcpy(palabras[posmenor], palabras[i]);
-    strcpy(palabras[i], aux);
-    i++;
+        strcpy(aux, palabras[posmenor]);
+        strcpy(palabras[posmenor], palabras[i]);
+        strcpy(palabras[i], aux);
+        i++;
+    }
 }
-}
 
-int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA]){
+int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA])
+{
 
     int i = 0;
     int j = 0;
@@ -493,15 +541,18 @@ int encontrarDeterminante(int matrizA[maxFilasA][maxColumnasA]){
 }
 
 
-void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]) {
+void inversaMatriz(int matrizA[maxFilasA][maxColumnasA])
+{
 
     int resultado = encontrarDeterminante(matrizA);
 
-    if (resultado == 0) {
+    if (resultado == 0)
+    {
 
         printf("La matriz no tiene inversa \n");
     }
-    else {
+    else
+    {
         printf("La matriz tiene inversa  \n");
     }
 
@@ -514,7 +565,8 @@ void inversaMatriz(int matrizA[maxFilasA][maxColumnasA]) {
 
 
 
-void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA], int matrizB[maxFilasB][maxColumnasB]){
+void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA], int matrizB[maxFilasB][maxColumnasB])
+{
 
     int iA= 0;
     int jA = 0;
@@ -530,7 +582,8 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA], int matrizB[maxFila
 
 
 
-    if(maxColumnasA != maxFilasB){
+    if(maxColumnasA != maxFilasB)
+    {
         printf("No se puede multplicar ya que la cantidad columnas de la matriz A son distinas a la cantidad de filas de la matriz B");
         return 0;
     }
@@ -538,32 +591,35 @@ void multiplicarMatriz(int matrizA[maxFilasA][maxColumnasA], int matrizB[maxFila
 
 
 
-          while(jA < maxColumnasA && iA < maxFilasA) {
-            jB = 0;
-            jR = 0;
+    while(jA < maxColumnasA && iA < maxFilasA)
+    {
+        jB = 0;
+        jR = 0;
 
-            while(jB < maxColumnasB && iB < maxFilasB){
+        while(jB < maxColumnasB && iB < maxFilasB)
+        {
 
-                resultado = (((matrizA[iA][jA])*(matrizB[iB][jB])) + ((matrizA[iA][jA+1]*matrizB[iB+1][jB])));
-                matrizR[iR][jR] = resultado;
+            resultado = (((matrizA[iA][jA])*(matrizB[iB][jB])) + ((matrizA[iA][jA+1]*matrizB[iB+1][jB])));
+            matrizR[iR][jR] = resultado;
 
-                jB++;
-                jR++;
-          }
-          iR++;
-          iA++;
+            jB++;
+            jR++;
+        }
+        iR++;
+        iA++;
 
-            }
+    }
 
-            printf("\nLa matriz R es la siguiente:\n");
-            mostrarMatrizB(matrizR);
+    printf("\nLa matriz R es la siguiente:\n");
+    mostrarMatrizB(matrizR);
 
 }
 
 
 
 
-void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA]) {
+void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA])
+{
 
     float matrizC[maxFilasA][maxColumnasA];
     float matrizI[maxFilasA][maxColumnasA];
@@ -571,11 +627,12 @@ void calcualrMatrizInversa(int matrizA[maxFilasA][maxColumnasA]) {
     int matrizAdj[maxFilasA][maxColumnasA];
 
 
-if (determinate == 0) {
+    if (determinate == 0)
+    {
 
-    printf("El determiante es 0 por lo tanto no tiene inversa");
-    return 0;
-}
+        printf("El determiante es 0 por lo tanto no tiene inversa");
+        return 0;
+    }
 
     matrizCofactores(matrizA, matrizC);
     matrizTraspuesta(matrizC, matrizAdj);
@@ -589,12 +646,13 @@ if (determinate == 0) {
 
 
 
-mostrarMatrizAFloat(matrizI);
+    mostrarMatrizAFloat(matrizI);
 
 }
 
 
-void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFilasA][maxColumnasA]) {
+void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFilasA][maxColumnasA])
+{
 
 
     matrizC[0][0] = matrizA[1][1];
@@ -604,7 +662,8 @@ void matrizCofactores( int matrizA[maxFilasA][maxColumnasA],float matrizC[maxFil
 
 }
 
-void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[maxFilasA][maxColumnasA]) {
+void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[maxFilasA][maxColumnasA])
+{
 
 
     matrizAdj[0][0] = matrizC[0][0];
@@ -614,47 +673,49 @@ void matrizTraspuesta (float matrizC[maxFilasA][maxColumnasA], int matrizAdj[max
 
 }
 
-void elecciones(){
+void elecciones()
+{
 
 
-int elecciones [5][5];
+    int elecciones [5][5];
 
-char encabezado[5][20];
-
-
-elecciones[0][0] = 1;
-elecciones[0][1] = 194;
-elecciones[0][2] = 48;
-elecciones[0][3] = 206;
-elecciones[0][4] = 45;
-elecciones[1][0] = 2;
-elecciones[1][1] = 180;
-elecciones[1][2] = 20;
-elecciones[1][3] = 320;
-elecciones[1][4] = 16;
-elecciones[2][0] = 3;
-elecciones[2][1] = 221;
-elecciones[2][2] = 90;
-elecciones[2][3] = 140;
-elecciones[2][4] = 20;
-elecciones[3][0] = 4;
-elecciones[3][1] = 432;
-elecciones[3][2] = 51;
-elecciones[3][3] = 821;
-elecciones[3][4] = 14;
-elecciones[4][0] = 5;
-elecciones[4][1] = 820;
-elecciones[4][2] = 61;
-elecciones[4][3] = 946;
-elecciones[4][4] = 18;
+    char encabezado[5][20];
 
 
 
-strcpy(encabezado[0], "Distrito   ");
-strcpy(encabezado[1], "Candidato A  ");
-strcpy(encabezado[2], "Candidato B ");
-strcpy(encabezado[3], "Candidato C  ");
-strcpy(encabezado[4], "Candidato D");
+    elecciones[0][0] = 1;
+    elecciones[0][1] = 194;
+    elecciones[0][2] = 48;
+    elecciones[0][3] = 206;
+    elecciones[0][4] = 45;
+    elecciones[1][0] = 2;
+    elecciones[1][1] = 180;
+    elecciones[1][2] = 20;
+    elecciones[1][3] = 320;
+    elecciones[1][4] = 16;
+    elecciones[2][0] = 3;
+    elecciones[2][1] = 221;
+    elecciones[2][2] = 90;
+    elecciones[2][3] = 140;
+    elecciones[2][4] = 20;
+    elecciones[3][0] = 4;
+    elecciones[3][1] = 432;
+    elecciones[3][2] = 51;
+    elecciones[3][3] = 821;
+    elecciones[3][4] = 14;
+    elecciones[4][0] = 5;
+    elecciones[4][1] = 820;
+    elecciones[4][2] = 61;
+    elecciones[4][3] = 946;
+    elecciones[4][4] = 18;
+
+
+
+    strcpy(encabezado[0], "Distrito   ");
+    strcpy(encabezado[1], "Candidato A  ");
+    strcpy(encabezado[2], "Candidato B ");
+    strcpy(encabezado[3], "Candidato C  ");
+    strcpy(encabezado[4], "Candidato D");
 
 
     int i;
@@ -667,6 +728,8 @@ strcpy(encabezado[4], "Candidato D");
         printf("|%s ", encabezado[z]);
     }
     printf("\n");
+
+
 
     for (i = 0; i < 5; i++ )
     {
@@ -682,56 +745,228 @@ strcpy(encabezado[4], "Candidato D");
 
     }
 
-    sumaPorcentajeVotos(elecciones);
+    int votos[4];
+    float porcentaje[4];
+
+
+    sumaElecciones(elecciones, votos);
+
+    int votosTotales = sumarVotos(votos);
+      printf("\n\nSuma de los votos totales: %i\n", votosTotales);
+
+
+    calcularPorcentaje(votos, votosTotales, porcentaje);
+
+
+    printf("\nPorcentaje de votos de cada candidato: \n");
+    mostrarArregloNum(porcentaje, 4);
+
+
+    int posElecto = candidatoElecto(votos);
+
+    printf(" \n\n El candidato con mas votos es %s \n", encabezado[posElecto]);
+
+    int ganador = ganadorElecciones(porcentaje);
+
+    printf(" El candidato con mas de 50 porciento de votos es el %scon un porcentaje del: %.2f",encabezado[ganador + 1], porcentaje[ganador]);
+
+    masVotados(porcentaje, encabezado);
+
 }
 
+int sumaElecciones(int elecciones[5][5], int votos[4]){
 
-void sumaPorcentajeVotos(int elecciones[5][5]){
 
     int i;
     int j;
+    int k = 0;
+
+
     int suma = 0;
-    float votos[4];
-    float porcentaje[4];
-    int totalVotos;
-    int h = 0;
-    int k;
-    for(i = 0; i < 5; i++){
 
 
-        for(j = 1; j < 5;j++){
+    for (j = 1; j < 5; j++)
+    {
 
-            suma = suma + elecciones[j];
+        for (i = 0; i < 5; i++)
+        {
+
+
+            suma = suma + elecciones[i][j];
+
+
         }
-        votos[i] = suma;
+
+        votos[k] = suma;
+        k++;
+
         suma = 0;
     }
+    printf("\nSuma de votos de cada candidato: \n");
+    mostrarArregloNumInt(votos, 4);
+}
 
-    while (h < 4){
+int sumarVotos( int votos[4]){
 
-        totalVotos = totalVotos + votos[h];
-        h++;
+    int i;
+    int votosTotales= 0;
+
+    for (i = 0; i< 4; i++)
+    {
+
+
+        votosTotales = votosTotales + votos[i];
+
     }
 
-    for(k = 0; k < 4; k++){
 
-        porcentaje[k] = ((votos[0]*100)/totalVotos);
+    return votosTotales;
+}
+
+void calcularPorcentaje(int votos[4], int votosTotales, float porcentaje[4]){
+
+    int i;
+
+    float resultado = 0;
+
+
+    for (i = 0; i < 4; i++)
+    {
+        resultado = (((float)votos[i] * 100) / (float)votosTotales);
+
+        porcentaje[i] = resultado;
+        resultado = 0;
     }
 
-        printf("Suma de votos por candidato respectivamente: \n");
-        mostrarArregloNum(votos, 4);
+}
 
-        printf("Porcentajes de votos conseguidos por candidato respectivamente: \n");
-        mostrarArregloNum(porcentaje, 4);
+int candidatoElecto(int votos[4]) {
 
+int i = 0;
+
+int menor = votos[i];
+int posMenor = i;
+
+
+
+for (i; i < 4; i++) {
+
+    if(menor > votos[i]) {
+
+        menor = votos[i];
+        posMenor = i;
+    }
+
+}
+
+return posMenor;
+}
+
+int ganadorElecciones(float porcentaje[4]) {
+
+int i;
+int pos;
+
+for ( i = 0; i < 4; i++) {
+
+    if (porcentaje[i] > 50) {
+
+        pos  = i;
+
+        return pos;
+
+    }
+}
+
+
+printf("Ninguno de los candidatos supero el 50 porciento");
+return 0;
+}
+
+void masVotados(float porcentaje[4], char encabezado[5][20]){
+
+int posGanador = ganadorElecciones(porcentaje);
+
+
+if(porcentaje[posGanador] >= 50){
+    printf("\n No hay segunda vuelta\n");
+    return 0;}
+
+    int posSegundo = segundoGanador(porcentaje);
+
+    printf("\nLos candidatos que pasan a la segunda vuelta son: \n%s\n %s \n", encabezado[posGanador], encabezado[posSegundo]);
+
+}
+
+int segundoGanador(float porcentaje[4]){
+
+    int i = 0;
+    int posSegundo = i;
+    int segundo = porcentaje[i];
+
+    int posGanador = ganadorElecciones(porcentaje);
+
+
+    for(i; i < 4; i++){
+
+    if((segundo > porcentaje[i]) && segundo < porcentaje[posGanador]){
+
+        segundo = porcentaje[i];
+        posSegundo = i;
+
+    }
+    }
+    return posSegundo;
 }
 
 void mostrarArregloNum(float array[], int validos){
 
     int i;
+ printf("\n");
+    for(i = 0; i < validos; i++)
+    {
 
-    for(i = 0; i < validos; i++){
 
-        printf("%.2f",array[i]);
+        printf("%.2f   ",(float) array[i]);
     }
 }
+
+void mostrarArregloNumInt(int array[], int validos){
+
+    int i;
+ printf("\n");
+    for(i = 0; i < validos; i++)
+    {
+
+        printf("%i   ",array[i]);
+    }
+}
+
+
+void matrizSimetrica(matriz[maxFilasSimetrica][maxColumnasSimetrica]){
+        
+            int i = 0;
+            int j = ;
+            int k;
+            for ( k = 0; k < maxFilasSimetrica; k++ ){
+    
+                if((matrizS[i][j+1]) != (matrizS[i+1][j])){
+                        
+                    return 0;
+                }
+                
+                else {
+                        
+                    j++;
+                    i++;
+                }
+                
+                
+            }
+
+
+
+
+}
+
+
