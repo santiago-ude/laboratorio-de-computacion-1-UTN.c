@@ -13,27 +13,71 @@ typedef struct {
 } alumno;
 
 void cargarAlumnos(alumno arreglo[], int* dimension);
-void mostrarArray(alumno arreglo[], int validos);
+void mostrarArray(alumno arreglo[], int dimension);
 void ordenarSeleccion(alumno arreglo[], int dimension);
 int buscarMenor(alumno arreglo[], int dimension,int i);
+void mostrarGenero(alumno arreglo[], int dimension, char genero);
 
 
 int main()
 {
+
 
     alumno* arreglo;
     int dimension = 0;
 
     arreglo = (alumno*)malloc(1 * sizeof(alumno));
 
-    cargarAlumnos(arreglo, &dimension);
 
-    mostrarArray(arreglo, dimension);
 
-    printf("\n\n\nOrdenado por N de legajos\n");
+    int operador;
+    printf("Que punto queres hacer: ");
+    scanf("%i", &operador);
 
-    ordenarSeleccion(arreglo, dimension);
-    mostrarArray(arreglo, dimension);
+
+
+    char sexo;
+
+    switch(operador){
+
+    case 1:
+        cargarAlumnos(arreglo, &dimension);
+        mostrarArray(arreglo, dimension);
+        break;
+
+    case 2:
+        cargarAlumnos(arreglo, &dimension);
+        mostrarArray(arreglo, dimension);
+        break;
+
+    case 3:
+        cargarAlumnos(arreglo, &dimension);
+        mostrarArray(arreglo, dimension);
+        break;
+
+    case 4:
+        cargarAlumnos(arreglo, &dimension);
+        mostrarArray(arreglo, dimension);
+        printf("\n\n\nOrdenado por N de legajos\n");
+
+        ordenarSeleccion(arreglo, dimension);
+        mostrarArray(arreglo, dimension);
+        break;
+
+    case 5:
+        cargarAlumnos(arreglo, &dimension);
+
+        printf("Que sexo desea buscar  ");
+        fflush(stdin);
+        scanf("%c", &sexo);
+
+        mostrarGenero(arreglo, dimension, sexo);
+        break;
+
+
+    }
+
+
 
 
 return 0;
@@ -57,9 +101,18 @@ void cargarAlumnos(alumno arreglo[], int* dimension){
     printf("\nN de matricula: ");
     scanf("%i", &arreglo[i].matricula);
 
+        printf("M = Masculino \nF = Femenino \n");
     printf("\n Genero: ");
+
+    
     fflush(stdin);
-    scanf("%c", &arreglo[i].genero);
+    int gen;
+    
+    scanf("%c", &gen);
+    
+    if (gen != 'M' )
+    
+    
 
 
     printf("\n\n1: SEGUIR CARGANDO\n");
@@ -73,11 +126,11 @@ void cargarAlumnos(alumno arreglo[], int* dimension){
 }
 
 
-void mostrarArray(alumno arreglo[], int  validos){
+void mostrarArray(alumno arreglo[], int  dimension){
 
 int i;
 
-for (i = 0; i< validos; i++) {
+for (i = 0; i< dimension; i++) {
 
 
     printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
@@ -126,3 +179,23 @@ void ordenarSeleccion(alumno arreglo[], int dimension){
         i++;
     }
 }
+
+
+void mostrarGenero(alumno arreglo[], int dimension, char genero) {
+
+    int i = 0;
+
+    for ( i = 0; i < dimension; i++) {
+
+    if (arreglo[i].genero == genero) {
+
+        printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
+        printf("N de MATRICULA : %i\n", arreglo[i].matricula);
+        printf("GENERO         : %c\n", arreglo[i].genero);
+        printf("\n");
+
+        }
+    }
+
+}
+
