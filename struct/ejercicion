@@ -3,6 +3,8 @@
 #include <string.h>
 
 
+
+
 typedef struct {
 
     int matricula;
@@ -12,6 +14,8 @@ typedef struct {
 
 void cargarAlumnos(alumno arreglo[], int* dimension);
 void mostrarArray(alumno arreglo[], int validos);
+void ordenarSeleccion(alumno arreglo[], int dimension);
+int buscarMenor(alumno arreglo[], int dimension,int i);
 
 
 int main()
@@ -24,6 +28,11 @@ int main()
 
     cargarAlumnos(arreglo, &dimension);
 
+    mostrarArray(arreglo, dimension);
+
+    printf("\n\n\nOrdenado por N de legajos\n");
+
+    ordenarSeleccion(arreglo, dimension);
     mostrarArray(arreglo, dimension);
 
 
@@ -77,4 +86,43 @@ for (i = 0; i< validos; i++) {
     printf("\n");
 
 }
+}
+
+int buscarMenor(alumno arreglo[], int dimension,int i){
+
+    int u = i + 1;
+    int menor = arreglo[i].matricula;
+    int posmenor = i;
+
+
+
+    while(u < dimension){
+
+        if(menor > arreglo[u].matricula){
+
+            menor = arreglo[u].matricula;
+            posmenor = u;
+        }
+        u++;
+    }
+
+    return posmenor;
+}
+
+
+void ordenarSeleccion(alumno arreglo[], int dimension){
+
+    int aux;
+    int posmenor;
+    int i = 0;
+
+
+    while (i < dimension - 1){
+
+        posmenor = buscarMenor(arreglo, dimension, i);
+        aux = arreglo[posmenor].matricula;
+        arreglo[posmenor].matricula = arreglo[i].matricula;
+        arreglo[i].matricula = aux;
+        i++;
+    }
 }
