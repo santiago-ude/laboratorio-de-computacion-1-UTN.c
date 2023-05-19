@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void redimensionArreglo(int arreglo[], int dimension, int nuevaDimension);
+void cargarArreglo(int arreglo[], int dimension);
+void mostrarArreglo(int arreglo[], int dimension);
+
+int main()
+{
+    int* arreglo;
+    int dimension;
+
+    printf("Determinar dimension del arreglo: ");
+    scanf("%i", &dimension);
+
+    arreglo = ((int*)malloc(dimension * sizeof(int)));
+    printf("\n\nArreglo principal de %i elementos\n\n", dimension);
+
+    cargarArreglo(arreglo, dimension);
+    mostrarArreglo(arreglo, dimension);
+        //-----------
+    int nuevaDimension;
+
+    printf("\n\nDeterminar la nueva dimension del arreglo: ");
+    scanf("%i", &nuevaDimension);
+
+    printf("\n\nArreglo redimensionado de %i elementos\n\n", nuevaDimension);
+    cargarArreglo(arreglo, nuevaDimension);
+    mostrarArreglo(arreglo, nuevaDimension);
+
+
+return 0;
+}
+
+
+
+void redimensionArreglo(int arreglo[], int dimension, int nuevaDimension){
+
+    arreglo = realloc(arreglo, nuevaDimension * sizeof(int));
+}
+
+void cargarArreglo(int arreglo[], int dimension){
+
+int i;
+
+for(i = 0; i < dimension; i++){
+    printf("Insertar elemento al arreglo: ");
+    scanf("%i", &arreglo[i]);
+}
+
+}
+
+void mostrarArreglo(int arreglo[], int dimension){
+
+    int i;
+
+    for(i = 0; i < dimension; i++){
+
+        printf("%i ", arreglo[i]);
+    }
+}
