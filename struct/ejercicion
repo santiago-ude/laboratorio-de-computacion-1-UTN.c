@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+typedef struct {
+
+    int matricula;
+    char nombre[30];
+    char genero;
+} alumno;
+
+void cargarAlumnos(alumno arreglo[], int* dimension);
+void mostrarArray(alumno arreglo[], int validos);
+
+
+int main()
+{
+
+    alumno* arreglo;
+    int dimension = 0;
+
+    arreglo = (alumno*)malloc(1 * sizeof(alumno));
+
+    cargarAlumnos(arreglo, &dimension);
+
+    mostrarArray(arreglo, dimension);
+
+
+return 0;
+}
+
+
+void cargarAlumnos(alumno arreglo[], int* dimension){
+
+    int valor = 1;
+    char nombre[30];
+    int i = *dimension;
+
+    while(valor == 1){
+
+
+    printf("Nombre del alumno: ");
+    fflush(stdin);
+    scanf("%s", &nombre);
+    strcpy(arreglo[i].nombre, nombre);
+
+    printf("\nN de matricula: ");
+    scanf("%i", &arreglo[i].matricula);
+
+    printf("\n Genero: ");
+    fflush(stdin);
+    scanf("%c", &arreglo[i].genero);
+
+
+    printf("\n\n1: SEGUIR CARGANDO\n");
+    scanf("%i", &valor);
+
+    i++;
+    arreglo=realloc(arreglo, (i+1) * sizeof(alumno));
+
+    }
+    *dimension=i;
+}
+
+
+void mostrarArray(alumno arreglo[], int  validos){
+
+int i;
+
+for (i = 0; i< validos; i++) {
+
+
+    printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
+    printf("N de MATRICULA : %i\n", arreglo[i].matricula);
+    printf("GENERO         : %c\n", arreglo[i].genero);
+    printf("\n");
+
+}
+}
