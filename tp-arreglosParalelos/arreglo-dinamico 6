@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void cargarPares(int arreglo[], int dimension, int nuevoArreglo[]);
+int elementosPares(int arreglo[], int dimension) ;
+void mostrarArray(int arreglo[], int validos);
+
+int main()
+{
+    int dimension  = 9;
+    int arreglo[] = {1,2,3,4,5,6,7,8,9};
+
+    mostrarArray(arreglo, dimension);
+    printf("\n");
+
+
+    int pares = elementosPares(arreglo, dimension);
+
+
+    int* nuevoArreglo;
+
+
+
+
+    nuevoArreglo = (int*)malloc(pares*(sizeof(int)));
+    cargarPares(arreglo, dimension, nuevoArreglo);
+    mostrarArray(nuevoArreglo, pares);
+
+    return 0;
+}
+
+
+
+int elementosPares(int arreglo[], int dimension) {
+
+int i;
+int k = 0;
+
+for (i = 0; i< dimension; i++) {
+
+    if ( arreglo[i] % 2 == 0) {
+
+        k++;
+    }
+}
+
+
+return k;
+}
+
+void cargarPares(int arreglo[], int dimension, int nuevoArreglo[]){
+
+
+    int i;
+    int k = 0;
+
+    for ( i= 0; i< dimension; i++ ) {
+
+        if (arreglo[i] % 2 == 0) {
+            nuevoArreglo[k] = arreglo[i];
+            k++;
+
+        }
+    }
+}
+
+
+void mostrarArray(int arreglo[], int validos){
+
+int i;
+
+for (i =0; i < validos; i++) {
+    printf("\n %i", arreglo[i]);
+
+}
+}
