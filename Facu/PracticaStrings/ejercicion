@@ -1,1 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define maxColumnas 100
+#define maxFilas 30
+
+int ingresarPalabras(char palabras[][maxColumnas]);
+void mostrarPalabras(char palabras[][maxColumnas], int validos);
+
+int main() {
+
+
+  char palabras[maxFilas][maxColumnas];
+
+
+  int validos =  ingresarPalabras(palabras);
+
+  mostrarPalabras(palabras, validos);
+  
+
+
+}
+
+int ingresarPalabras(char palabras[][maxColumnas]){
+
+
+int i= 0;
+int valor = 1;
+char dato;
+
+    while (valor == 1 && i < maxColumnas) {
+
+    fflush(stdin);
+    printf("Ingrese una palabra al array \n");
+    gets(palabras[i]);
+
+
+    printf("Ingrese 1 para cargar mas palabras  \n");
+    scanf("%i", &valor);
+    i++;
+
+return i;
+}
+
+}
+
+
+void mostrarPalabras(char palabras[][maxColumnas], int validos) {
+
+int i;
+
+    for (i = 0; i< validos; i++){
+
+    printf("%s  \n", palabras[i]);
+
+}
+
+}
 
