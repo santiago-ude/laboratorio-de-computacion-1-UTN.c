@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+void nuevoArreglo(char cadenaB[], int lenght);
+
+int main() {
+
+
+char cadena[100];
+char cadenaB[100];
+
+printf("Ingrese una palabra: ");
+
+gets(cadena);
+
+int lenght = strlen(cadena);
+printf("La palabra es: %s\n", cadena);
+
+nuevoArreglo(cadenaB, lenght);
+
+printf("La cadena nueva es: %s \n", cadenaB);
+
+return 0;
+}
+
+
+void nuevoArreglo(char cadenaB[], int lenght) {
+
+int i;
+
+for (i = 0; i< lenght; i++) {
+
+    cadenaB[i] = '-';
+}
+}
+
