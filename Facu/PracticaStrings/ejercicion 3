@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void cargarCadena(char cadenaA[]);
+int buscarLetra(char cadenaA[], char letra);
+void cargarLetra(char cadenaA[], char cadenaB[], char letra, int pos);
+
+int main() {
+
+char cadenaA[100];
+char cadenaB[100];
+char letra;
+
+cargarCadena(cadenaA);
+
+printf("Que letra desea buscar ");
+scanf("%c", &letra);
+
+int pos = buscarLetra(cadenaA, letra);
+
+printf("%i \n ", pos);
+
+cargarLetra(cadenaA, cadenaB, letra, pos);
+
+printf("%s", cadenaB);
+
+return 0;
+}
+
+void cargarCadena(char cadenaA[]){
+
+printf("Ingrese una palabra ");
+gets(cadenaA);
+
+
+printf("La cadena ingresada es: %s \n ", cadenaA);
+
+}
+
+
+int buscarLetra(char cadenaA[], char letra){
+
+    int i = 0;
+
+    while (i < strlen(cadenaA)) {
+
+        if (cadenaA[i] == letra) {
+
+            return i;
+        }
+        i++;
+
+    }
+
+    printf("La letra no se encuentra en la palabra  \n");
+return 0;
+
+}
+
+void cargarLetra(char cadenaA[], char cadenaB[], char letra, int pos) {
+
+int i = 0;
+
+while (i < strlen(cadenaA)){
+
+    if (i == pos) {
+
+        cadenaB[i] = letra;
+    }
+
+    else  cadenaB[i] = '-';
+
+        i++;
+}
+}
+
