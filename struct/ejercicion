@@ -20,8 +20,8 @@ char confirmarGenero (char gen);
 void ordenarInsercion(alumno arreglo[], int dimension);
 int contarGenero(alumno arreglo[], int dimension, char genero);
 void ordenacionInsercion (alumno arreglo[], int dimension);
-void insertar(alumno arreglo[], int u, alumno dato[]);
-
+void insertar(alumno arreglo[], int u);
+void puntos();
 
 int main()
 {
@@ -39,74 +39,76 @@ int main()
     char seguir[] = "si";
 
 
-    while (strcmp(seguir, "si") == 0){
+    while (strcmp(seguir, "si") == 0)
+    {
 
         int operador;
-        printf("Que punto queres hacer: ");
+        printf(" \nPrimero carge el array, luego seleccione el punto a realizar \n");
+        cargarAlumnos(arreglo, &dimension);
+
+        printf("Que punto queres hacer: \n");
+        puntos();
+
         scanf("%i", &operador);
 
 
-    printf("First, we should charge our students array");
 
-    cargarAlumnos(arreglo, &dimension);
+        switch(operador)
+        {
 
+        case 1:
+            mostrarArray(arreglo, dimension);
+            break;
 
-    switch(operador)
-    {
+        case 2:
+            mostrarArray(arreglo, dimension);
+            break;
 
-    case 1:
-        mostrarArray(arreglo, dimension);
-        break;
+        case 3:
+            mostrarArray(arreglo, dimension);
+            break;
 
-    case 2:
-        mostrarArray(arreglo, dimension);
-        break;
+        case 4:
+            mostrarArray(arreglo, dimension);
+            printf("\n\n\nOrdenado por N de legajos\n");
 
-    case 3:
-        mostrarArray(arreglo, dimension);
-        break;
+            ordenarSeleccion(arreglo, dimension);
+            mostrarArray(arreglo, dimension);
+            break;
 
-    case 4:
-        mostrarArray(arreglo, dimension);
-        printf("\n\n\nOrdenado por N de legajos\n");
+        case 5:
+            printf("Que sexo desea buscar  ");
+            fflush(stdin);
+            scanf("%c", &sexo);
 
-        ordenarSeleccion(arreglo, dimension);
-        mostrarArray(arreglo, dimension);
-        break;
+            mostrarGenero(arreglo, dimension, sexo);
+            break;
 
-    case 5:
-        printf("Que sexo desea buscar  ");
-        fflush(stdin);
-        scanf("%c", &sexo);
+        case 6:
+            ordenarSeleccion(arreglo, dimension);
+            printf("\n\n");
+            nuevoAlumnoOrdenado(arreglo, &dimension);
+            break;
 
-        mostrarGenero(arreglo, dimension, sexo);
-        break;
+        case 7:
+            ordenarInsercion(arreglo, dimension);
+            mostrarArray(arreglo, dimension);
+            break;
 
-    case 6:
-        ordenarSeleccion(arreglo, dimension);
-        printf("\n\n");
-        nuevoAlumnoOrdenado(arreglo, &dimension);
-    break;
+        case 8:
+            printf("De que genero quiere saber la cantidad");
+            fflush(stdin);
+            scanf("%c", &gen);
+            cantidad =  contarGenero(arreglo, dimension, gen);
 
-    case 7:
-        ordenarInsercion(arreglo, dimension);
-        mostrarArray(arreglo, dimension);
-        break;
+            printf("De el genero %c, hay un total de %i alumnos  \n", gen, cantidad);
+            break;
 
-    case 8:
-        printf("De que genero quiere saber la cantidad");
-        fflush(stdin);
-        scanf("%c", &gen);
-        cantidad =  contarGenero(arreglo, dimension, gen);
-
-        printf("De el genero %c, hay un total de %i alumnos  \n", gen, cantidad);
-    break;
-
-    }
+        }
 
 
-    printf("Desea hacer otro punto?");
-    scanf("%s", &seguir);
+        printf("Desea hacer otro punto?");
+        scanf("%s", &seguir);
     }
 
     return 0;
@@ -240,9 +242,10 @@ void mostrarGenero(alumno arreglo[], int dimension, char genero)
 }
 
 
-void nuevoAlumnoOrdenado(alumno arreglo[], int* dimension) {
+void nuevoAlumnoOrdenado(alumno arreglo[], int* dimension)
+{
 
-  int i = *dimension++;
+    int i = *dimension++;
 
 
 
@@ -260,77 +263,95 @@ void nuevoAlumnoOrdenado(alumno arreglo[], int* dimension) {
 
     scanf("%c", &gen);
 
-   gen = confirmarGenero(gen);
+    gen = confirmarGenero(gen);
 
-        arreglo[i].genero = gen;
+    arreglo[i].genero = gen;
     i++;
     ordenarSeleccion(arreglo, i);
     mostrarArray(arreglo, i);
 }
 
 
-char confirmarGenero (char gen){
+char confirmarGenero (char gen)
+{
 
     while (gen != 'M' && gen != 'F')
-        {
-            fflush(stdin);
-            printf("Ingrese un genero valido: ");
-            scanf("%c", &gen);
-        }
-
-return gen;
-}
-
-
-
-int contarGenero(alumno arreglo[], int dimension, char genero) {
-
-    int i;
-    int gen = 0;
-
-    for (i = 0; i< dimension; i++) {
-
-        if (arreglo[i].genero == genero) {
-
-            gen++;
-
-        }
+    {
+        fflush(stdin);
+        printf("Ingrese un genero valido: ");
+        scanf("%c", &gen);
     }
-
 
     return gen;
 }
 
 
-void insertar(alumno arreglo[], int i, alumno dato[]){
 
-int u = i;
+int contarGenero(alumno arreglo[], int dimension, char genero)
+{
 
-while(u >= 0 && strcmp(dato[i].nombre, arreglo[u].nombre) >0) {
+    int i;
+    int gen = 0;
 
-    arreglo[u+1] = arreglo[u];
-    u++;
+    for (i = 0; i< dimension; i++)
+    {
+
+        if (arreglo[i].genero == genero)
+        {
+
+            gen++;
+
+        }
+    }
+    return gen;
 }
 
-// Aca hay que hacer que te apse todos los datos. no solo el nombre
-//Osea que hay que repetir
 
-    arreglo[u+1] = dato[u];
+void insertar(alumno arreglo[], int i)
+{
+    int u = i;
+
+    alumno dato[100];
+    dato[0]= arreglo[i+1];
+
+    while(u >= 0 && strcmp(dato[0].nombre, arreglo[u].nombre) < 0)
+    {
+
+        arreglo[u+1] = arreglo[u];
+        u--;
+    }
+    arreglo[u+1] = dato[0];
 }
 
 
-void ordenarInsercion(alumno arreglo[], int dimension) {
-
+void ordenarInsercion(alumno arreglo[], int dimension)
+{
 
     int i =0;
 
-    while(i < (dimension - 1)) {
-
-
-        insertar(arreglo, i, arreglo);
+    while(i < (dimension - 1))
+    {
+        insertar(arreglo, i);
         i++;
     }
+}
 
 
+void puntos() {
+int i;
+for(i = 2; i< 9; i++) {
+
+    printf("  -Punto %i: presiones la tecla %i\n", i, i);
+}
 
 }
+
+
+
+
+
+
+
+
+
+
