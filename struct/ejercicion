@@ -19,6 +19,8 @@ void nuevoAlumnoOrdenado(alumno arreglo[], int* dimension) ;
 char confirmarGenero (char gen);
 void ordenarInsercion(alumno arreglo[], int dimension);
 int contarGenero(alumno arreglo[], int dimension, char genero);
+void ordenacionInsercion (alumno arreglo[], int dimension);
+void insertar(alumno arreglo[], int u, alumno dato[]);
 
 
 int main()
@@ -88,6 +90,7 @@ int main()
 
     case 7:
         ordenarInsercion(arreglo, dimension);
+        mostrarArray(arreglo, dimension);
         break;
 
     case 8:
@@ -278,35 +281,6 @@ char confirmarGenero (char gen){
 return gen;
 }
 
-void insertarWord(alumno arreglo[], int i, char dato[]){
-
-int u = i;
-
-while ((u >= 0) && (strcmp(dato[0], arreglo[u].nombre) > 0)){
-
-
-
-    strcpy(arreglo[u+1].nombre, arreglo[u].nombre);
-    u--;
-}
-strcpy(arreglo[u+1].nombre, dato[0]);
-
-
-}
-
-void ordenarInsercion(alumno arreglo[], int dimension){
-
-int i = 0;
-
- while (i < dimension - 1){
-
-    insertarWord(arreglo, i, arreglo[i+1].nombre);
-    i++;
- }
-
- mostrarArray(arreglo, dimension);
-}
-
 
 
 int contarGenero(alumno arreglo[], int dimension, char genero) {
@@ -325,4 +299,38 @@ int contarGenero(alumno arreglo[], int dimension, char genero) {
 
 
     return gen;
+}
+
+
+void insertar(alumno arreglo[], int i, alumno dato[]){
+
+int u = i;
+
+while(u >= 0 && strcmp(dato[i].nombre, arreglo[u].nombre) >0) {
+
+    arreglo[u+1] = arreglo[u];
+    u++;
+}
+
+// Aca hay que hacer que te apse todos los datos. no solo el nombre
+//Osea que hay que repetir
+
+    arreglo[u+1] = dato[u];
+}
+
+
+void ordenarInsercion(alumno arreglo[], int dimension) {
+
+
+    int i =0;
+
+    while(i < (dimension - 1)) {
+
+
+        insertar(arreglo, i, arreglo);
+        i++;
+    }
+
+
+
 }
