@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
-
-typedef struct {
+typedef struct
+{
 
     int matricula;
     char nombre[30];
@@ -17,6 +15,10 @@ void mostrarArray(alumno arreglo[], int dimension);
 void ordenarSeleccion(alumno arreglo[], int dimension);
 int buscarMenor(alumno arreglo[], int dimension,int i);
 void mostrarGenero(alumno arreglo[], int dimension, char genero);
+void nuevoAlumnoOrdenado(alumno arreglo[], int* dimension) ;
+char confirmarGenero (char gen);
+void ordenarInsercion(alumno arreglo[], int dimension);
+int contarGenero(alumno arreglo[], int dimension, char genero);
 
 
 int main()
@@ -28,35 +30,41 @@ int main()
 
     arreglo = (alumno*)malloc(1 * sizeof(alumno));
 
-
-
-    int operador;
-    printf("Que punto queres hacer: ");
-    scanf("%i", &operador);
-
-
-
     char sexo;
+    char gen;
+    int cantidad;
 
-    switch(operador){
+    char seguir[] = "si";
+
+
+    while (strcmp(seguir, "si") == 0){
+
+        int operador;
+        printf("Que punto queres hacer: ");
+        scanf("%i", &operador);
+
+
+    printf("First, we should charge our students array");
+
+    cargarAlumnos(arreglo, &dimension);
+
+
+    switch(operador)
+    {
 
     case 1:
-        cargarAlumnos(arreglo, &dimension);
         mostrarArray(arreglo, dimension);
         break;
 
     case 2:
-        cargarAlumnos(arreglo, &dimension);
         mostrarArray(arreglo, dimension);
         break;
 
     case 3:
-        cargarAlumnos(arreglo, &dimension);
         mostrarArray(arreglo, dimension);
         break;
 
     case 4:
-        cargarAlumnos(arreglo, &dimension);
         mostrarArray(arreglo, dimension);
         printf("\n\n\nOrdenado por N de legajos\n");
 
@@ -65,8 +73,6 @@ int main()
         break;
 
     case 5:
-        cargarAlumnos(arreglo, &dimension);
-
         printf("Que sexo desea buscar  ");
         fflush(stdin);
         scanf("%c", &sexo);
@@ -74,74 +80,98 @@ int main()
         mostrarGenero(arreglo, dimension, sexo);
         break;
 
+    case 6:
+        ordenarSeleccion(arreglo, dimension);
+        printf("\n\n");
+        nuevoAlumnoOrdenado(arreglo, &dimension);
+    break;
+
+    case 7:
+        ordenarInsercion(arreglo, dimension);
+        break;
+
+    case 8:
+        printf("De que genero quiere saber la cantidad");
+        fflush(stdin);
+        scanf("%c", &gen);
+        cantidad =  contarGenero(arreglo, dimension, gen);
+
+        printf("De el genero %c, hay un total de %i alumnos  \n", gen, cantidad);
+    break;
 
     }
 
 
+    printf("Desea hacer otro punto?");
+    scanf("%s", &seguir);
+    }
 
-
-return 0;
+    return 0;
 }
 
 
-void cargarAlumnos(alumno arreglo[], int* dimension){
+void cargarAlumnos(alumno arreglo[], int* dimension)
+{
 
     int valor = 1;
     char nombre[30];
     int i = *dimension;
 
-    while(valor == 1){
+    while(valor == 1)
+    {
 
 
-    printf("Nombre del alumno: ");
-    fflush(stdin);
-    scanf("%s", &nombre);
-    strcpy(arreglo[i].nombre, nombre);
+        printf("Nombre del alumno: ");
+        fflush(stdin);
+        scanf("%s", &nombre);
+        strcpy(arreglo[i].nombre, nombre);
 
-    printf("\nN de matricula: ");
-    scanf("%i", &arreglo[i].matricula);
+        printf("\nN de matricula: ");
+        scanf("%i", &arreglo[i].matricula);
 
         printf("M = Masculino \nF = Femenino \n");
-    printf("\n Genero: ");
-
-    
-    fflush(stdin);
-    int gen;
-    
-    scanf("%c", &gen);
-    
-    if (gen != 'M' )
-    
-    
+        printf("\n Genero: ");
 
 
-    printf("\n\n1: SEGUIR CARGANDO\n");
-    scanf("%i", &valor);
+        char gen;
+        fflush(stdin);
+        scanf("%c", &gen);
 
-    i++;
-    arreglo=realloc(arreglo, (i+1) * sizeof(alumno));
+
+        gen = confirmarGenero(gen);
+        arreglo[i].genero = gen;
+
+
+        printf("\n\n1: SEGUIR CARGANDO\n");
+        scanf("%i", &valor);
+
+        i++;
+        arreglo=realloc(arreglo, (i+1) * sizeof(alumno));
 
     }
     *dimension=i;
 }
 
 
-void mostrarArray(alumno arreglo[], int  dimension){
+void mostrarArray(alumno arreglo[], int  dimension)
+{
 
-int i;
+    int i;
 
-for (i = 0; i< dimension; i++) {
+    for (i = 0; i< dimension; i++)
+    {
 
 
-    printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
-    printf("N de MATRICULA : %i\n", arreglo[i].matricula);
-    printf("GENERO         : %c\n", arreglo[i].genero);
-    printf("\n");
+        printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
+        printf("N de MATRICULA : %i\n", arreglo[i].matricula);
+        printf("GENERO         : %c\n", arreglo[i].genero);
+        printf("\n");
 
+    }
 }
-}
 
-int buscarMenor(alumno arreglo[], int dimension,int i){
+int buscarMenor(alumno arreglo[], int dimension,int i)
+{
 
     int u = i + 1;
     int menor = arreglo[i].matricula;
@@ -149,9 +179,11 @@ int buscarMenor(alumno arreglo[], int dimension,int i){
 
 
 
-    while(u < dimension){
+    while(u < dimension)
+    {
 
-        if(menor > arreglo[u].matricula){
+        if(menor > arreglo[u].matricula)
+        {
 
             menor = arreglo[u].matricula;
             posmenor = u;
@@ -163,14 +195,16 @@ int buscarMenor(alumno arreglo[], int dimension,int i){
 }
 
 
-void ordenarSeleccion(alumno arreglo[], int dimension){
+void ordenarSeleccion(alumno arreglo[], int dimension)
+{
 
     int aux;
     int posmenor;
     int i = 0;
 
 
-    while (i < dimension - 1){
+    while (i < dimension - 1)
+    {
 
         posmenor = buscarMenor(arreglo, dimension, i);
         aux = arreglo[posmenor].matricula;
@@ -181,21 +215,114 @@ void ordenarSeleccion(alumno arreglo[], int dimension){
 }
 
 
-void mostrarGenero(alumno arreglo[], int dimension, char genero) {
+void mostrarGenero(alumno arreglo[], int dimension, char genero)
+{
 
     int i = 0;
 
-    for ( i = 0; i < dimension; i++) {
+    for ( i = 0; i < dimension; i++)
+    {
 
-    if (arreglo[i].genero == genero) {
+        if (arreglo[i].genero == genero)
+        {
 
-        printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
-        printf("N de MATRICULA : %i\n", arreglo[i].matricula);
-        printf("GENERO         : %c\n", arreglo[i].genero);
-        printf("\n");
+            printf("\nNOMBRE         : %s\n", arreglo[i].nombre);
+            printf("N de MATRICULA : %i\n", arreglo[i].matricula);
+            printf("GENERO         : %c\n", arreglo[i].genero);
+            printf("\n");
 
         }
     }
 
 }
 
+
+void nuevoAlumnoOrdenado(alumno arreglo[], int* dimension) {
+
+  int i = *dimension++;
+
+
+
+    printf("Insertar nombre del nuevo alumno: ");
+    fflush(stdin);
+    scanf("%s", &arreglo[i].nombre);
+
+    printf("Inserte N de matricula del nuevo alumno: ");
+    scanf("%i", &arreglo[i].matricula);
+
+    printf("Inserte genero del nuevo alumno\nM = masculino\nF = femenino\n");
+
+
+    char gen;
+
+    scanf("%c", &gen);
+
+   gen = confirmarGenero(gen);
+
+        arreglo[i].genero = gen;
+    i++;
+    ordenarSeleccion(arreglo, i);
+    mostrarArray(arreglo, i);
+}
+
+
+char confirmarGenero (char gen){
+
+    while (gen != 'M' && gen != 'F')
+        {
+            fflush(stdin);
+            printf("Ingrese un genero valido: ");
+            scanf("%c", &gen);
+        }
+
+return gen;
+}
+
+void insertarWord(alumno arreglo[], int i, char dato[]){
+
+int u = i;
+
+while ((u >= 0) && (strcmp(dato[0], arreglo[u].nombre) > 0)){
+
+
+
+    strcpy(arreglo[u+1].nombre, arreglo[u].nombre);
+    u--;
+}
+strcpy(arreglo[u+1].nombre, dato[0]);
+
+
+}
+
+void ordenarInsercion(alumno arreglo[], int dimension){
+
+int i = 0;
+
+ while (i < dimension - 1){
+
+    insertarWord(arreglo, i, arreglo[i+1].nombre);
+    i++;
+ }
+
+ mostrarArray(arreglo, dimension);
+}
+
+
+
+int contarGenero(alumno arreglo[], int dimension, char genero) {
+
+    int i;
+    int gen = 0;
+
+    for (i = 0; i< dimension; i++) {
+
+        if (arreglo[i].genero == genero) {
+
+            gen++;
+
+        }
+    }
+
+
+    return gen;
+}
