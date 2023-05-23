@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct
+{
+    char nombre[20];
+    int matricula;
+    char genero;
+
+} stAlumno;
+
+
+void cargarAlumno(stAlumno* uno);
+
+
+int main()
+{
+
+    stAlumno uno;
+    stAlumno* dos = &uno;
+    cargarAlumno(&uno);
+
+    printf("Nombre del alumno:  %s", (uno).nombre);
+    printf("\nLa matricula del alumno es: %i", (uno).matricula);
+    printf("\nEl genero del alumno es: %c", (uno).genero);
+
+
+    return 0;
+}
+
+
+void cargarAlumno(stAlumno* uno)
+{
+
+    printf("Cargar nombre del alumno: ");
+    fflush(stdin);
+    scanf("%s", &(*uno).nombre);
+
+    printf("Cargar matricula del alumno: ");
+    scanf("%i", &(*uno).matricula);
+
+    printf("Cargar genero del alumno: ");
+    fflush(stdin);
+    scanf("%c", &(*uno).genero);
+
+
+}
