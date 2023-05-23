@@ -313,16 +313,16 @@ void insertar(alumno arreglo[], int i)
 {
     int u = i;
 
-    alumno dato[100];
-    dato[0]= arreglo[i+1];
+    alumno dato;
+    dato= arreglo[i+1];
 
-    while(u >= 0 && strcmp(dato[0].nombre, arreglo[u].nombre) < 0)
+    while(u >= 0 && strcmp(dato.nombre, arreglo[u].nombre) < 0)
     {
 
         arreglo[u+1] = arreglo[u];
         u--;
     }
-    arreglo[u+1] = dato[0];
+    arreglo[u+1] = dato;
 }
 
 
