@@ -38,13 +38,15 @@ int main()
 
     char seguir[] = "si";
 
+    int operador;
+    printf(" \nPrimero carge el array, luego seleccione el punto a realizar \n");
+    cargarAlumnos(arreglo, &dimension);
 
-    while (strcmp(seguir, "si") == 0)
+
+
+    while (strcmp(seguir, "si") == 0 || strcmp(seguir, "Si")== 0 || strcmp(seguir, "SI")== 0)
     {
 
-        int operador;
-        printf(" \nPrimero carge el array, luego seleccione el punto a realizar \n");
-        cargarAlumnos(arreglo, &dimension);
 
         printf("Que punto queres hacer: \n");
         puntos();
@@ -107,7 +109,7 @@ int main()
         }
 
 
-        printf("Desea hacer otro punto?");
+        printf("Desea hacer otro punto?  \n SEGUIR 'si' \n TERMINAR 'no'  \n RESPUESTA: " );
         scanf("%s", &seguir);
     }
 
@@ -337,21 +339,13 @@ void ordenarInsercion(alumno arreglo[], int dimension)
 }
 
 
-void puntos() {
-int i;
-for(i = 2; i< 9; i++) {
+void puntos()
+{
+    int i;
+    for(i = 2; i< 9; i++)
+    {
 
-    printf("  -Punto %i: presiones la tecla %i\n", i, i);
+        printf("  -Punto %i: presiones la tecla %i\n", i, i);
+    }
+
 }
-
-}
-
-
-
-
-
-
-
-
-
-
