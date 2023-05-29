@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+void cargar (char nombre[]);
+
+
+int main()
+{
+
+
+
+
+cargar("archi");
+
+}
+
+
+
+void cargar (char nombre[]){
+    int dato;
+
+    FILE *archi;
+
+
+    archi = fopen(nombre, "a+b");
+
+    if(archi == NULL){
+
+        printf("No existe bro");
+
+    }
+
+
+    printf("dame un dato gil: ");
+    scanf("%i", &dato);
+
+    fwrite(&dato, sizeof(int), 1, archi);
+    
+    
+    //Lo que hace e suna nueva variable para guardar la direccion de memoria del dato
+    //Despues lo que hacemos esmotstrar lo que esta en esa direccion de memoria 
+
+    int datito = fread(&dato, sizeof(int), 1, archi);
+
+    printf("%i", datito);
+    
+
+}
