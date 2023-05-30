@@ -1,69 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pila.h"
+#include <string.h>
 
-void cargar (char nombre[]);
+const char nombreArchivo[] = "archivo.bin" ;
+
+void trabajarArchivo ();
+void mostrarDato();
+void contarElementos();
+
 
 
 int main()
 {
-
-
-
-
-cargar("archi");
-
+    trabajarArchivo();
+    mostrarDato();
+    contarElementos();
 }
 
 
 
-void cargar (char nombre[]){
-    int dato;
-
-    FILE *archi;
-
-
-    archi = fopen(nombre, "a+b");
-
-    if(archi == NULL){
-
-        printf("No existe bro");
-
-    }
-
-
-    printf("dame un dato gil: ");
-    scanf("%i", &dato);
-
-    fwrite(&dato, sizeof(int), 1, archi);
-    
-    
-    //Lo que hace e suna nueva variable para guardar la direccion de memoria del dato
-    //Despues lo que hacemos esmotstrar lo que esta en esa direccion de memoria 
-
-    int datito = fread(&dato, sizeof(int), 1, archi);
-
-    printf("%i", datito);
-    
-
-}
-
-
-
-void trabajarArchivo (char nombre[])
+void trabajarArchivo ()
 {
     int dato;
 
     FILE *archi;
-
-
-    archi = fopen(nombre, "wb");
-
+    archi = fopen(nombreArchivo, "ab");
     if(archi == NULL)
     {
-
         printf("No existe bro");
-
     }
 
     printf("dame un dato gil: ");
@@ -71,29 +35,35 @@ void trabajarArchivo (char nombre[])
 
     fwrite(&dato, sizeof(int), 1, archi);
     fclose(archi);
-
 }
 
-
-void mostrarDato( char nombre[])
+void mostrarDato()
 {
-
-    FILE *archi;
-
-    archi = fopen(nombre, "rb");
-    if(archi == NULL)
-    {
-
-        printf("No existe bro");
-    }
-
     int dato;
+    FILE *archi;
+    archi = fopen(nombreArchivo, "rb");
 
     while(fread(&dato,sizeof(int),1,archi) > 0)
     {
         printf("|%d|",dato);
     }
     fclose(archi);
+
+}
+
+void contarElementos(){
+
+    int cantidad;
+
+    FILE *archi;
+    archi = fopen(nombreArchivo, "rb");
+    fseek(archi,0,SEEK_END);
+    cantidad = ftell(archi) / sizeof(int);
+
+    printf("La cantidad de elementos es: %i", cantidad);
+    fclose(archi);
+
+}
 
 }
 
