@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+typedef struct {
+
+    int legajo;
+    char nombreYApellido[100];
+    int edad;
+    int anio;
+
+} Alumno;
+
+const char nombreArchivo[] = "archivo.bin" ;
+
+
+int main()
+{
+  
+  
+  
+}
+
+
+Alumno cargarAlumno(){
+
+
+FILE *archi;
+
+archi = fopen(nombreArchivo, "ab");
+
+
+
+
+}
+
+
+
+Alumno IngresarDatos() {
+    
+Alumno aux;
+    
+    
+printf("Legajo");
+scanf("%i", aux.legajo );
+
+printf("Nombre: ");
+gets(aux.nombreYApellido);
+
+printf("Edad: ");
+scanf("%i", aux.edad);
+
+printf("Anio: ");
+scanf("%i", aux.anio);
+
+
+}
+
+
