@@ -1,0 +1,141 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct
+{
+    int id;
+    char name[100];
+} Person;
+
+
+const char archivoDePersonas[] = "personas.bin";
+void trabajarArchivo (char nombre[]);
+void mostrarDato( char nombre[]);
+void crearArchivoDePersonas();
+int ultimoId();
+void mostrarArchivoPersonas();
+Person cargarUnaPersona();
+int tamanoArchi();
+
+
+int main()
+{
+    crearArchivoDePersonas();
+    mostrarArchivoPersonas();
+}
+
+
+
+void trabajarArchivo (char nombre[])
+{
+    int dato;
+
+    FILE *archi;
+
+
+    archi = fopen(nombre, "wb");
+
+    if(archi == NULL)
+    {
+
+        printf("No existe bro");
+
+    }
+
+    printf("dame un dato gil: ");
+    scanf("%i", &dato);
+
+    fwrite(&dato, sizeof(int), 1, archi);
+    fclose(archi);
+
+}
+
+
+void mostrarDato( char nombre[])
+{
+
+    FILE *archi;
+
+    archi = fopen(nombre, "rb");
+    if(archi == NULL)
+    {
+
+        printf("No existe bro");
+    }
+
+    int dato;
+
+    while(fread(&dato,sizeof(int),1,archi) > 0)
+    {
+        printf("|%d|",dato);
+    }
+    fclose(archi);
+
+}
+
+
+void crearArchivoDePersonas()
+{
+    Person aux;
+    aux = cargarUnaPersona();
+    FILE *archi = fopen(archivoDePersonas, "ab");
+    fwrite(&aux,sizeof(Person),1,archi);
+    fclose(archi);
+
+
+}
+
+Person cargarUnaPersona()
+{
+
+    Person persona;
+    persona.id = ultimoId();
+    printf("Ingrese el nombre de la persona ");
+    gets(persona.name);
+
+    return persona;
+
+}
+int ultimoId()
+{
+
+    Person aux;
+    FILE *archi = fopen(archivoDePersonas,"rb");
+    if(archi == NULL || tamanoArchi() == 0)
+    {
+        fclose(archi);
+        return 1;
+    }
+
+    fseek(archi,(sizeof(Person) * -1),SEEK_END);
+    fread(&aux,sizeof(Person),1,archi);
+    return aux.id + 1;
+
+}
+
+void mostrarArchivoPersonas()
+{
+    Person dato;
+    FILE *archi = fopen(archivoDePersonas,"rb");
+    while(fread(&dato,sizeof(Person),1,archi) > 0)
+    {
+        printf("id %d\n",dato.id);
+        printf("name %s\n",dato.name);
+    }
+    fclose(archi);
+}
+
+
+int tamanoArchi()
+{
+
+    FILE *fich;
+
+    fich=fopen(archivoDePersonas,"rb");
+
+    fseek(fich, 0, SEEK_END);
+    fclose(fich);
+    return ftell(fich)/sizeof(Person);
+
+}
