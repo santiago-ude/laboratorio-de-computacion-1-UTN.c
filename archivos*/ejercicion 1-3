@@ -47,3 +47,53 @@ void cargar (char nombre[]){
     
 
 }
+
+
+
+void trabajarArchivo (char nombre[])
+{
+    int dato;
+
+    FILE *archi;
+
+
+    archi = fopen(nombre, "wb");
+
+    if(archi == NULL)
+    {
+
+        printf("No existe bro");
+
+    }
+
+    printf("dame un dato gil: ");
+    scanf("%i", &dato);
+
+    fwrite(&dato, sizeof(int), 1, archi);
+    fclose(archi);
+
+}
+
+
+void mostrarDato( char nombre[])
+{
+
+    FILE *archi;
+
+    archi = fopen(nombre, "rb");
+    if(archi == NULL)
+    {
+
+        printf("No existe bro");
+    }
+
+    int dato;
+
+    while(fread(&dato,sizeof(int),1,archi) > 0)
+    {
+        printf("|%d|",dato);
+    }
+    fclose(archi);
+
+}
+
