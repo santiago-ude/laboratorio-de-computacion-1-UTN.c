@@ -4,7 +4,8 @@
 
 const char nombreArchivo[] = "archivo.bin" ;
 
-typedef struct {
+typedef struct
+{
 
     int legajo;
     char nombreYApellido[100];
@@ -17,79 +18,95 @@ typedef struct {
 void cargarAlumno();
 stAlumno ingresarDatos();
 void mostrarAlumno(stAlumno alumnito);
-
-
-
-
-
+void mostrarArchivo();
 
 
 int main()
 {
-
-        cargarAlumno();
-
-
-
+    cargarAlumno();
+    mostrarArchivo();
 }
 
 
-void cargarAlumno(){
+void cargarAlumno()
+{
 
-FILE *archi;
+    FILE *archi;
 
-archi = fopen(nombreArchivo, "ab");
+    archi = fopen(nombreArchivo, "ab");
 
-stAlumno estudiante;
+    if (archi == NULL) {
+        printf("El archivo no esta creado");
+    }
 
-char seguir[] = "si";
+    stAlumno estudiante;
 
-while (strcmp(seguir, "si") == 0){
+    char seguir[] = "si";
 
-    estudiante = ingresarDatos();
-    fwrite(&estudiante, sizeof(stAlumno),1, archi);
+    while (strcmp(seguir, "si") == 0)
+    {
 
-    printf("Desea seguir? (si/no)\n");
+        estudiante = ingresarDatos();
+        fwrite(&estudiante, sizeof(stAlumno),1, archi);
+
+        printf("Desea seguir? (si/no)\n");
+        fflush(stdin);
+        gets(seguir);
+
+    }
+
+    fclose(archi);
+}
+
+
+
+stAlumno ingresarDatos()
+{
+
+    stAlumno aux;
+    char NyA[100];
+
+    printf("Legajo: ");
+    scanf("%i", &aux.legajo);
+
+    printf("Nombre y Apellido: ");
     fflush(stdin);
-    gets(seguir);
+    gets(aux.nombreYApellido);
 
+    printf("Edad: ");
+    scanf("%i", &aux.edad);
+
+    printf("Anio: ");
+    scanf("%i", &aux.anio);
+
+    return aux;
 }
 
-fclose(archi);
-}
-
-
-
-stAlumno ingresarDatos() {
-
-stAlumno aux;
-char NyA[100];
-
-printf("Legajo: ");
-scanf("%i", &aux.legajo);
-
-printf("Nombre y Apellido: ");
-fflush(stdin);
-gets(aux.nombreYApellido);
-
-printf("Edad: ");
-scanf("%i", &aux.edad);
-
-printf("Anio: ");
-scanf("%i", &aux.anio);
-
-return aux;
-}
-
-void mostrarAlumno(stAlumno alumnito){
-
-
+void mostrarAlumno(stAlumno alumnito)
+{
     printf("\nNOMBRE y APELLIDO--------%s\n", alumnito.nombreYApellido);
     printf("EDAD-----------------------%i\n", alumnito.edad);
     printf("LEGAJO---------------------%i\n",alumnito.legajo);
     printf("ANIO-----------------------%i\n", alumnito.anio);
-
-
 }
 
 
+void mostrarArchivo() {
+
+int i = 1;
+FILE * archi;
+
+stAlumno dato;
+
+archi = fopen(nombreArchivo, "rb");
+
+
+    while (fread(&dato,sizeof(stAlumno),1,archi) > 0){
+
+        printf("\nALUMNO n: %i\n", i);
+        mostrarAlumno(dato);
+        i++;
+    }
+
+    fclose(archi);
+}
