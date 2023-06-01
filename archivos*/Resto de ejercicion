@@ -24,6 +24,7 @@ void cargarUnicoAlumno();
 void pasarLegajos();
 void buscarEdad(int dato);
 void buscarRango(int dato, int datoB);
+stAlumno buscarMayor();
 
 
 int main()
@@ -40,6 +41,7 @@ int main()
 
    buscarEdad(dato);
 */
+/*
     int datoB;
     printf("Que rango de edad desea buscar?\n");
     printf("Entre ");
@@ -48,6 +50,10 @@ int main()
     scanf("%i", &datoB);
 
     buscarRango(dato, datoB);
+
+*/
+
+    mayorAlumno();
 }
 
 
@@ -226,17 +232,45 @@ archi = fopen(nombreArchivo,"rb");
 stAlumno alumno;
 
 
-while (fread(&alumno, sizeof(stAlumno), 1, archi) > 0){
-    
-    
-    
-    
-}
+alumno = buscarMayor();
+
+
+
+mostrarAlumno(alumno);
+
+fclose(archi);
 
 }
 
 
 stAlumno buscarMayor(){
+
+
+FILE *archi;
+
+archi = fopen(nombreArchivo, "rb");
+
+stAlumno alumno;
+stAlumno mayor;
+
+
+mayor = alumno;
+
+while (fread(&alumno, sizeof(stAlumno), 1, archi) > 0) {
+
+    if (alumno.edad > mayor.edad){
+
+        mayor = alumno;
+
+    }
+}
+fclose(archi);
+
+
+return mayor;
+}
+
+
 
 
 
