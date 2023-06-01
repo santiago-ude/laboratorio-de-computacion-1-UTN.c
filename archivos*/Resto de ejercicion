@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "pila.h"
 
-const char nombreArchivo[] = "archivo.bin" ;
+const char nombreArchivo[] = "archivo.bin";
 
 typedef struct
 {
@@ -19,12 +20,34 @@ void cargarAlumno();
 stAlumno ingresarDatos();
 void mostrarAlumno(stAlumno alumnito);
 void mostrarArchivo();
+void cargarUnicoAlumno();
+void pasarLegajos();
+void buscarEdad(int dato);
+void buscarRango(int dato, int datoB);
 
 
 int main()
 {
-    cargarAlumno();
+  //  cargarAlumno();
     mostrarArchivo();
+   // cargarUnicoAlumno();
+    pasarLegajos();
+    int dato;
+/*
+
+    printf("\nBuscar alumnos mayores a: \n");
+    scanf("%i", &dato);
+
+   buscarEdad(dato);
+*/
+    int datoB;
+    printf("Que rango de edad desea buscar?\n");
+    printf("Entre ");
+    scanf("%i", &dato);
+    printf("Y ");
+    scanf("%i", &datoB);
+
+    buscarRango(dato, datoB);
 }
 
 
@@ -59,12 +82,10 @@ void cargarAlumno()
 }
 
 
-
 stAlumno ingresarDatos()
 {
 
     stAlumno aux;
-    char NyA[100];
 
     printf("Legajo: ");
     scanf("%i", &aux.legajo);
@@ -110,3 +131,116 @@ archi = fopen(nombreArchivo, "rb");
 
     fclose(archi);
 }
+
+
+
+void cargarUnicoAlumno(){
+
+FILE *archi;
+stAlumno dato;
+
+archi = fopen(nombreArchivo, "ab");
+
+dato = ingresarDatos();
+
+fwrite(&dato,sizeof(stAlumno),1,archi);
+fclose(archi);
+
+
+mostrarArchivo();
+}
+
+
+void pasarLegajos(){
+
+FILE * archi;
+
+archi = fopen(nombreArchivo, "rb");
+
+Pila legajosMayores;
+inicpila(&legajosMayores);
+
+stAlumno dato;
+
+while (fread(&dato, sizeof(stAlumno), 1, archi) > 0){
+
+    if(dato.edad >= 18){
+
+        apilar(&legajosMayores, dato.legajo);
+    }
+
+}
+fclose(archi);
+mostrar(&legajosMayores);
+}
+
+
+void buscarEdad(int dato){
+
+    int i = 0;
+    FILE *archi;
+
+    archi = fopen(nombreArchivo, "rb");
+    stAlumno alumno;
+
+
+    while (fread(&alumno, sizeof(stAlumno), 1, archi) > 0){
+
+        if (alumno.edad >= dato){
+
+            i++;
+        }
+    }
+    fclose(archi);
+    printf("\nLa cantidad de alumnos que superan los %i, son: %i \n", dato, i);
+
+}
+
+void buscarRango(int dato, int datoB){
+
+FILE *archi;
+
+archi = fopen(nombreArchivo, "rb");
+stAlumno alumno;
+while (fread(&alumno,sizeof(stAlumno), 1, archi)){
+
+    if(alumno.edad >= dato && alumno.edad <= datoB){
+
+    mostrarAlumno(alumno);
+
+    }
+
+}
+
+fclose(archi);
+}
+
+
+void mayorAlumno(){
+
+
+FILE *archi;
+
+archi = fopen(nombreArchivo,"rb");
+
+stAlumno alumno;
+
+
+while (fread(&alumno, sizeof(stAlumno), 1, archi) > 0){
+    
+    
+    
+    
+}
+
+}
+
+
+stAlumno buscarMayor(){
+
+
+
+
+
+}
+
