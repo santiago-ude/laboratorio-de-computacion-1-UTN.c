@@ -1,0 +1,441 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define columnas 3
+#define filas 2
+
+#define maxLetras 30
+
+#define archivoJugadores "jugadores.bin"
+
+typedef struct
+{
+    int numCamiseta;
+    char nombre[maxLetras];
+    char equipo[maxLetras];
+    int edad;
+} jugadorScaloneta;
+
+
+
+int cargarMatriz(char matriz[][maxLetras]);
+
+
+void cargarJugadores(jugadorScaloneta * astro);
+
+void cargarNombre(jugadorScaloneta * astro);
+void cargarCamiseta(jugadorScaloneta * astro);
+void cargarEquipo(jugadorScaloneta * astro);
+void cargarEdad(jugadorScaloneta * astro);
+
+void mostrarArchivo();
+
+void mostrarEquipo(char equipoBuscado[]);
+void mostrarJugador(jugadorScaloneta astro);
+
+
+int  tamanoArchivo();
+
+
+ void buscarPosicion(int posicion);
+
+
+ int pasarAArreglo(jugadorScaloneta arreglo[], int edadP);
+
+ void menorJugador();
+
+ int buscarCamiseta(int camisetaP);
+
+int main()
+{
+
+//Punto 1----------------------------------------------------
+char matriz[maxLetras][maxLetras];
+
+int validos = cargarMatriz(matriz);
+printf("%i", validos);
+
+
+//Punto 2----------------------------------------------------
+
+jugadorScaloneta astro;
+
+cargarJugadores(&astro);
+
+
+//Punto 3-----------------------------------------------------
+
+
+char equipoBuscado[maxLetras];
+printf("Ingrese el equipo que busca: ");
+fflush(stdin);
+gets(equipoBuscado);
+printf("\n\n%s\n\n", equipoBuscado);
+mostrarEquipo(equipoBuscado);
+
+mostrarArchivo();
+
+
+
+//Punto 4-----------------------------------------------------
+tamanoArchivo();
+
+
+ //Punto 5-----------------------------------------------------
+
+int posicion;
+
+printf("que posicion desa buscar?");
+scanf("%i", &posicion);
+
+ int validos3 = tamanoArchivo();
+
+while (posicion < 0 || posicion > validos3){
+
+    printf("La posicion ingresa no esta disponible, ingrese nuevamente");
+    fflush(stdin);
+    scanf("%i", &posicion);
+
+}
+
+
+  buscarPosicion( posicion);
+
+
+
+
+  // Punto 6-------------------------------
+
+  jugadorScaloneta arreglo[maxLetras];
+  int edadP;
+  printf("Que edad desea buscar \n");
+  fflush(stdin);
+  scanf("%i", &edadP);
+
+int validos2 = pasarAArreglo(arreglo, edadP);
+printf("%i", validos2);
+
+
+
+//Punto 7------------------------------------
+
+menorJugador();
+
+//Punto 8-------------------------------------
+
+int camisetaP;
+printf("ingrese la camiseta que desa buscar");
+scanf("%i", &camisetaP);
+
+
+int resultado = buscarCamiseta(camisetaP);
+
+printf("%i", resultado);
+
+
+
+
+
+
+  return 0;
+}
+
+//Punto 1----------------------------------------------------
+int cargarMatriz(char matriz[][maxLetras]){
+
+int i = 0;
+int dato = 1;
+char palabra[maxLetras];
+
+while (dato == 1){
+
+    printf("Escriba la palabra que desea ingresar");
+    fflush(stdin);
+    gets(palabra);
+
+    strcpy(matriz[i], palabra);
+
+
+    printf("\n\nPresione 1 PAra seguir\n\n");
+    scanf("%i", &dato);
+}
+
+return i;
+}
+
+//Punto 2----------------------------------------------------
+
+
+void cargarJugadores(jugadorScaloneta *astro){
+
+
+
+FILE* archi = fopen(archivoJugadores, "ab");
+
+if (archi == NULL){
+    printf("Archivo inexistente");
+}
+
+int dato = 1;
+
+while (dato == 1){
+
+cargarCamiseta(astro);
+cargarNombre(astro);
+cargarEquipo(astro);
+cargarEdad(astro);
+
+fwrite(astro,sizeof(jugadorScaloneta), 1, archi);
+
+
+printf("Presione 1 para seguir");
+fflush(stdin);
+scanf("%i", &dato);
+}
+
+fclose(archi);
+
+}
+
+
+void cargarCamiseta(jugadorScaloneta * astro){
+
+int camiseta;
+
+printf("Ingrese le numero de camiseta");
+fflush(stdin);
+scanf("%i", &camiseta);
+
+astro->numCamiseta = camiseta;
+
+}
+
+
+void cargarNombre(jugadorScaloneta * astro){
+
+char dato[maxLetras];
+
+printf("Ingrese el nombre del jugador");
+fflush(stdin);
+gets(astro->nombre);
+
+
+
+}
+
+void cargarEquipo(jugadorScaloneta * astro){
+
+
+char dato[maxLetras];
+
+printf("Ingrese el equipo del jugador");
+fflush(stdin);
+gets(astro->equipo);
+
+
+}
+
+
+
+void cargarEdad(jugadorScaloneta * astro){
+int dato;
+
+printf("Ingrese la edad del jugador");
+fflush(stdin);
+scanf("%i", &dato);
+
+astro->edad = dato;
+
+
+
+}
+
+
+//Punto 3-----------------------------------------------------
+
+void mostrarEquipo(char equipoBuscado[]){
+
+FILE* archi = fopen(archivoJugadores, "rb");
+
+jugadorScaloneta astro;
+
+printf("\n\n%s\n\n", equipoBuscado);
+
+
+while(fread((&astro), sizeof(jugadorScaloneta), 1, archi)){
+
+
+    if (strcmp(astro.equipo, equipoBuscado ) == 0){
+
+        mostrarJugador(astro);
+    }
+}
+
+fclose(archi);
+
+}
+
+
+void mostrarJugador(jugadorScaloneta astro){
+
+printf("\nNOMBRE: %s \n", astro.nombre);
+printf("EQUIPO: %s \n", astro.equipo);
+printf("EDAD: %i \n", astro.edad);
+printf("CAMISETA: %i \n", astro.numCamiseta);
+
+}
+
+
+void mostrarArchivo(){
+
+FILE* archi = fopen(archivoJugadores, "rb");
+jugadorScaloneta astro;
+
+while (fread(&astro, sizeof(jugadorScaloneta), 1, archi)){
+
+    mostrarJugador(astro);
+
+
+}
+
+
+fclose(archi);
+
+}
+
+//Punto 4-----------------------------------------------------
+
+int tamanoArchivo(){
+FILE* archi = fopen(archivoJugadores, "rb");
+
+fseek(archi,1, SEEK_END);
+
+
+int tamano = ftell(archi) / sizeof(jugadorScaloneta);
+
+printf("El tamano es: %i", tamano);
+
+fclose(archi);
+
+return tamano;
+}
+
+
+//Punto 5-----------------------------------------------------
+
+
+void buscarPosicion(int posicion){
+
+FILE * archi = fopen(archivoJugadores, "rb");
+
+
+jugadorScaloneta astro;
+
+fseek(archi,sizeof(jugadorScaloneta) * 1, SEEK_CUR);
+fread(&astro, sizeof(jugadorScaloneta), 1,archi);
+
+mostrarJugador(astro);
+
+fclose(archi);
+}
+
+
+
+
+//Punto 6------------------------------------------
+
+
+int pasarAArreglo(jugadorScaloneta arreglo[], int edadP){
+
+FILE* archi = fopen(archivoJugadores, "rb");
+int i = 0;
+
+jugadorScaloneta astro;
+
+while (fread(&astro, sizeof(jugadorScaloneta), 1, archi)){
+
+    if (astro.edad == edadP){
+
+        arreglo[i] = astro;
+
+        mostrarJugador(arreglo[i]);
+        i++;
+    }
+}
+
+
+
+fclose(archi);
+
+return i;
+}
+
+
+
+//Punto 7-------------------------------------------------
+
+void menorJugador(){
+
+jugadorScaloneta astro;
+
+FILE * archi = fopen(archivoJugadores, "rb");
+
+
+jugadorScaloneta joven;
+joven.edad = 1000;
+
+
+while(fread(&astro, sizeof(jugadorScaloneta), 1, archi) > 0){
+
+
+        if(astro.edad < joven.edad){
+
+            joven = astro;
+        }
+}
+
+
+mostrarJugador(joven);
+
+
+
+
+fclose(archi);
+}
+
+
+//Punto 8-----------------------------
+
+
+int buscarCamiseta(camisetaP){
+
+jugadorScaloneta astro;
+
+FILE * archi = fopen(archivoJugadores, "rb");
+
+
+while(fread(&astro, sizeof(jugadorScaloneta), 1, archi) > 0){
+
+
+        if(astro.numCamiseta == camisetaP){
+
+        mostrarJugador(astro);
+        return 1;
+
+        }
+}
+
+fclose(archi);
+
+return -1;
+}
+
+
+
+
+
+
+
+
+
