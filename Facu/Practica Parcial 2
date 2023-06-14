@@ -1,0 +1,395 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define baseDeDatos "base.bin"
+#define maxDisfraces 100
+
+#define archiMujeres "mujeres.bin"
+#define archiHombres "hombres.bin"
+
+typedef struct
+{
+    int id;
+    char nombreDisfraz[40];
+    char genero[10];
+    int precioAlquiler;
+} Disfraz;
+
+
+int  cargarArreglo(Disfraz astro[]);
+void mostrarArreglo(Disfraz astro[], int validos);
+void cargarNombre(Disfraz *dis);
+void cargarPrecio(Disfraz * dis);
+void cargarID(Disfraz*dis);
+void cargarGenero(Disfraz* dis);
+
+int conocerCantidad(Disfraz dis[], int validos, int* mujeres);
+
+void cargarArchivo(Disfraz dis[], int validos);
+void mostrarArchivo();
+void mostrarHombre();
+void mostrarMujer();
+void mostrarDatos(Disfraz astro);
+
+void modificarArchivos();
+void cambiarNombreHombre();
+void cambiarNombreMujer();
+
+
+
+int main()
+{
+
+    Disfraz astro [maxDisfraces];
+    int validos = 0;
+    int mujeres = 0;
+
+
+
+    validos =  cargarArreglo(astro);
+
+    mostrarArreglo(astro, validos);
+
+     int cantidadHombres = conocerCantidad(astro,validos, &mujeres);
+
+      printf("\nLA cantidad de hombres es de: %i\n", cantidadHombres);
+       printf("La cantidad de mujeres es de: %i", mujeres);
+
+       cargarArchivo(astro,validos);
+       mostrarArchivo();
+
+       modificarArchivos();
+
+}
+
+//---------------Punto 1--------------------
+
+int  cargarArreglo(Disfraz astro[])
+{
+
+    int dato = 1;
+    int i =0;
+    Disfraz dis;
+
+    while (dato == 1 && i < maxDisfraces)
+    {
+        cargarID(&dis);
+        cargarNombre(&dis);
+        cargarPrecio(&dis);
+        cargarGenero(&dis);
+
+
+        astro[i] = dis;
+
+
+        printf("Si desea seguir presione 1");
+        fflush(stdin);
+        scanf("%i", &dato);
+        i++;
+    }
+
+    return i;
+}
+
+void mostrarArreglo(Disfraz astro[], int validos){
+int i;
+
+for (i = 0; i< validos; i++){
+
+    printf("\n ID: %i\n", astro[i].id);
+    printf(" NOMBRE: %s\n", astro[i].nombreDisfraz);
+    printf(" PRECIO: %i\n", astro[i].precioAlquiler);
+    printf(" GENERO %s\n", astro[i].genero);
+
+}
+}
+
+void cargarNombre(Disfraz *dis)
+{
+
+    printf("Ingrese el nombre del Disfraz");
+    fflush(stdin);
+    gets(dis->nombreDisfraz);
+
+}
+
+void cargarPrecio(Disfraz * dis)
+{
+
+    printf("Ingrese el precio del disfraz");
+    fflush(stdin);
+    scanf("%i", &dis->precioAlquiler);
+
+}
+
+void cargarID(Disfraz*dis)
+{
+    printf("ingrese el id del disfraz");
+    fflush(stdin);
+    scanf("%i", &dis->id);
+}
+
+
+void cargarGenero(Disfraz* dis)
+{
+
+    int dato = 3;
+
+
+
+    while (dato != 1 && dato != 0)
+    {
+
+        printf("Precione\n |0| Hombre \n |1| Mujer");
+        scanf("%i", &dato);
+
+        if (dato == 0)
+        {
+            strcpy(dis->genero, "Hombre");
+
+        }
+        else if(dato == 1)
+        {
+            strcpy(dis->genero, "Mujer");
+
+        }
+    }
+}
+
+//-------------Punto 2-------------------------
+int conocerCantidad(Disfraz dis[], int validos, int* mujeres){
+
+int i;
+int hombres = 0;
+*mujeres = 0;
+int precio;
+printf("Ingrese el precio minimo del disfraz buscado");
+fflush(stdin);
+scanf("%i", &precio);
+
+
+for (i = 0; i < validos; i++){
+
+
+    if (strcmp(dis[i].genero, "Hombre" ) == 0 && ( dis[i].precioAlquiler >= precio)){
+        hombres++;
+    }
+    if (strcmp(dis[i].genero, "Mujer" ) == 0 && ( dis[i].precioAlquiler >= precio)){
+
+        *mujeres = *mujeres + 1;
+    }
+}
+
+return hombres;
+
+}
+
+//---------------------Punto 3---------------------------------------------
+
+void cargarArchivo(Disfraz dis[], int validos){
+
+
+int i;
+FILE* archi = fopen(archiHombres, "ab");
+
+FILE* archi2 = fopen(archiMujeres, "ab");
+
+for(i = 0; i< validos; i++){
+
+    if (strcmp(dis[i].genero, "Hombre" )==0){
+
+        fwrite(&dis[i], sizeof(Disfraz), 1, archi);
+    }
+    else if (strcmp(dis[i].genero, "Mujer" ) == 0 ){
+
+        fwrite(&dis[i], sizeof(Disfraz), 1, archi2);
+
+    }
+
+
+    fclose(archi);
+    fclose(archi2);
+
+}
+
+}
+
+
+//----------Punto 4-----------------------------------
+void mostrarArchivo(){
+
+    int dato = 0;
+
+    while (dato != 1 && dato!= 2){
+    printf(" \n|1| Mostrar hombres \n|2| Mostrar Mujeres");
+    scanf("%i", &dato);
+
+    Disfraz astro;
+
+    if (dato == 1){
+
+        mostrarHombre();
+    }
+
+    else if (dato == 2){
+        mostrarMujer();
+
+    }
+
+    }
+}
+
+void mostrarHombre(){
+
+FILE* archi = fopen(archiHombres, "rb");
+Disfraz astro;
+
+while (fread(&astro, sizeof(Disfraz), 1, archi)){
+
+      mostrarDatos(astro);
+}
+
+fclose(archi);
+}
+
+void mostrarMujer(){
+
+FILE* archi = fopen(archiMujeres, "rb");
+Disfraz astro;
+
+while (fread(&astro, sizeof(Disfraz), 1, archi)){
+
+      mostrarDatos(astro);
+}
+
+fclose(archi);
+}
+
+
+void mostrarDatos(Disfraz astro) {
+
+
+
+
+    printf("\n ID: %i\n", astro.id);
+    printf(" NOMBRE: %s\n", astro.nombreDisfraz);
+    printf(" PRECIO: %i\n", astro.precioAlquiler);
+    printf(" GENERO %s\n", astro.genero);
+}
+
+
+//-------------------Punto 5--------------------
+
+
+void modificarArchivos(){
+
+int dato = 0;
+
+while (dato != 1 && dato != 2){
+
+    printf(" |1| Modificar Hombre \n |2| Moficiar Mujer");
+    fflush(stdin);
+    scanf("%i", &dato);
+
+    if(dato == 1){
+
+        cambiarNombreHombre();
+
+    }
+    if (dato == 2){
+
+        cambiarNombreMujer();
+    }
+
+}
+
+}
+
+
+
+void cambiarNombreHombre(){
+
+int opcion;
+int dato = 1;
+
+Disfraz astro;
+FILE* archi = fopen(archiHombres, "r+b");
+
+
+
+while (dato == 1){
+
+    printf("Ingrese el id del disfaz que desea modificar");
+    scanf("%i", &opcion);
+
+while(fread(&astro, sizeof(Disfraz), 1, archi)){
+
+
+    if (astro.id == opcion){
+        printf("Ingrese el nuevo nombre");
+        fflush(stdin);
+        gets(astro.nombreDisfraz);
+
+
+        fseek(archi,-sizeof(Disfraz), SEEK_CUR);
+        fwrite(&astro, sizeof(Disfraz), 1, archi);
+
+                mostrarDatos(astro);
+
+    }
+     break;
+}
+
+
+printf("Si desea seguir presione 1");
+scanf("%i", &dato);
+}
+
+fclose(archi);
+}
+
+
+void cambiarNombreMujer(){
+
+int opcion = 0;
+
+int dato = 1;
+
+Disfraz astro;
+FILE* archi = fopen(archiMujeres, "r+b");
+
+
+
+while (dato == 1){
+
+    printf("Ingrese el id del disfaz que desea modificar");
+    scanf("%i", &opcion);
+
+while(fread(&astro, sizeof(Disfraz), 1, archi)){
+
+
+    if (astro.id == opcion){
+
+        printf("Ingrese el nuevo nombre");
+        fflush(stdin);
+        gets(astro.nombreDisfraz);
+
+        fseek(archi,-sizeof(Disfraz) * -1, SEEK_CUR);
+        fwrite(&astro, sizeof(Disfraz), 1, archi);
+
+        mostrarDatos(astro);
+        break;
+    }
+}
+
+
+printf("Si desea seguir presione 1");
+scanf("%i", &dato);
+}
+
+fclose(archi);
+
+}
+
+
